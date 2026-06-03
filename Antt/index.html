@@ -1,0 +1,1360 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Adequações Antt</title>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+
+
+
+<style>
+:root{
+    --orange:#ff6600;
+    --orange-dim:#cc5200;
+    --orange-glow:rgba(255,102,0,.18);
+    --bg:#111111;
+    --surface:#1c1c1c;
+    --surface2:#242424;
+    --border:#333333;
+    --text:#e8e8e8;
+    --muted:#888888;
+    --green:#22c55e;
+    --blue:#3b82f6;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Roboto',sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    padding:32px 24px;
+    min-height:100vh;
+
+    background-image:
+    radial-gradient(ellipse 60% 40% at 80% 10%, rgba(255,102,0,.06) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 30% at 10% 90%, rgba(255,102,0,.04) 0%, transparent 50%);
+}
+
+.page{
+    max-width:1240px;
+    margin:auto;
+    display:flex;
+    flex-direction:column;
+    gap:52px;
+}
+
+/* HEADER */
+
+.header{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    border-bottom:1px solid var(--border);
+    padding-bottom:20px;
+    position:relative;
+}
+
+.header::after{
+    content:'';
+    position:absolute;
+    left:0;
+    bottom:-1px;
+    width:180px;
+    height:2px;
+    background:var(--orange);
+}
+
+.header h1{
+    font-size:38px;
+    font-weight:900;
+    letter-spacing:2px;
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.page-icon{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:42px;
+    height:42px;
+    border-radius:12px;
+    background:rgba(255,102,0,.18);
+    color:var(--orange);
+    font-size:22px;
+}
+
+.header h1 span{
+    color:var(--orange);
+}
+
+.header h2{
+    color:var(--muted);
+    font-size:16px;
+    letter-spacing:4px;
+    margin-top:6px;
+}
+
+.logo{
+    color:var(--orange);
+    font-weight:900;
+    font-size:22px;
+    letter-spacing:3px;
+}
+
+.section-label{
+    color:var(--orange);
+    font-size:13px;
+    font-weight:700;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    margin-bottom:28px;
+    display:flex;
+    align-items:center;
+    gap:8px;
+}
+
+.section-label::before{
+    content:'';
+    width:3px;
+    height:16px;
+    background:var(--orange);
+}
+
+.top-link-box{
+    background:rgba(255,102,0,.08);
+    border:1px solid rgba(255,102,0,.2);
+    border-radius:10px;
+    padding:14px 18px;
+    margin-bottom:18px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+.top-link-box a{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    background:var(--orange);
+    color:#111;
+    font-weight:700;
+    padding:12px 18px;
+    border-radius:8px;
+    text-decoration:none;
+    transition:.25s;
+}
+.top-link-box a:hover{
+    background:var(--orange-dim);
+}
+.top-link-box a::before{
+    content:'🔗';
+    display:inline-block;
+    font-size:16px;
+}
+
+.leg-list a{
+    color:var(--text);
+    text-decoration:none;
+}
+.leg-list a:hover{
+    color:var(--orange);
+    text-decoration:underline;
+}
+
+/* Intro / HERO */
+
+.hero-grid{
+    display:grid;
+    grid-template-columns:2.5fr 1fr;
+    gap:60px;
+    align-items:start;
+}
+
+.hero-sub{
+    font-size:17px;
+    line-height:2;
+    color:var(--text);
+    max-width:900px;
+}
+
+.leg-list{
+    list-style:none;
+    padding:0;
+    margin:0;
+}
+
+.leg-list li{
+    margin-bottom:14px;
+    color:var(--text);
+    line-height:1.6;
+}
+
+/* ASSISTENTE DE BUSCA */
+
+.help-center{
+    max-width:950px;
+    margin:0 auto;
+    text-align:center;
+}
+
+.help-title{
+    font-size:42px;
+    font-weight:900;
+    margin-bottom:12px;
+}
+
+.help-subtitle{
+    color:var(--muted);
+    font-size:16px;
+    margin-bottom:30px;
+}
+
+.search-wrapper{
+    position:relative;
+    margin-bottom:25px;
+}
+
+.search-wrapper input{
+    width:100%;
+    background:#1d1d1d;
+    border:1px solid #3a3a3a;
+    border-radius:24px;
+    padding:22px 65px 22px 28px;
+    color:white;
+    font-size:16px;
+    outline:none;
+    transition:.25s;
+}
+
+.search-wrapper input:focus{
+    border-color:var(--orange);
+    box-shadow:0 0 25px rgba(255,102,0,.15);
+}
+
+.search-icon{
+    position:absolute;
+    right:24px;
+    top:50%;
+    transform:translateY(-50%);
+    color:var(--orange);
+    font-size:22px;
+}
+
+.help-tags{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:12px;
+    margin-bottom:30px;
+}
+
+.help-tag{
+    background:rgba(255,102,0,.08);
+    border:1px solid rgba(255,102,0,.18);
+    color:var(--text);
+    padding:10px 18px;
+    border-radius:999px;
+    cursor:pointer;
+    transition:.25s;
+    font-size:14px;
+}
+
+.help-tag:hover{
+    background:rgba(255,102,0,.15);
+    border-color:var(--orange);
+}
+
+.search-result{
+    display:none;
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:20px;
+    text-align:left;
+}
+
+.search-result.show{
+    display:block;
+}
+
+.search-success{
+    color:#22c55e;
+    font-weight:700;
+}
+
+.search-fail{
+    color:#f59e0b;
+    font-weight:700;
+}
+
+.search-match{
+    border:1px solid rgba(255,102,0,.15);
+    border-radius:10px;
+    padding:16px;
+    margin-top:16px;
+    background:rgba(255,102,0,.04);
+}
+
+.search-match strong{
+    display:block;
+    margin-bottom:6px;
+    color:var(--orange);
+}
+
+.search-match p{
+    margin:0 0 10px;
+    color:var(--text);
+    line-height:1.7;
+}
+
+.search-answer a{
+    color:var(--orange);
+    text-decoration:none;
+}
+
+.search-answer a:hover{
+    text-decoration:underline;
+}
+
+.ticket-box{
+    margin-top:18px;
+    padding-top:18px;
+    border-top:1px solid var(--border);
+}
+
+.ticket-btn{
+    display:inline-block;
+    margin-top:10px;
+    background:var(--orange);
+    color:#111;
+    text-decoration:none;
+    padding:12px 18px;
+    border-radius:8px;
+    font-weight:700;
+}
+
+@media(max-width:900px){
+
+    .hero-grid{
+        grid-template-columns:1fr;
+        gap:30px;
+    }
+
+}
+.hero-title{
+    font-size:28px;
+    margin-bottom:12px;
+}
+.hero-sub{
+    line-height:1.8;
+    margin-bottom:20px;
+}
+.hero-steps ul{ 
+    margin-left:18px;
+    line-height:1.6;
+}
+.hero-cta{
+    display:inline-block;
+    background:var(--orange);
+    color:#111;
+    padding:8px 12px;
+    border-radius:6px;
+    text-decoration:none;
+    font-weight:700;
+    margin-top:8px;
+}
+.hero-right{
+    background:var(--surface2);
+    border-radius:8px;
+    padding:12px;
+}
+.leg-list{list-style:none;padding-left:0;margin:0}
+.leg-list li{margin-bottom:8px;color:var(--text);font-size:13px}
+
+/* TOP */
+
+.top-row{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:24px;
+}
+
+.cards-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:16px;
+}
+
+.info-card{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:28px;
+    transition:.25s;
+    position:relative;
+    overflow:hidden;
+    min-height:180px;
+}
+
+.info-card::before{
+    content:'';
+    position:absolute;
+    left:0;
+    top:0;
+    width:4px;
+    height:100%;
+    background:var(--orange);
+}
+
+.info-card:hover{
+    border-color:var(--orange);
+}
+
+.card-badge{
+    background:rgba(255,102,0,.15);
+    color:var(--orange);
+    font-size:10px;
+    font-weight:700;
+    letter-spacing:2px;
+    padding:3px 8px;
+    border-radius:4px;
+    display:inline-block;
+    margin-bottom:8px;
+}
+
+.card-title{
+    font-size:20px;
+    font-weight:700;
+    margin-bottom:12px;
+}
+
+.card-desc{
+    font-size:12px;
+    color:var(--muted);
+    line-height:1.7;
+}
+
+/* CHECKLIST */
+
+.checklist{
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+}
+
+.check-item{
+    display:flex;
+    gap:14px;
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:22px;
+}
+
+.check-item:hover{
+    border-color:var(--orange);
+}
+
+.check-num{
+    color:var(--orange);
+    font-size:24px;
+    font-weight:900;
+}
+
+.check-body strong{
+    display:block;
+    margin-bottom:4px;
+}
+
+.check-body span{
+    color:var(--muted);
+    font-size:12px;
+    line-height:1.7;
+}
+
+/* TIMELINE */
+
+.timeline{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:16px;
+    position:relative;
+}
+
+.timeline-card{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:18px;
+    min-height:180px;
+    transition:.25s;
+}
+
+.timeline-card:hover{
+    border-color:var(--orange);
+}
+
+.time{
+    color:var(--orange);
+    font-size:11px;
+    letter-spacing:2px;
+    font-weight:700;
+    margin-bottom:10px;
+}
+
+.timeline-title{
+    font-size:18px;
+    font-weight:700;
+    margin-bottom:10px;
+}
+
+.timeline-text{
+    font-size:12px;
+    line-height:1.5;
+    color:var(--muted);
+}
+
+/* FAQ */
+
+.faq-container{
+    display:flex;
+    flex-direction:column;
+    gap:16px;
+}
+
+.video-list{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+}
+
+.video-link{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    padding:14px 12px;
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:10px;
+    text-decoration:none;
+    color:var(--text);
+    transition:.25s;
+    text-align:center;
+}
+
+.video-link:hover{
+    border-color:var(--orange);
+    background:rgba(255,102,0,.06);
+}
+
+.video-link span{
+    font-size:28px;
+    line-height:1;
+    min-width:40px;
+    text-align:center;
+}
+
+.video-link div{
+    flex:1;
+}
+
+.video-link strong{
+    display:block;
+    font-size:14px;
+    font-weight:600;
+    margin-bottom:4px;
+}
+
+.video-link small{
+    display:block;
+    font-size:11px;
+    color:var(--muted);
+}
+
+.faq-item{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:10px;
+    overflow:hidden;
+    transition:.25s;
+}
+
+.faq-item:hover{
+    border-color:var(--orange);
+}
+
+.faq-item.open{
+    border-color:var(--orange);
+    box-shadow:0 0 18px var(--orange-glow);
+}
+
+.faq-q{
+    width:100%;
+    background:none;
+    border:none;
+    color:var(--text);
+    text-align:left;
+    padding:20px 24px;
+    cursor:pointer;
+    font-size:15px;
+    font-weight:600;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.faq-q::after{
+    content:'+';
+    color:var(--orange);
+    font-size:24px;
+}
+
+.faq-item.open .faq-q::after{
+    content:'−';
+}
+
+.faq-a{
+    max-height:0;
+    overflow:hidden;
+    transition:max-height .35s ease;
+}
+
+.faq-content{
+    background:transparent;
+    padding:20px 22px;
+    color:var(--text);
+    line-height:1.7;
+    font-size:13px;
+}
+
+/* ALERT */
+
+.alert-box{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:10px;
+    overflow:hidden;
+}
+
+.alert-header{
+    background:var(--orange);
+    color:#111;
+    text-align:center;
+    padding:10px;
+    font-weight:900;
+    letter-spacing:2px;
+}
+
+.alert-body{
+    padding:20px;
+}
+
+.alert-body ul{
+    margin-left:20px;
+    line-height:2;
+}
+
+.alert-body li{
+    color:var(--text);
+}
+
+@media(max-width:900px){
+
+    .top-row{
+        grid-template-columns:1fr;
+    }
+
+    .timeline{
+        grid-template-columns:1fr;
+    }
+
+    .cards-grid{
+        grid-template-columns:1fr;
+    }
+
+}
+/* FLUXOGRAMA */
+
+.flow-container{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:16px;
+    margin-bottom:32px;
+    flex-wrap:wrap;
+}
+
+.flow-card{
+    flex:1;
+    min-width:220px;
+    max-width:260px;
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:24px;
+    text-align:center;
+    transition:.25s;
+}
+
+.flow-card:hover{
+    border-color:var(--orange);
+    transform:translateY(-4px);
+}
+
+.flow-icon{
+    font-size:36px;
+    margin-bottom:14px;
+}
+
+.flow-title{
+    font-size:16px;
+    font-weight:700;
+    margin-bottom:10px;
+}
+
+.flow-text{
+    font-size:13px;
+    line-height:1.8;
+    color:var(--muted);
+    color: white;
+}
+
+.flow-arrow{
+    color:var(--orange);
+    font-size:28px;
+    font-weight:900;
+}
+
+.important-box{
+    background:rgba(255,102,0,.08);
+    border:1px solid rgba(255,102,0,.25);
+    border-left:5px solid var(--orange);
+    border-radius:12px;
+    padding:24px;
+    margin-bottom:20px;
+}
+
+.important-title{
+    color:var(--orange);
+    font-size:18px;
+    font-weight:800;
+    margin-bottom:12px;
+}
+
+.important-text{
+    line-height:1.8;
+    color:var(--text);
+}
+
+.warning-box{
+    background:rgba(239,68,68,.08);
+    border:1px solid rgba(239,68,68,.25);
+    border-left:5px solid #ef4444;
+    border-radius:12px;
+    padding:24px;
+}
+
+.warning-title{
+    color:#ef4444;
+    font-size:18px;
+    font-weight:800;
+    margin-bottom:12px;
+}
+
+.warning-text{
+    line-height:1.8;
+    color:var(--text);
+}
+
+@media(max-width:900px){
+
+    .hero-grid{
+        grid-template-columns:1fr;
+        gap:24px;
+    }
+
+    .flow-container{
+        flex-direction:column;
+        gap:14px;
+    }
+
+    .flow-arrow{
+        transform:rotate(90deg);
+        margin:0;
+    }
+
+    .flow-card{
+        max-width:100%;
+        width:100%;
+    }
+
+    .video-list{
+        grid-template-columns:1fr;
+    }
+
+    .faq-q{
+        padding:16px 18px;
+    }
+
+    .faq-content{
+        padding:16px 18px;
+    }
+
+    .alert-body,
+    .important-box,
+    .warning-box,
+    .info-card,
+    .timeline-card,
+    .check-item,
+    .flow-card{
+        padding:18px;
+    }
+
+    .check-item{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .page{
+        gap:24px;
+    }
+
+    body{
+        padding:20px 16px;
+    }
+
+}
+
+@media(max-width:600px){
+    body{
+        padding:16px 12px;
+    }
+    .page{
+        gap:20px;
+    }
+    .header{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:16px;
+    }
+    .header h1{
+        font-size:32px;
+    }
+    .logo{
+        font-size:18px;
+    }
+    .section-label{
+        margin-bottom:18px;
+    }
+    .hero-title{
+        font-size:24px;
+    }
+    .hero-sub{
+        font-size:15px;
+    }
+    .flow-card{
+        padding:18px;
+    }
+    .flow-arrow{
+        font-size:24px;
+    }
+    .video-link{
+        padding:14px;
+    }
+    .timeline-card{
+        padding:16px;
+    }
+    .faq-q{
+        font-size:14px;
+    }
+    .faq-content{
+        font-size:13px;
+    }
+}
+
+</style>
+</head>
+<body>
+
+<div class="page">
+
+<div class="header">
+    <div>
+        <h1>CIOT <span>ANTT</span></h1>
+        <h2>REGRAS OPERACIONAIS</h2>
+    </div>
+    <div class="logo">NSTECH</div>
+</div>
+<div class="top-link-box">
+    <a href="https://portal.antt.gov.br/perguntas-frequentes" target="_blank" rel="noopener noreferrer">Perguntas Frequentes ANTT</a>
+</div>
+<div class="hero-grid">
+
+    <div>
+        <div class="section-label">CIOT ANTT - FROTA PRÓPRIA</div>
+
+        <div class="hero-sub">
+            A solução tem como objetivo realizar a geração automática do CIOT para operações de Frota Própria, em conformidade com a MP nº 1.343 e com a regulamentação estabelecida pela Portaria SUROC nº 6, de 23 de abril de 2026.
+
+            O processo de geração será executado automaticamente com base nas informações do CT-e, desconsiderando quaisquer valores existentes em Contratos de Frete.
+
+            Após a geração, o número do CIOT será vinculado automaticamente ao MDF-e.
+        </div>
+    </div>
+
+    <div>
+        <div class="section-label">Legislação Relacionada</div>
+
+        <ul class="leg-list">
+            <li>🔸 <a href="https://anttlegis.antt.gov.br/action/ActionDatalegis.php?acao=detalharAto&tipo=RES&numeroAto=00005867&seqAto=000&valorAno=2020&orgao=DG/ANTT/MI&codTipo=&desItem=&desItemFim=&cod_menu=5408&cod_modulo=161&pesquisa=true" target="_blank" rel="noopener noreferrer">Resolução ANTT nº 5.867/2020</a></li>
+            <li>🔸 <a href="https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2026/mpv/mpv1343.htm" target="_blank" rel="noopener noreferrer">MP nº 1.343/2026</a></li>
+            <li>🔸 <a href="https://anttlegis.antt.gov.br/action/ActionDatalegis.php?acao=abrirTextoAto&cod_menu=9230&cod_modulo=623&numeroAto=00006077&orgao=DG%2FANTT%2FMT&seqAto=000&tipo=RES&valorAno=2026&utm_source=chatgpt.com" target="_blank" rel="noopener noreferrer">Resolução ANTT nº 6.077/2026</a></li>
+            <li>🔸 <a href="https://anttlegis.antt.gov.br/action/ActionDatalegis.php?acao=abrirTextoAto&tipo=RES&numeroAto=00006078&seqAto=000&valorAno=2026&orgao=DG/ANTT/MT&cod_modulo=623&cod_menu=9230" target="_blank" rel="noopener noreferrer">Resolução ANTT nº 6.078/2026</a></li>
+            <li>🔸 <a href="https://anttlegis.antt.gov.br/action/ActionDatalegis.php?acao=abrirTextoAto&tipo=POR&numeroAto=00000006&seqAto=000&valorAno=2026&orgao=SUROC/ANTT/MT&cod_modulo=623&cod_menu=9230" target="_blank" rel="noopener noreferrer">Portaria SUROC nº 6/2026</a></li>
+            <li>🔸 <a href="https://anttlegis.antt.gov.br/action/ActionDatalegis.php?acao=abrirTextoAto&tipo=POR&numeroAto=00000006&seqAto=000&valorAno=2026&orgao=SUROC/ANTT/MT&cod_modulo=623&cod_menu=9230" target="_blank" rel="noopener noreferrer">Portal ANTT Legislação – Portaria SUROC nº 6/2026</a></li>
+        </ul>
+    </div>
+
+</div>
+
+<div class="help-center">
+
+    <div class="help-title">
+        Como podemos ajudar?
+    </div>
+
+
+    <div class="search-wrapper">
+        <input
+            type="text"
+            id="faqSearch"
+            placeholder="Digite sua dúvida..."
+        >
+        <div class="search-icon">⌕</div>
+    </div>
+
+    <div class="help-tags">
+
+        <div class="help-tag">CIOT</div>
+        <div class="help-tag">CT-e</div>
+        <div class="help-tag">MDF-e</div>
+        <div class="help-tag">ANTT</div>
+        <div class="help-tag">Vale-Pedágio</div>
+        <div class="help-tag">Frete Mínimo</div>
+
+    </div>
+
+    <div class="search-result" id="searchResult">
+    </div>
+
+</div>
+
+<div>
+    <div class="section-label">Contratação do Add-on</div>
+
+    <div class="flow-container">
+
+        <div class="flow-card">
+            <div class="flow-icon">🛒</div>
+            <div class="flow-title">1. Acessar Atua Store</div>
+            <div class="flow-text">
+                Portal do Cliente<br>
+                ➜ Atua Store<br>
+                ➜ CIOT ANTT
+            </div>
+        </div>
+
+        <div class="flow-arrow">➜</div>
+
+        <div class="flow-card">
+            <div class="flow-icon">✅</div>
+            <div class="flow-title">2. Contratar</div>
+            <div class="flow-text">
+                Clique em <strong>Contratar</strong> e confirme a ativação do Add-on.
+            </div>
+        </div>
+
+        <div class="flow-arrow">➜</div>
+
+        <div class="flow-card">
+            <div class="flow-icon">⚙️</div>
+            <div class="flow-title">3. Configurações</div>
+            <div class="flow-text">
+                Após ativar, acesse o menu
+                <strong>Configurações</strong>.
+            </div>
+        </div>
+
+        <div class="flow-arrow">➜</div>
+
+        <div class="flow-card">
+            <div class="flow-icon">📋</div>
+            <div class="flow-title">4. Escolher Plano</div>
+            <div class="flow-text">
+                Selecione o plano de contratação e clique em
+                <strong>Salvar</strong>.
+            </div>
+        </div>
+
+    </div>
+
+    <div class="important-box">
+
+        <div class="important-title">
+            ⚠️ Importante
+        </div>
+
+        <div class="important-text">
+            Ao ativar o Add-on CIOT ANTT, o sistema criará automaticamente uma administradora de pagamento
+            <strong>CIOT ANTT - Sem Movimentação Financeira</strong>,
+            utilizada exclusivamente para operações de Frota Própria.
+            <br><br>
+            Essa configuração é obrigatória para permitir a geração automática do CIOT durante a emissão do CT-e.
+        </div>
+
+    </div>
+
+    <div class="warning-box">
+
+        <div class="warning-title">
+            🔒 Não aparece a opção "Contratar"?
+        </div>
+
+        <div class="warning-text">
+            Apenas o <strong>Responsável pelo Sistema</strong> possui permissão para contratar Add-ons na Atua Store.
+            <br><br>
+            Caso a opção não esteja disponível para você, será necessário solicitar a contratação ao usuário responsável pela gestão do sistema.
+        </div>
+
+    </div>
+
+</div>
+
+
+<div>
+    <div class="section-label">Perguntas Frequentes</div>
+
+    <div class="faq-container">
+
+        <div class="faq-item">
+            <button class="faq-q">
+                Para emitir CIOT é necessário adequar a operação ao piso mínimo de frete?
+            </button>
+            <div class="faq-a">
+                <div class="faq-content">
+                    Sim. O piso mínimo de frete deve ser respeitado quando houver transporte rodoviário remunerado de cargas, contratado por viagem, utilizando veículo movido a diesel e caracterizado como operação de carga lotação. As administradoras validam o piso junto à ANTT antes da geração do CIOT.
+                </div>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-q">
+                É necessário emitir CIOT para um CT-e de complemento de frete?
+            </button>
+            <div class="faq-a">
+                <div class="faq-content">
+                    Não. Quando o CT-e complementar tem apenas a finalidade de ajustar valores de uma operação já vinculada a um CIOT válido, não é necessária a geração de um novo CIOT.
+                </div>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-q">
+                Quando indicar operação de alto desempenho?
+            </button>
+            <div class="faq-a">
+                <div class="faq-content">
+                    Quando houver frota dedicada ou fidelizada, tempo total de carga e descarga de até três horas e responsabilidade do contratante pelas atividades de carregamento e descarregamento.
+                </div>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-q">
+                Nos casos de CIOT para frota própria, o ICMS pode compor o valor do piso mínimo de frete?
+            </button>
+            <div class="faq-a">
+                <div class="faq-content">
+                    NÃO. Nos cenários de geração de CIOT para frota própria, o cálculo do piso mínimo de frete considera os valores vinculados à prestação de transporte informados no CT-e, desconsiderando os valores referentes ao ICMS. Dessa forma, o imposto não compõe a base utilizada para validação do frete mínimo perante as regras aplicáveis ao CIOT e à ANTT.
+                </div>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-q">
+                O pedágio pode compor o piso mínimo de frete?
+            </button>
+            <div class="faq-a">
+                <div class="faq-content">
+                    NÃO. O valor do Vale-Pedágio Obrigatório (VPO) não pode compor nem ser descontado do valor do frete devido ao transportador. Quando houver pedágio na operação, ele deve ser tratado conforme a Lei nº 10.209/2001 e regulamentações aplicáveis, sem reduzir ou complementar o valor do piso mínimo do frete. Ou seja, o vale-pedágio é um valor separado do frete, devendo ser gerado por meio de fornecedor homologado e disponibilizado de forma antecipada ao transportador.
+                </div>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-q">
+                Como é gerado o KM rodado considerado pela ANTT?
+            </button>
+            <div class="faq-a">
+                <div class="faq-content">
+                    A ANTT calcula e roteiriza a quilometragem da operação com base nos dados de origem e destino informados no registro da operação de transporte. Esse cálculo pode considerar informações como CEP, código IBGE do município ou coordenadas de latitude e longitude. Para definição do trajeto e da distância percorrida, é utilizada a tecnologia de roteirização baseada no Google Maps, que determina o KM considerado para validação da operação e aplicação das regras relacionadas ao frete e CIOT.
+                </div>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-q">
+                Com as novas regras do CIOT mudou alguma regra sobre o Vale-Pedágio?
+            </button>
+            <div class="faq-a">
+                <div class="faq-content">
+                    NÃO. O Vale-Pedágio Obrigatório (VPO) foi instituído pela Lei nº 10.209, de 23 de março de 2001, tornando obrigatória a antecipação do valor do pedágio pelo contratante do transporte rodoviário de cargas. Dessa forma, a obrigatoriedade do vale-pedágio não foi alterada pelas regras do CIOT. O embarcador ou equiparado e, na ausência destes, a própria transportadora, conforme o cenário operacional, continua responsável pela aquisição e geração antecipada do vale-pedágio, com o devido destaque da informação no MDF-e.
+                </div>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-q">
+                Nos casos em que subcontrato outro transportador e possuo vários CT-es para transportar na mesma operação, como devo proceder?
+            </button>
+            <div class="faq-a">
+                <div class="faq-content">
+                    Nestes cenários, orientamos a utilização do processo de embarque disponível no sistema. O procedimento consiste em iniciar a operação vinculando os CT-es ao embarque e, no último CT-e da operação, gerar o contrato de frete e realizar a emissão do CIOT correspondente. Dessa forma, toda a operação permanece consolidada em um único registro, garantindo a correta validação do frete, da quilometragem e das regras aplicáveis pela ANTT e pela administradora de pagamento.<br><br><strong>Documentação:</strong> <a href="https://wiki.atua.com.br:8028/pt-br/Transportadora/CT-e/Emissao_de_CT-e_por_embarque" target="_blank" style="color:var(--orange); text-decoration:none;">Emissão CT-e por Embarque</a><br><strong>Vídeo:</strong> <a href="https://www.youtube.com/watch?v=kUcjJI2vKNo&feature=youtu.be" target="_blank" style="color:var(--orange); text-decoration:none;">YouTube - Incluir / Excluir CTRC do Embarque</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-q">
+                Em situações com frota própria e vários CT-es na mesma operação, como devo proceder?
+            </button>
+            <div class="faq-a">
+                <div class="faq-content">
+                    Nestes cenários, orientamos a utilização do processo de embarque disponível no sistema. O procedimento consiste em iniciar a operação vinculando os CT-es ao embarque e, no último CT-e da operação, indicar a ADM de pagamento CIOT/ANTT para então realizar a emissão do CIOT correspondente. Dessa forma, a operação permanece consolidada em um único registro, permitindo a correta validação da quilometragem, do frete e das regras aplicáveis ao CIOT e à ANTT.<br><br><strong>Documentação:</strong> <a href="https://wiki.atua.com.br:8028/pt-br/Atua-Store/Add-ons/ciot-antt-frota" target="_blank" style="color:var(--orange); text-decoration:none;">CIOT ANTT Frota (item Emissão CT-e Embarque Frota)</a><br><strong>Vídeo:</strong> <a href="https://www.youtube.com/watch?v=SMHR3aI4TaU&feature=youtu.be" target="_blank" style="color:var(--orange); text-decoration:none;">YouTube - Emissão CT-e Embarque + CF + CIOT Frota</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-q">
+                O que é considerado como informações básicas para a geração de CIOT?
+            </button>
+            <div class="faq-a">
+                <div class="faq-content">
+                    As informações mínimas necessárias para a geração do CIOT incluem:<br>
+                    - Dados do contratante e do contratado ou do subcontratante e subcontratado, quando aplicável;<br>
+                    - Dados do destinatário;<br>
+                    - Origem e destino da operação;<br>
+                    - Distância da rota;<br>
+                    - Tipo e quantidade da carga transportada;<br>
+                    - Valor do frete;<br>
+                    - Forma de pagamento;<br>
+                    - Placas e dados dos veículos envolvidos na operação;<br>
+                    - Datas de início e término do transporte;<br>
+                    - Dados bancários do contratado ou definição da forma de pagamento utilizada.<br><br>
+                    Essas informações são utilizadas para o registro da operação de transporte, validação junto à ANTT e geração do CIOT pela administradora de pagamento.
+                </div>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-q">
+                Em que situações de transporte é indispensável o piso mínimo de frete?
+            </button>
+            <div class="faq-a">
+                <div class="faq-content">
+                    O piso mínimo de frete deve ser aplicado quando houver transporte rodoviário remunerado de cargas, contratado por viagem, em âmbito nacional, realizado com veículo movido a diesel e caracterizado como operação de carga lotação. Nessas situações, o valor do frete deve respeitar os parâmetros definidos pela regulamentação vigente, observadas as hipóteses de exceção previstas pela ANTT.
+                </div>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-q">
+                Veículos de pequeno porte, como furgões, estão sujeitos à regra do piso mínimo?
+            </button>
+            <div class="faq-a">
+                <div class="faq-content">
+                    Depende da operação realizada. A aplicação do piso mínimo de frete não considera apenas o porte do veículo, mas principalmente as características da operação de transporte. Para enquadramento na regra, é necessário que haja transporte rodoviário remunerado de carga lotação e que o veículo utilizado seja movido a diesel. Dessa forma, veículos de pequeno porte, como furgões, podem estar sujeitos ao piso mínimo caso atendam a essas condições. Por outro lado, veículos movidos por outros combustíveis, como gasolina ou eletricidade, não se enquadram nas regras do piso mínimo previstas pela regulamentação da ANTT.
+                </div>
+            </div>
+        </div>
+        <div class="faq-item">
+            <button class="faq-q">
+                Há a possibilidade de dividir uma carga entre duas transportadoras e atender ao frete mínimo?
+            </button>
+            <div class="faq-a">
+                <div class="faq-content">
+                    Depende da forma como a operação será estruturada.
+                    Se cada transportadora assumir uma parte da operação e emitir seus próprios documentos, cada uma deverá realizar o cálculo do frete de forma individualizada e atender às exigências do piso mínimo de frete aplicáveis à sua participação na viagem. Na prática, isso significa que cada transportadora terá sua própria obrigação de pagamento, podendo resultar em um custo equivalente ao pagamento em duplicidade da operação.
+                    Caso a intenção seja apenas dividir o valor do frete entre duas transportadoras para uma mesma prestação de serviço, sem que cada uma assuma formalmente sua parte da operação e suas respectivas obrigações, isso não é permitido.
+                    Portanto, a resposta é: sim, desde que cada transportadora participe formalmente da prestação do serviço e cumpra individualmente as regras do frete mínimo. Caso contrário, a divisão não pode ser realizada.
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div>
+    <div class="section-label">Centro de Vídeos</div>
+    <div class="video-list">
+        <a class="video-link" href="https://www.youtube.com/watch?v=awI0V_lGkqE" target="_blank" rel="noopener noreferrer"><span>🎬</span><div><strong>Vídeo contratação Add-on</strong><small>https://www.youtube.com/watch?v=awI0V_lGkqE</small></div></a>
+        <a class="video-link" href="https://youtu.be/eNC7BwPVGn8" target="_blank" rel="noopener noreferrer"><span>🎬</span><div><strong>Vídeo Emissão CIOT Frota com Contrato de Frete</strong><small>https://youtu.be/eNC7BwPVGn8</small></div></a>
+        <a class="video-link" href="https://youtu.be/siTmSH5v3pM" target="_blank" rel="noopener noreferrer"><span>🎬</span><div><strong>Vídeo Emissão CIOT Frota sem Contrato de Frete</strong><small>https://youtu.be/siTmSH5v3pM</small></div></a>
+        <a class="video-link" href="https://www.instagram.com/p/DYnOR2MiPQI/" target="_blank" rel="noopener noreferrer"><span>🎬</span><div><strong>Vídeo explicativo sobre CIOT Frota Própria</strong><small>https://www.instagram.com/p/DYnOR2MiPQI/</small></div></a>
+        <a class="video-link" href="https://youtu.be/SMHR3aI4TaU" target="_blank" rel="noopener noreferrer"><span>🎬</span><div><strong>Vídeo Emissão CT-e Embarque + CF + CIOT Frota</strong><small>https://youtu.be/SMHR3aI4TaU</small></div></a>
+        <a class="video-link" href="https://youtu.be/kUcjJI2vKNo" target="_blank" rel="noopener noreferrer"><span>🎬</span><div><strong>Vídeo Emissão CT-e c/Embarque</strong><small>https://youtu.be/kUcjJI2vKNo</small></div></a>
+        <a class="video-link" href="https://youtu.be/yMbpdEDPnsw" target="_blank" rel="noopener noreferrer"><span>🎬</span><div><strong>Vídeo Incluir / Excluir CTRC do Embarque</strong><small>https://youtu.be/yMbpdEDPnsw</small></div></a>
+    </div>
+</div>
+
+<div class="important-box">
+
+        <div class="important-title">
+            ⚠️ Importante
+        </div>
+
+        <div class="important-text">
+            Prezado cliente, para melhor atendê-lo, solicitamos que sempre que houver necessidade de acionar o suporte, a demanda seja registrada via ticket e descrita com o
+            <strong>maior nível de detalhamento possível.</strong>
+            <br><br>
+É de fundamental importância informar dados como: documento ou processo envolvido, prints da tela com a situação apresentada, contexto da operação e quaisquer outros detalhes que possam influenciar na análise.
+Quanto mais completas forem as informações registradas, maior será a agilidade no entendimento do cenário e no atendimento da solicitação.        </div>
+
+    </div>
+
+<script>
+
+const buttons = document.querySelectorAll('.faq-q');
+
+buttons.forEach(btn => {
+
+    btn.addEventListener('click', () => {
+
+        const item = btn.parentElement;
+        const answer = btn.nextElementSibling;
+        const isOpen = item.classList.contains('open');
+
+        document.querySelectorAll('.faq-item').forEach(faq => {
+            faq.classList.remove('open');
+            faq.querySelector('.faq-a').style.maxHeight = '0px';
+        });
+
+        if(!isOpen){
+            item.classList.add('open');
+            answer.style.maxHeight = answer.scrollHeight + 'px';
+        }
+
+    });
+
+});
+
+const searchInput = document.getElementById('faqSearch');
+const resultBox = document.getElementById('searchResult');
+
+function pesquisarFAQ() {
+
+    const termo = searchInput.value.toLowerCase().trim();
+
+    if(!termo){
+        resultBox.classList.remove('show');
+        return;
+    }
+
+    const palavras = termo.split(/\s+/).filter(Boolean);
+    const faqs = Array.from(document.querySelectorAll('.faq-item'));
+
+    const resultados = faqs.filter(item => {
+        const pergunta = item.querySelector('.faq-q').innerText.toLowerCase();
+        const resposta = item.querySelector('.faq-content').innerText.toLowerCase();
+        return palavras.every(p => pergunta.includes(p) || resposta.includes(p));
+    });
+
+    document.querySelectorAll('.faq-item').forEach(item => {
+        item.classList.remove('open');
+        item.querySelector('.faq-a').style.maxHeight = '0px';
+    });
+
+    if(resultados.length){
+        const list = resultados.map(item => {
+            const pergunta = item.querySelector('.faq-q').innerText;
+            const resposta = item.querySelector('.faq-content').innerHTML;
+            return `
+                <div class="search-match">
+                    <strong>${pergunta}</strong>
+                    <div class="search-answer">${resposta}</div>
+                </div>
+            `;
+        }).join('');
+
+        resultBox.innerHTML = `
+            <div class="search-success">
+                ✓ ${resultados.length} resultado(s) encontrado(s)
+            </div>
+            ${list}
+        `;
+
+        resultados.forEach(item => {
+            item.classList.add('open');
+            const answer = item.querySelector('.faq-a');
+            answer.style.maxHeight = answer.scrollHeight + 'px';
+        });
+
+        resultBox.classList.add('show');
+    } else {
+        resultBox.innerHTML = `
+            <div class="search-fail">
+                ⚠ Não encontramos conteúdo relacionado.
+            </div>
+
+            <br>
+
+            Sua dúvida é sobre:
+
+            <br><br>
+
+            • CIOT<br>
+            • CT-e<br>
+            • MDF-e<br>
+            • ANTT
+
+            <div class="ticket-box">
+                Caso a dúvida permaneça após consultar os materiais disponíveis, recomendamos a abertura de um ticket para análise da equipe de suporte.
+                <br>
+            </div>
+        `;
+
+        resultBox.classList.add('show');
+    }
+}
+
+searchInput.addEventListener('keyup', pesquisarFAQ);
+
+document.querySelectorAll('.help-tag').forEach(tag => {
+
+    tag.addEventListener('click', () => {
+
+        searchInput.value = tag.innerText;
+
+        pesquisarFAQ();
+
+    });
+
+});
+
+</script>
+
+</body>
+</html>
