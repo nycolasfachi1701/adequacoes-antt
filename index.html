@@ -777,6 +777,216 @@ body{
     color:var(--text);
 }
 
+/* GUIA CIOT */
+
+.guide-panel{
+    background:linear-gradient(180deg, rgba(255,102,0,.08), rgba(28,28,28,.45));
+    border:1px solid rgba(255,102,0,.22);
+    border-radius:12px;
+    padding:28px;
+    box-shadow:0 0 24px rgba(255,102,0,.08);
+}
+
+.guide-head{
+    display:flex;
+    justify-content:space-between;
+    gap:24px;
+    align-items:flex-start;
+    margin-bottom:24px;
+}
+
+.guide-kicker{
+    color:var(--orange);
+    font-size:12px;
+    font-weight:800;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    margin-bottom:8px;
+}
+
+.guide-title{
+    font-size:26px;
+    font-weight:900;
+    line-height:1.25;
+}
+
+.guide-badge{
+    flex:0 0 auto;
+    background:var(--orange);
+    color:#111;
+    border-radius:8px;
+    padding:10px 14px;
+    font-size:12px;
+    font-weight:900;
+    letter-spacing:2px;
+    text-transform:uppercase;
+}
+
+.guide-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:16px;
+    margin-bottom:18px;
+}
+
+.guide-card{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:22px;
+}
+
+.guide-card:hover{
+    border-color:var(--orange);
+}
+
+.guide-card-title{
+    color:var(--orange);
+    font-size:18px;
+    font-weight:800;
+    margin-bottom:12px;
+}
+
+.guide-card p,
+.guide-note,
+.guide-flow-text{
+    color:var(--text);
+    font-size:13px;
+    line-height:1.7;
+}
+
+.guide-list{
+    list-style:none;
+    margin:12px 0 0;
+    padding:0;
+}
+
+.guide-list li{
+    color:var(--text);
+    font-size:13px;
+    line-height:1.7;
+    padding-left:18px;
+    position:relative;
+    margin-bottom:6px;
+}
+
+.guide-list li::before{
+    content:'';
+    width:6px;
+    height:6px;
+    border-radius:50%;
+    background:var(--orange);
+    position:absolute;
+    left:0;
+    top:10px;
+}
+
+.guide-note{
+    margin-top:14px;
+    padding:12px 14px;
+    background:rgba(255,102,0,.08);
+    border-left:4px solid var(--orange);
+    border-radius:8px;
+}
+
+.guide-section{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:22px;
+    margin-top:16px;
+}
+
+.guide-section-title{
+    font-size:17px;
+    font-weight:800;
+    color:var(--orange);
+    margin-bottom:12px;
+}
+
+.criteria-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:10px;
+    margin-top:14px;
+}
+
+.criteria-pill{
+    background:rgba(255,255,255,.04);
+    border:1px solid var(--border);
+    border-radius:8px;
+    padding:12px;
+    color:var(--text);
+    font-size:12px;
+    font-weight:700;
+}
+
+.guide-flow{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:14px;
+}
+
+.guide-flow-card{
+    background:rgba(255,102,0,.06);
+    border:1px solid rgba(255,102,0,.18);
+    border-radius:10px;
+    padding:18px;
+}
+
+.guide-flow-card strong{
+    display:block;
+    color:var(--orange);
+    margin-bottom:8px;
+}
+
+.guide-table-wrap{
+    overflow-x:auto;
+    border:1px solid var(--border);
+    border-radius:10px;
+}
+
+.guide-table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:720px;
+    background:var(--surface);
+}
+
+.guide-table th,
+.guide-table td{
+    padding:13px 14px;
+    border-bottom:1px solid var(--border);
+    text-align:left;
+    font-size:13px;
+}
+
+.guide-table th{
+    color:var(--orange);
+    background:rgba(255,102,0,.08);
+    font-weight:800;
+}
+
+.guide-table tr:last-child td{
+    border-bottom:none;
+}
+
+.guide-laws{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+}
+
+.guide-law{
+    background:rgba(255,102,0,.08);
+    border:1px solid rgba(255,102,0,.18);
+    border-radius:999px;
+    color:var(--text);
+    font-size:12px;
+    font-weight:700;
+    padding:9px 12px;
+}
+
 @media(max-width:900px){
 
     .hero-grid{
@@ -803,6 +1013,20 @@ body{
         grid-template-columns:1fr;
     }
 
+    .guide-head,
+    .guide-grid,
+    .guide-flow{
+        grid-template-columns:1fr;
+    }
+
+    .guide-head{
+        flex-direction:column;
+    }
+
+    .criteria-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
     .faq-q{
         padding:16px 18px;
     }
@@ -814,6 +1038,9 @@ body{
     .alert-body,
     .important-box,
     .warning-box,
+    .guide-panel,
+    .guide-card,
+    .guide-section,
     .info-card,
     .timeline-card,
     .check-item,
@@ -880,6 +1107,12 @@ body{
     }
     .faq-content{
         font-size:13px;
+    }
+    .criteria-grid{
+        grid-template-columns:1fr;
+    }
+    .guide-title{
+        font-size:22px;
     }
 }
 
@@ -1039,6 +1272,179 @@ body{
 
     </div>
 
+</div>
+
+
+<div>
+    <div class="section-label">Guia Rápido TMS Agro</div>
+
+    <div class="guide-panel">
+        <div class="guide-head">
+            <div>
+                <div class="guide-kicker">Classificação de CIOT e Piso Mínimo</div>
+                <div class="guide-title">TMS AGRO - Guia Rápido de Classificação de CIOT e Validação do Piso Mínimo de Frete</div>
+            </div>
+            <div class="guide-badge">Consulta rápida</div>
+        </div>
+
+        <div class="guide-grid">
+            <div class="guide-card">
+                <div class="guide-card-title">CIOT Lotação</div>
+                <p>Quando existir apenas um contratante da operação de transporte.</p>
+                <ul class="guide-list">
+                    <li>Um embarcador e uma entrega.</li>
+                    <li>Um embarcador e múltiplas entregas.</li>
+                    <li>Um embarcador e múltiplas coletas.</li>
+                    <li>ETC contratando TAC.</li>
+                    <li>ETC contratando outra ETC.</li>
+                </ul>
+                <div class="guide-note">
+                    Múltiplas entregas ou coletas não alteram a classificação para Fracionado quando houver apenas um contratante.
+                </div>
+            </div>
+
+            <div class="guide-card">
+                <div class="guide-card-title">CIOT Fracionado</div>
+                <p>Quando houver mais de um contratante vinculado à mesma operação.</p>
+                <ul class="guide-list">
+                    <li>Mercadorias de vários embarcadores na mesma viagem.</li>
+                    <li>Operação de distribuição consolidada de diversos clientes.</li>
+                    <li>Coletas de diferentes contratantes.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="guide-section">
+            <div class="guide-section-title">Múltiplas Entregas</div>
+            <p class="guide-flow-text">
+                Mesmo com um único contratante e múltiplos destinos, o tipo de CIOT permanece como <strong>Lotação</strong>. Nesses casos, o Piso Mínimo <strong>não é validado automaticamente</strong>, pois múltiplos destinos afastam a validação.
+            </p>
+        </div>
+
+        <div class="guide-section">
+            <div class="guide-section-title">Validação do Piso Mínimo</div>
+            <p class="guide-flow-text">
+                A classificação do CIOT e a validação do Piso Mínimo são análises distintas. Uma operação pode ser Lotação e, ainda assim, não ter validação automática do Piso Mínimo.
+            </p>
+
+            <div class="criteria-grid">
+                <div class="criteria-pill">Contratante único</div>
+                <div class="criteria-pill">Contrato único</div>
+                <div class="criteria-pill">Veículo exclusivo</div>
+                <div class="criteria-pill">Origem única</div>
+                <div class="criteria-pill">Destino único</div>
+                <div class="criteria-pill">Documento fiscal único</div>
+            </div>
+
+            <div class="guide-note">
+                Haverá validação do Piso somente quando todos os requisitos forem atendidos simultaneamente.
+            </div>
+
+            <ul class="guide-list">
+                <li>Não haverá validação automática em operações com múltiplas entregas ou múltiplas coletas.</li>
+                <li>Também não haverá validação automática com múltiplos CT-es, múltiplas NF-es, mais de um contratante ou operações classificadas como Fracionadas.</li>
+            </ul>
+        </div>
+
+        <div class="guide-section">
+            <div class="guide-section-title">Subcontratação</div>
+            <div class="guide-grid">
+                <div class="guide-card">
+                    <div class="guide-card-title">ETC -> TAC</div>
+                    <p>Gera CIOT | Lotação | ETC contratante é responsável pelo registro.</p>
+                </div>
+                <div class="guide-card">
+                    <div class="guide-card-title">ETC -> ETC</div>
+                    <p>Gera CIOT | Lotação | ETC que executará o transporte é responsável.</p>
+                </div>
+                <div class="guide-card">
+                    <div class="guide-card-title">ETC -> ETC -> TAC</div>
+                    <p>Gera CIOT | Lotação | Responsabilidade acompanha a execução efetiva.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="guide-section">
+            <div class="guide-section-title">Fluxo Simplificado</div>
+            <div class="guide-flow">
+                <div class="guide-flow-card">
+                    <strong>Existe mais de um contratante?</strong>
+                    <div class="guide-flow-text">
+                        SIM -> CIOT Fracionado<br>
+                        NÃO -> CIOT Lotação
+                    </div>
+                </div>
+                <div class="guide-flow-card">
+                    <strong>Validação do Piso Mínimo</strong>
+                    <div class="guide-flow-text">
+                        Todos os critérios atendidos -> Valida Piso<br>
+                        Qualquer critério não atendido -> Não valida Piso automaticamente
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="guide-section">
+            <div class="guide-section-title">Resumo</div>
+            <div class="guide-table-wrap">
+                <table class="guide-table">
+                    <thead>
+                        <tr>
+                            <th>Situação</th>
+                            <th>Tipo CIOT</th>
+                            <th>Validação Piso</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1 contratante, 1 entrega</td>
+                            <td>Lotação</td>
+                            <td>Sim</td>
+                        </tr>
+                        <tr>
+                            <td>1 contratante, múltiplas entregas</td>
+                            <td>Lotação</td>
+                            <td>Não</td>
+                        </tr>
+                        <tr>
+                            <td>1 contratante, múltiplas coletas</td>
+                            <td>Lotação</td>
+                            <td>Não</td>
+                        </tr>
+                        <tr>
+                            <td>Vários contratantes</td>
+                            <td>Fracionado</td>
+                            <td>Não</td>
+                        </tr>
+                        <tr>
+                            <td>ETC -> TAC</td>
+                            <td>Lotação</td>
+                            <td>Depende dos critérios</td>
+                        </tr>
+                        <tr>
+                            <td>ETC -> ETC</td>
+                            <td>Lotação</td>
+                            <td>Depende dos critérios</td>
+                        </tr>
+                        <tr>
+                            <td>ETC -> ETC -> TAC</td>
+                            <td>Lotação</td>
+                            <td>Depende dos critérios</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="guide-section">
+            <div class="guide-section-title">Base Legal</div>
+            <div class="guide-laws">
+                <div class="guide-law">Portaria SUROC nº 16/2026</div>
+                <div class="guide-law">Resolução ANTT nº 5.867/2020</div>
+                <div class="guide-law">Resolução ANTT nº 6.078/2026</div>
+            </div>
+        </div>
+    </div>
 </div>
 
 
