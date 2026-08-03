@@ -3,9 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Adequações Antt</title>
-<link rel="icon" href="favicon.ico" type="image/x-icon">
+<title>CIOT ANTT — Regras Operacionais | NSTECH</title>
+<meta name="description" content="Portal de apoio às adequações do CIOT ANTT para Frota Própria: regras operacionais, guia de classificação de CIOT, validação do piso mínimo de frete, perguntas frequentes e vídeos. NSTECH.">
+<meta name="theme-color" content="#ff6600">
+<link rel="icon" href="favicon.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+<script>document.documentElement.className += ' js';</script>
 
 
 
@@ -31,6 +36,40 @@
     box-sizing:border-box;
 }
 
+html{
+    scroll-behavior:smooth;
+}
+
+@media(prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto;}
+    *{transition:none !important;animation:none !important;}
+}
+
+/* Acessibilidade: foco visível e skip-link */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+.help-tag:focus-visible{
+    outline:2px solid var(--orange);
+    outline-offset:3px;
+    border-radius:6px;
+}
+
+.skip-link{
+    position:absolute;
+    left:-9999px;
+    top:0;
+    background:var(--orange);
+    color:#111;
+    padding:10px 16px;
+    font-weight:700;
+    border-radius:0 0 8px 0;
+    z-index:1000;
+}
+.skip-link:focus{
+    left:0;
+}
+
 body{
     font-family:'Roboto',sans-serif;
     background:var(--bg);
@@ -46,6 +85,14 @@ body{
 .page{
     max-width:1240px;
     margin:auto;
+    display:flex;
+    flex-direction:column;
+    gap:52px;
+}
+
+/* O conteúdo foi envolvido em <main>; ele precisa herdar o mesmo respiro
+   entre as seções, senão o espaçamento some nas transições de área. */
+main#conteudo{
     display:flex;
     flex-direction:column;
     gap:52px;
@@ -135,7 +182,6 @@ body{
     border:1px solid rgba(255,102,0,.2);
     border-radius:10px;
     padding:14px 18px;
-    margin-bottom:18px;
     display:flex;
     align-items:center;
     justify-content:center;
@@ -266,7 +312,10 @@ body{
     cursor:pointer;
     transition:.25s;
     font-size:14px;
-        user-select:none;
+    font-family:inherit;
+    font-weight:500;
+    line-height:1;
+    user-select:none;
     }
 
     .help-tag:hover{
@@ -987,6 +1036,495 @@ body{
     padding:9px 12px;
 }
 
+/* NAV FIXO */
+
+.site-nav{
+    position:sticky;
+    top:0;
+    z-index:50;
+    margin:0 -24px;
+    padding:0 24px;
+    background:rgba(17,17,17,.82);
+    backdrop-filter:blur(12px);
+    -webkit-backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--border);
+}
+
+.site-nav-inner{
+    max-width:1240px;
+    margin:auto;
+    display:flex;
+    align-items:center;
+    gap:6px;
+    overflow-x:auto;
+    scrollbar-width:none;
+    padding:10px 0;
+}
+.site-nav-inner::-webkit-scrollbar{display:none;}
+
+.site-nav a{
+    flex:0 0 auto;
+    color:var(--muted);
+    text-decoration:none;
+    font-size:13px;
+    font-weight:700;
+    letter-spacing:.5px;
+    padding:8px 14px;
+    border-radius:999px;
+    white-space:nowrap;
+    transition:.2s;
+}
+.site-nav a:hover{
+    color:var(--text);
+    background:rgba(255,102,0,.08);
+}
+.site-nav a.active{
+    color:var(--orange);
+    background:rgba(255,102,0,.12);
+}
+
+/* Âncoras: compensa o nav fixo ao rolar */
+[id]{
+    scroll-margin-top:80px;
+}
+
+/* Realce de termos na busca */
+mark.hl{
+    background:var(--orange);
+    color:#111;
+    border-radius:3px;
+    padding:0 3px;
+    font-weight:700;
+}
+
+/* Animação de entrada das seções (só quando há JS) */
+.js .reveal{
+    opacity:0;
+    transform:translateY(18px);
+    transition:opacity .6s ease, transform .6s ease;
+}
+.js .reveal.is-visible{
+    opacity:1;
+    transform:none;
+}
+
+/* Grupo de resultados e link para o Guia na busca */
+.result-group-title{
+    text-align:left;
+    color:var(--muted);
+    font-size:12px;
+    font-weight:700;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    margin:22px 0 4px;
+}
+
+a.guia-link{
+    display:block;
+    text-align:left;
+    text-decoration:none;
+    cursor:pointer;
+}
+a.guia-link:hover{
+    border-color:var(--orange);
+    background:rgba(255,102,0,.08);
+}
+a.guia-link p{
+    color:var(--muted);
+    font-size:12px;
+    margin:0;
+}
+
+/* Destaque temporário ao pular para uma seção do Guia */
+.guide-flash{
+    box-shadow:0 0 0 2px var(--orange), 0 0 22px var(--orange-glow) !important;
+    border-radius:12px;
+    transition:box-shadow .35s ease;
+}
+
+/* CENTRO DE VÍDEOS */
+.videos-intro{
+    color:var(--muted);
+    font-size:14px;
+    margin:-16px 0 24px;
+}
+
+.video-group{
+    margin-bottom:30px;
+}
+.video-group:last-child{
+    margin-bottom:0;
+}
+
+.video-group-title{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-size:15px;
+    font-weight:800;
+    letter-spacing:.5px;
+    color:var(--text);
+    margin:0 0 16px;
+}
+.video-group-title::before{
+    content:'';
+    width:8px;
+    height:8px;
+    border-radius:50%;
+    background:var(--orange);
+    box-shadow:0 0 10px var(--orange);
+}
+.vg-count{
+    font-size:11px;
+    font-weight:700;
+    color:var(--orange);
+    background:rgba(255,102,0,.12);
+    border:1px solid rgba(255,102,0,.22);
+    border-radius:999px;
+    padding:3px 10px;
+}
+
+.video-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(250px,1fr));
+    gap:18px;
+}
+
+.video-card{
+    display:flex;
+    flex-direction:column;
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:14px;
+    overflow:hidden;
+    text-decoration:none;
+    color:var(--text);
+    transition:transform .25s, border-color .25s, box-shadow .25s;
+}
+.video-card:hover{
+    transform:translateY(-5px);
+    border-color:var(--orange);
+    box-shadow:0 14px 32px rgba(0,0,0,.5);
+}
+
+.video-thumb{
+    position:relative;
+    aspect-ratio:16/9;
+    background:linear-gradient(135deg,#2b2b2b,#161616);
+    overflow:hidden;
+}
+.video-thumb img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+    filter:brightness(.82);
+    transition:transform .4s, filter .25s;
+}
+.video-card:hover .video-thumb img{
+    transform:scale(1.06);
+    filter:brightness(1);
+}
+
+.video-thumb.ig{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:linear-gradient(135deg,#833ab4,#fd1d1d 55%,#fcb045);
+}
+.video-thumb.ig .ig-glyph{
+    font-size:46px;
+    filter:drop-shadow(0 2px 6px rgba(0,0,0,.35));
+}
+
+.video-play{
+    position:absolute;
+    inset:0;
+    margin:auto;
+    width:54px;
+    height:54px;
+    border-radius:50%;
+    background:rgba(255,102,0,.92);
+    color:#111;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:20px;
+    padding-left:3px;
+    box-shadow:0 4px 16px rgba(0,0,0,.45);
+    transition:transform .25s, background .25s;
+}
+.video-card:hover .video-play{
+    transform:scale(1.14);
+    background:var(--orange);
+}
+
+.video-platform{
+    position:absolute;
+    top:10px;
+    left:10px;
+    display:inline-flex;
+    align-items:center;
+    gap:5px;
+    background:rgba(0,0,0,.62);
+    -webkit-backdrop-filter:blur(4px);
+    backdrop-filter:blur(4px);
+    color:#fff;
+    font-size:10px;
+    font-weight:700;
+    letter-spacing:.5px;
+    padding:4px 9px;
+    border-radius:999px;
+}
+
+.video-info{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    padding:15px 16px 16px;
+    flex:1;
+}
+.video-info strong{
+    font-size:14px;
+    font-weight:700;
+    line-height:1.4;
+}
+.video-meta{
+    margin-top:auto;
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:.4px;
+    color:var(--muted);
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    transition:color .25s;
+}
+.video-card:hover .video-meta{
+    color:var(--orange);
+}
+
+@media(max-width:600px){
+    .video-grid{
+        grid-template-columns:1fr;
+    }
+}
+
+/* ÁREA DE SUGESTÕES / DÚVIDAS */
+.suggest-panel{
+    background:linear-gradient(180deg, rgba(255,102,0,.08), rgba(28,28,28,.45));
+    border:1px solid rgba(255,102,0,.22);
+    border-radius:12px;
+    padding:28px;
+    box-shadow:0 0 24px rgba(255,102,0,.08);
+}
+.suggest-head{
+    margin-bottom:22px;
+}
+.suggest-title{
+    font-size:22px;
+    font-weight:900;
+    margin-bottom:8px;
+}
+.suggest-desc{
+    color:var(--muted);
+    font-size:14px;
+    line-height:1.7;
+}
+.suggest-desc strong{
+    color:var(--text);
+}
+
+.suggest-form{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:16px;
+}
+.field{
+    display:flex;
+    flex-direction:column;
+    gap:7px;
+}
+.field.full{
+    grid-column:1 / -1;
+}
+.field label{
+    font-size:12px;
+    font-weight:700;
+    letter-spacing:.5px;
+    color:var(--text);
+}
+.field label .opt{
+    color:var(--muted);
+    font-weight:500;
+}
+.field label .req{
+    color:var(--orange);
+}
+.field input,
+.field select,
+.field textarea{
+    background:#1d1d1d;
+    border:1px solid #3a3a3a;
+    border-radius:10px;
+    padding:13px 14px;
+    color:var(--text);
+    font-family:inherit;
+    font-size:14px;
+    outline:none;
+    transition:.2s;
+    width:100%;
+}
+.field textarea{
+    min-height:130px;
+    resize:vertical;
+    line-height:1.6;
+}
+.field input:focus,
+.field select:focus,
+.field textarea:focus{
+    border-color:var(--orange);
+    box-shadow:0 0 0 3px rgba(255,102,0,.14);
+}
+.field select{
+    appearance:none;
+    -webkit-appearance:none;
+    cursor:pointer;
+    background-image:linear-gradient(45deg,transparent 50%,var(--orange) 50%),linear-gradient(135deg,var(--orange) 50%,transparent 50%);
+    background-position:calc(100% - 20px) center,calc(100% - 15px) center;
+    background-size:5px 5px,5px 5px;
+    background-repeat:no-repeat;
+    padding-right:40px;
+}
+.field .hint{
+    font-size:11px;
+    color:var(--muted);
+}
+.field.invalid input,
+.field.invalid select,
+.field.invalid textarea{
+    border-color:#ef4444;
+    box-shadow:0 0 0 3px rgba(239,68,68,.12);
+}
+
+.suggest-actions{
+    grid-column:1 / -1;
+    display:flex;
+    align-items:center;
+    gap:16px;
+    flex-wrap:wrap;
+    margin-top:4px;
+}
+.suggest-submit{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    background:var(--orange);
+    color:#111;
+    border:none;
+    font-family:inherit;
+    font-weight:800;
+    font-size:15px;
+    letter-spacing:.5px;
+    padding:14px 26px;
+    border-radius:10px;
+    cursor:pointer;
+    transition:.2s;
+}
+.suggest-submit:hover{
+    background:var(--orange-dim);
+}
+.suggest-submit:disabled{
+    opacity:.6;
+    cursor:progress;
+}
+.suggest-privacy{
+    font-size:11px;
+    color:var(--muted);
+    flex:1;
+    min-width:220px;
+    line-height:1.5;
+}
+.suggest-feedback{
+    grid-column:1 / -1;
+    display:none;
+    border-radius:10px;
+    padding:16px 18px;
+    font-size:14px;
+    line-height:1.6;
+}
+.suggest-feedback.show{
+    display:block;
+}
+.suggest-feedback.ok{
+    background:rgba(34,197,94,.1);
+    border:1px solid rgba(34,197,94,.35);
+    color:#4ade80;
+}
+.suggest-feedback.err{
+    background:rgba(239,68,68,.1);
+    border:1px solid rgba(239,68,68,.35);
+    color:#f87171;
+}
+.suggest-demo-note{
+    grid-column:1 / -1;
+    font-size:12px;
+    color:var(--muted);
+    background:rgba(255,255,255,.03);
+    border:1px dashed var(--border);
+    border-radius:8px;
+    padding:10px 12px;
+    line-height:1.6;
+}
+
+@media(max-width:600px){
+    .suggest-form{
+        grid-template-columns:1fr;
+    }
+}
+
+/* Botão voltar ao topo */
+.to-top{
+    position:fixed;
+    right:22px;
+    bottom:22px;
+    width:48px;
+    height:48px;
+    border:none;
+    border-radius:50%;
+    background:var(--orange);
+    color:#111;
+    font-size:22px;
+    font-weight:900;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    box-shadow:0 8px 24px rgba(0,0,0,.4), 0 0 0 1px rgba(255,102,0,.3);
+    opacity:0;
+    visibility:hidden;
+    transform:translateY(12px);
+    transition:.25s;
+    z-index:60;
+}
+.to-top.show{
+    opacity:1;
+    visibility:visible;
+    transform:none;
+}
+.to-top:hover{
+    background:var(--orange-dim);
+}
+
+@media(max-width:600px){
+    .to-top{
+        right:16px;
+        bottom:16px;
+        width:44px;
+        height:44px;
+    }
+}
+
 @media(max-width:900px){
 
     .hero-grid{
@@ -1053,7 +1591,8 @@ body{
         align-items:flex-start;
     }
 
-    .page{
+    .page,
+    main#conteudo{
         gap:24px;
     }
 
@@ -1067,7 +1606,8 @@ body{
     body{
         padding:16px 12px;
     }
-    .page{
+    .page,
+    main#conteudo{
         gap:20px;
     }
     .header{
@@ -1120,15 +1660,30 @@ body{
 </head>
 <body>
 
+<a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+
 <div class="page">
 
-<div class="header">
+<div class="header" id="topo">
     <div>
         <h1>CIOT <span>ANTT</span></h1>
         <h2>REGRAS OPERACIONAIS</h2>
     </div>
     <div class="logo">NSTECH</div>
 </div>
+
+<nav class="site-nav" aria-label="Navegação da página">
+    <div class="site-nav-inner">
+        <a href="#ajuda">Buscar dúvida</a>
+        <a href="#contratacao">Contratação</a>
+        <a href="#guia">Guia TMS Agro</a>
+        <a href="#faq">Perguntas Frequentes</a>
+        <a href="#videos">Vídeos</a>
+        <a href="#sugestoes">Sugestões</a>
+    </div>
+</nav>
+
+<main id="conteudo">
 <div class="top-link-box">
     <a href="https://www.gov.br/antt/pt-br/assuntos/cargas/ciot-para-todos-1/perguntas-frequentes" target="_blank" rel="noopener noreferrer">Perguntas Frequentes ANTT</a>
 </div>
@@ -1161,39 +1716,47 @@ body{
 
 </div>
 
-<div class="help-center">
+<div class="help-center reveal" id="ajuda">
 
     <div class="help-title">
         Como podemos ajudar?
     </div>
 
+    <p class="help-subtitle">Busque por palavra-chave nas perguntas frequentes e no guia de classificação.</p>
 
     <div class="search-wrapper">
+        <label for="faqSearch" class="skip-link">Buscar dúvida</label>
         <input
-            type="text"
+            type="search"
             id="faqSearch"
+            autocomplete="off"
+            aria-describedby="searchResult"
             placeholder="Digite sua dúvida..."
         >
-        <div class="search-icon">⌕</div>
+        <div class="search-icon" aria-hidden="true">⌕</div>
     </div>
 
-    <div class="help-tags">
+    <div class="help-tags" role="group" aria-label="Palavras-chave sugeridas">
 
-        <div class="help-tag">CIOT</div>
-        <div class="help-tag">CT-e</div>
-        <div class="help-tag">MDF-e</div>
-        <div class="help-tag">ANTT</div>
-        <div class="help-tag">Vale-Pedágio</div>
-        <div class="help-tag">Frete Mínimo</div>
+        <button type="button" class="help-tag">CIOT</button>
+        <button type="button" class="help-tag">CT-e</button>
+        <button type="button" class="help-tag">MDF-e</button>
+        <button type="button" class="help-tag">Piso Mínimo</button>
+        <button type="button" class="help-tag">Vale-Pedágio</button>
+        <button type="button" class="help-tag">Frota Própria</button>
+        <button type="button" class="help-tag">Embarque</button>
+        <button type="button" class="help-tag">Subcontratação</button>
+        <button type="button" class="help-tag">Alto Desempenho</button>
+        <button type="button" class="help-tag">Fracionado</button>
 
     </div>
 
-    <div class="search-result" id="searchResult">
+    <div class="search-result" id="searchResult" aria-live="polite">
     </div>
 
 </div>
 
-<div>
+<div class="reveal" id="contratacao">
     <div class="section-label">Contratação do Add-on</div>
 
     <div class="flow-container">
@@ -1275,7 +1838,7 @@ body{
 </div>
 
 
-<div>
+<div class="reveal" id="guia">
     <div class="section-label">Guia Rápido TMS Agro</div>
 
     <div class="guide-panel">
@@ -1448,7 +2011,7 @@ body{
 </div>
 
 
-<div>
+<div class="reveal" id="faq">
     <div class="section-label">Perguntas Frequentes</div>
 
     <div class="faq-container">
@@ -1638,20 +2201,166 @@ body{
     </div>
 </div>
 
-<div>
+<div class="reveal" id="videos">
     <div class="section-label">Centro de Vídeos</div>
-    <div class="video-list">
-        <a class="video-link" href="https://www.youtube.com/watch?v=awI0V_lGkqE" target="_blank" rel="noopener noreferrer"><span>🎬</span><div><strong>Vídeo contratação Add-on</strong><small>https://www.youtube.com/watch?v=awI0V_lGkqE</small></div></a>
-        <a class="video-link" href="https://youtu.be/eNC7BwPVGn8" target="_blank" rel="noopener noreferrer"><span>🎬</span><div><strong>Vídeo Emissão CIOT Frota com Contrato de Frete</strong><small>https://youtu.be/eNC7BwPVGn8</small></div></a>
-        <a class="video-link" href="https://youtu.be/siTmSH5v3pM" target="_blank" rel="noopener noreferrer"><span>🎬</span><div><strong>Vídeo Emissão CIOT Frota sem Contrato de Frete</strong><small>https://youtu.be/siTmSH5v3pM</small></div></a>
-        <a class="video-link" href="https://www.instagram.com/p/DYnOR2MiPQI/" target="_blank" rel="noopener noreferrer"><span>🎬</span><div><strong>Vídeo explicativo sobre CIOT Frota Própria</strong><small>https://www.instagram.com/p/DYnOR2MiPQI/</small></div></a>
-        <a class="video-link" href="https://youtu.be/SMHR3aI4TaU" target="_blank" rel="noopener noreferrer"><span>🎬</span><div><strong>Vídeo Emissão CT-e Embarque + CF + CIOT Frota</strong><small>https://youtu.be/SMHR3aI4TaU</small></div></a>
-        <a class="video-link" href="https://youtu.be/kUcjJI2vKNo" target="_blank" rel="noopener noreferrer"><span>🎬</span><div><strong>Vídeo Emissão CT-e c/Embarque</strong><small>https://youtu.be/kUcjJI2vKNo</small></div></a>
-        <a class="video-link" href="https://youtu.be/yMbpdEDPnsw" target="_blank" rel="noopener noreferrer"><span>🎬</span><div><strong>Vídeo Incluir / Excluir CTRC do Embarque</strong><small>https://youtu.be/yMbpdEDPnsw</small></div></a>
+    <p class="videos-intro">Tutoriais em vídeo organizados por tema. Clique em qualquer card para assistir.</p>
+
+    <div class="video-group">
+        <div class="video-group-title">Primeiros passos <span class="vg-count">1 vídeo</span></div>
+        <div class="video-grid">
+            <a class="video-card" href="https://www.youtube.com/watch?v=awI0V_lGkqE" target="_blank" rel="noopener noreferrer">
+                <div class="video-thumb">
+                    <img src="https://img.youtube.com/vi/awI0V_lGkqE/hqdefault.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+                    <span class="video-platform">▶ YouTube</span>
+                    <span class="video-play" aria-hidden="true">▶</span>
+                </div>
+                <div class="video-info">
+                    <strong>Contratação do Add-on</strong>
+                    <span class="video-meta">Assistir no YouTube ↗</span>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <div class="video-group">
+        <div class="video-group-title">CIOT Frota Própria <span class="vg-count">3 vídeos</span></div>
+        <div class="video-grid">
+            <a class="video-card" href="https://youtu.be/eNC7BwPVGn8" target="_blank" rel="noopener noreferrer">
+                <div class="video-thumb">
+                    <img src="https://img.youtube.com/vi/eNC7BwPVGn8/hqdefault.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+                    <span class="video-platform">▶ YouTube</span>
+                    <span class="video-play" aria-hidden="true">▶</span>
+                </div>
+                <div class="video-info">
+                    <strong>Emissão de CIOT Frota com Contrato de Frete</strong>
+                    <span class="video-meta">Assistir no YouTube ↗</span>
+                </div>
+            </a>
+            <a class="video-card" href="https://youtu.be/siTmSH5v3pM" target="_blank" rel="noopener noreferrer">
+                <div class="video-thumb">
+                    <img src="https://img.youtube.com/vi/siTmSH5v3pM/hqdefault.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+                    <span class="video-platform">▶ YouTube</span>
+                    <span class="video-play" aria-hidden="true">▶</span>
+                </div>
+                <div class="video-info">
+                    <strong>Emissão de CIOT Frota sem Contrato de Frete</strong>
+                    <span class="video-meta">Assistir no YouTube ↗</span>
+                </div>
+            </a>
+            <a class="video-card" href="https://www.instagram.com/p/DYnOR2MiPQI/" target="_blank" rel="noopener noreferrer">
+                <div class="video-thumb ig">
+                    <span class="ig-glyph" aria-hidden="true">📸</span>
+                    <span class="video-platform">Instagram</span>
+                    <span class="video-play" aria-hidden="true">▶</span>
+                </div>
+                <div class="video-info">
+                    <strong>Explicativo sobre CIOT Frota Própria</strong>
+                    <span class="video-meta">Assistir no Instagram ↗</span>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <div class="video-group">
+        <div class="video-group-title">Emissão por Embarque <span class="vg-count">3 vídeos</span></div>
+        <div class="video-grid">
+            <a class="video-card" href="https://youtu.be/SMHR3aI4TaU" target="_blank" rel="noopener noreferrer">
+                <div class="video-thumb">
+                    <img src="https://img.youtube.com/vi/SMHR3aI4TaU/hqdefault.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+                    <span class="video-platform">▶ YouTube</span>
+                    <span class="video-play" aria-hidden="true">▶</span>
+                </div>
+                <div class="video-info">
+                    <strong>Emissão CT-e Embarque + CF + CIOT Frota</strong>
+                    <span class="video-meta">Assistir no YouTube ↗</span>
+                </div>
+            </a>
+            <a class="video-card" href="https://youtu.be/kUcjJI2vKNo" target="_blank" rel="noopener noreferrer">
+                <div class="video-thumb">
+                    <img src="https://img.youtube.com/vi/kUcjJI2vKNo/hqdefault.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+                    <span class="video-platform">▶ YouTube</span>
+                    <span class="video-play" aria-hidden="true">▶</span>
+                </div>
+                <div class="video-info">
+                    <strong>Emissão de CT-e com Embarque</strong>
+                    <span class="video-meta">Assistir no YouTube ↗</span>
+                </div>
+            </a>
+            <a class="video-card" href="https://youtu.be/yMbpdEDPnsw" target="_blank" rel="noopener noreferrer">
+                <div class="video-thumb">
+                    <img src="https://img.youtube.com/vi/yMbpdEDPnsw/hqdefault.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+                    <span class="video-platform">▶ YouTube</span>
+                    <span class="video-play" aria-hidden="true">▶</span>
+                </div>
+                <div class="video-info">
+                    <strong>Incluir / Excluir CTRC do Embarque</strong>
+                    <span class="video-meta">Assistir no YouTube ↗</span>
+                </div>
+            </a>
+        </div>
     </div>
 </div>
 
-<div class="important-box">
+<div class="reveal" id="sugestoes">
+    <div class="section-label">Sugestões e Dúvidas</div>
+
+    <div class="suggest-panel">
+        <div class="suggest-head">
+            <div class="suggest-title">Envie sua dúvida ou situação</div>
+            <div class="suggest-desc">
+                Não encontrou a resposta acima? Registre aqui sua <strong>dúvida sobre a demanda</strong> ou uma <strong>nova situação</strong> que ainda não esteja contemplada. Sua mensagem chega direto à nossa equipe para análise.
+            </div>
+        </div>
+
+        <form class="suggest-form" id="suggestForm" novalidate>
+            <div class="field">
+                <label for="sg-nome">Nome <span class="opt">(opcional)</span></label>
+                <input type="text" id="sg-nome" name="nome" autocomplete="name" placeholder="Como podemos te chamar?">
+            </div>
+            <div class="field">
+                <label for="sg-empresa">Empresa <span class="opt">(opcional)</span></label>
+                <input type="text" id="sg-empresa" name="empresa" autocomplete="organization" placeholder="Nome da empresa">
+            </div>
+            <div class="field">
+                <label for="sg-email">E-mail para retorno <span class="opt">(opcional)</span></label>
+                <input type="email" id="sg-email" name="email" autocomplete="email" placeholder="voce@empresa.com.br">
+                <span class="hint">Preencha se quiser receber uma resposta.</span>
+            </div>
+            <div class="field">
+                <label for="sg-tipo">Tipo <span class="req">*</span></label>
+                <select id="sg-tipo" name="tipo" required>
+                    <option value="">Selecione...</option>
+                    <option>Dúvida sobre a demanda</option>
+                    <option>Nova situação / cenário</option>
+                    <option>Sugestão de melhoria</option>
+                    <option>Outro</option>
+                </select>
+            </div>
+            <div class="field full">
+                <label for="sg-assunto">Assunto <span class="req">*</span></label>
+                <input type="text" id="sg-assunto" name="assunto" required maxlength="120" placeholder="Resuma em poucas palavras">
+            </div>
+            <div class="field full">
+                <label for="sg-mensagem">Descrição <span class="req">*</span></label>
+                <textarea id="sg-mensagem" name="mensagem" required maxlength="3000" placeholder="Descreva com o máximo de detalhes: documento/processo envolvido, contexto da operação, o que aconteceu ou o que gostaria de sugerir..."></textarea>
+                <span class="hint"><span id="sg-count">0</span>/3000 caracteres</span>
+            </div>
+
+            <div class="suggest-demo-note" id="sg-demo" hidden>
+                ⚙️ <strong>Modo demonstração:</strong> o backend ainda não foi configurado, então esta mensagem será salva apenas neste navegador (visível na página de administração deste mesmo computador). Configure o endpoint do Google Apps Script para que as sugestões cheguem até a equipe.
+            </div>
+
+            <div class="suggest-feedback" id="sg-feedback" role="status" aria-live="polite"></div>
+
+            <div class="suggest-actions">
+                <button type="submit" class="suggest-submit" id="sg-submit">✉️ Enviar sugestão</button>
+                <span class="suggest-privacy">Não inclua senhas, dados bancários ou documentos sensíveis. Usaremos suas informações apenas para tratar esta solicitação.</span>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="important-box reveal">
 
         <div class="important-title">
             ⚠️ Importante
@@ -1666,142 +2375,378 @@ Quanto mais completas forem as informações registradas, maior será a agilidad
 
     </div>
 
+</main>
+
+</div>
+
+<button type="button" class="to-top" id="toTop" aria-label="Voltar ao topo" title="Voltar ao topo">↑</button>
+
 <script>
 
-const buttons = document.querySelectorAll('.faq-q');
+(function(){
+    'use strict';
 
-buttons.forEach(btn => {
+    /* ============================================================
+       CONFIGURAÇÃO DO ENVIO DE SUGESTÕES
+       Cole entre as aspas a URL do seu Web App do Google Apps Script
+       (ver instruções no arquivo backend-apps-script.gs).
+       Enquanto estiver vazio, o formulário funciona em MODO DEMONSTRAÇÃO,
+       salvando as sugestões apenas neste navegador (visíveis em admin.html).
+       ============================================================ */
+    const SUGESTOES_ENDPOINT = 'https://script.google.com/macros/s/AKfycbzgvV7N89oVwiiD4jIeQ70J_7XebzyS5_tT_VYM8MQdOd9-6_yQqqUgvdNUti7rYPnAEw/exec';
+    const SUGESTOES_STORE = 'ciot_sugestoes';
 
-    btn.addEventListener('click', () => {
+    const normalize = s => s.toLowerCase().normalize('NFD').replace(/\p{Diacritic}/gu,'');
 
-        const item = btn.parentElement;
-        const answer = btn.nextElementSibling;
-        const isOpen = item.classList.contains('open');
+    /* Sinônimos/apelidos para busca (chaves já normalizadas: minúsculas, sem acento) */
+    const SINONIMOS = {
+        'pedagio': ['vale-pedagio','vpo'],
+        'vpo': ['vale-pedagio','pedagio'],
+        'vale-pedagio': ['pedagio','vpo'],
+        'km': ['quilometragem','quilometro','distancia','roteirizacao'],
+        'quilometragem': ['km','distancia'],
+        'distancia': ['km','quilometragem'],
+        'piso': ['piso minimo','frete minimo'],
+        'lotacao': ['carga lotacao'],
+        'fracionado': ['fracionada','carga fracionada'],
+        'fracionada': ['fracionado','carga fracionada'],
+        'frota': ['frota propria'],
+        'subcontratacao': ['subcontrato','subcontratado','subcontratar'],
+        'subcontrato': ['subcontratacao','subcontratado'],
+        'furgao': ['pequeno porte','veiculo pequeno'],
+        'icms': ['imposto'],
+        'imposto': ['icms'],
+        'contingencia': ['instabilidade','indisponibilidade'],
+        'instabilidade': ['contingencia','indisponibilidade'],
+        'cte': ['ct-e'],
+        'mdfe': ['mdf-e'],
+        'complemento': ['complementar'],
+        'documentacao': ['documento','wiki'],
+        'video': ['videos','tutorial']
+    };
 
+    /* ---------- Acordeão FAQ ---------- */
+    const faqButtons = Array.from(document.querySelectorAll('.faq-q'));
+
+    function closeAllFaq(){
         document.querySelectorAll('.faq-item').forEach(faq => {
             faq.classList.remove('open');
+            const q = faq.querySelector('.faq-q');
+            if(q) q.setAttribute('aria-expanded', 'false');
             faq.querySelector('.faq-a').style.maxHeight = '0px';
         });
-
-        if(!isOpen){
-            item.classList.add('open');
-            answer.style.maxHeight = answer.scrollHeight + 'px';
-        }
-
-    });
-
-});
-
-const searchInput = document.getElementById('faqSearch');
-const resultBox = document.getElementById('searchResult');
-
-function pesquisarFAQ() {
-
-    const termo = searchInput.value.toLowerCase().trim();
-
-    if(!termo){
-        document.querySelectorAll('.faq-item').forEach(item => {
-            item.classList.remove('open');
-            item.querySelector('.faq-a').style.maxHeight = '0px';
-        });
-        document.querySelectorAll('.help-tag').forEach(tag => tag.classList.remove('active'));
-        resultBox.classList.remove('show');
-        resultBox.innerHTML = '';
-        return;
     }
 
-    const palavras = termo.split(/\s+/).filter(Boolean);
+    faqButtons.forEach((btn, i) => {
+        const item = btn.parentElement;
+        const answer = btn.nextElementSibling;
+        answer.id = answer.id || ('faq-a-' + i);
+        btn.setAttribute('aria-expanded', 'false');
+        btn.setAttribute('aria-controls', answer.id);
+
+        btn.addEventListener('click', () => {
+            const isOpen = item.classList.contains('open');
+            closeAllFaq();
+            if(!isOpen){
+                item.classList.add('open');
+                btn.setAttribute('aria-expanded', 'true');
+                answer.style.maxHeight = answer.scrollHeight + 'px';
+            }
+        });
+    });
+
+    /* Recalcula a altura do item aberto ao redimensionar (corrige clipping) */
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+            const open = document.querySelector('.faq-item.open .faq-a');
+            if(open) open.style.maxHeight = open.scrollHeight + 'px';
+        }, 120);
+    });
+
+    /* ---------- Índice do Guia TMS Agro para a busca ---------- */
+    const guideEntries = Array.from(
+        document.querySelectorAll('#guia .guide-card, #guia .guide-section')
+    ).map((el, i) => {
+        el.id = el.id || ('guia-item-' + i);
+        const titleEl = el.querySelector('.guide-card-title, .guide-section-title');
+        return {
+            id: el.id,
+            titulo: titleEl ? titleEl.innerText.trim() : 'Guia TMS Agro',
+            texto: normalize(el.innerText)
+        };
+    });
+
+    /* ---------- Realce de termos (seguro para HTML) ---------- */
+    function highlight(html, palavras){
+        const box = document.createElement('div');
+        box.innerHTML = html;
+        const walker = document.createTreeWalker(box, NodeFilter.SHOW_TEXT);
+        const nodes = [];
+        while(walker.nextNode()) nodes.push(walker.currentNode);
+
+        nodes.forEach(node => {
+            const original = node.nodeValue;
+            const norm = normalize(original);
+            const ranges = [];
+            palavras.forEach(p => {
+                const np = normalize(p);
+                if(!np) return;
+                let idx = norm.indexOf(np);
+                while(idx !== -1){
+                    ranges.push([idx, idx + np.length]);
+                    idx = norm.indexOf(np, idx + np.length);
+                }
+            });
+            if(!ranges.length) return;
+            ranges.sort((a,b) => a[0] - b[0]);
+            const merged = [];
+            ranges.forEach(r => {
+                const last = merged[merged.length - 1];
+                if(last && r[0] <= last[1]) last[1] = Math.max(last[1], r[1]);
+                else merged.push([r[0], r[1]]);
+            });
+            const frag = document.createDocumentFragment();
+            let pos = 0;
+            merged.forEach(range => {
+                const s = range[0], e = range[1];
+                if(s > pos) frag.appendChild(document.createTextNode(original.slice(pos, s)));
+                const mk = document.createElement('mark');
+                mk.className = 'hl';
+                mk.textContent = original.slice(s, e);
+                frag.appendChild(mk);
+                pos = e;
+            });
+            if(pos < original.length) frag.appendChild(document.createTextNode(original.slice(pos)));
+            node.parentNode.replaceChild(frag, node);
+        });
+        return box.innerHTML;
+    }
+
+    /* ---------- Busca ---------- */
+    const searchInput = document.getElementById('faqSearch');
+    const resultBox = document.getElementById('searchResult');
     const faqs = Array.from(document.querySelectorAll('.faq-item'));
 
-    const resultados = faqs.filter(item => {
-        const pergunta = item.querySelector('.faq-q').innerText.toLowerCase();
-        const resposta = item.querySelector('.faq-content').innerText.toLowerCase();
-        return palavras.every(p => pergunta.includes(p) || resposta.includes(p));
-    });
-
-    document.querySelectorAll('.faq-item').forEach(item => {
-        item.classList.remove('open');
-        item.querySelector('.faq-a').style.maxHeight = '0px';
-    });
-
-    if(resultados.length){
-        const list = resultados.map(item => {
-            const pergunta = item.querySelector('.faq-q').innerText;
-            const resposta = item.querySelector('.faq-content').innerHTML;
-            return `
-                <div class="search-match">
-                    <strong>${pergunta}</strong>
-                    <div class="search-answer">${resposta}</div>
-                </div>
-            `;
-        }).join('');
-
-        resultBox.innerHTML = `
-            <div class="search-success">
-                ✓ ${resultados.length} resultado(s) encontrado(s)
-            </div>
-            ${list}
-        `;
-
-        resultados.forEach(item => {
-            item.classList.add('open');
-            const answer = item.querySelector('.faq-a');
-            answer.style.maxHeight = answer.scrollHeight + 'px';
-        });
-
-        resultBox.classList.add('show');
-    } else {
-        resultBox.innerHTML = `
-            <div class="search-fail">
-                ⚠ Não encontramos conteúdo relacionado.
-            </div>
-
-            <br>
-
-            Sua dúvida é sobre:
-
-            <br><br>
-
-            • CIOT<br>
-            • CT-e<br>
-            • MDF-e<br>
-            • ANTT
-
-            <div class="ticket-box">
-                Caso a dúvida permaneça após consultar os materiais disponíveis, recomendamos a abertura de um ticket para análise da equipe de suporte.
-                <br>
-            </div>
-        `;
-
-        resultBox.classList.add('show');
-    }
-}
-
-searchInput.addEventListener('keyup', pesquisarFAQ);
-
-document.querySelectorAll('.help-tag').forEach(tag => {
-
-    tag.addEventListener('click', () => {
-
-        const isActive = tag.classList.contains('active');
-
+    function limparBusca(){
+        closeAllFaq();
         document.querySelectorAll('.help-tag').forEach(t => t.classList.remove('active'));
+        resultBox.classList.remove('show');
+        resultBox.innerHTML = '';
+    }
 
-        if (isActive) {
-            searchInput.value = '';
-            resultBox.classList.remove('show');
-            resultBox.innerHTML = '';
-            searchInput.focus();
+    function pesquisar(){
+        const termo = searchInput.value.trim();
+        if(!termo){ limparBusca(); return; }
+
+        const palavras = termo.split(/\s+/).filter(Boolean);
+
+        // Cada palavra digitada vira um grupo com ela + seus sinônimos (basta um casar)
+        const grupos = palavras.map(p => {
+            const np = normalize(p);
+            const set = new Set([np]);
+            (SINONIMOS[np] || []).forEach(s => set.add(normalize(s)));
+            return Array.from(set).filter(Boolean);
+        });
+        const combina = texto => grupos.every(g => g.some(v => texto.includes(v)));
+        const termosRealce = Array.from(new Set(grupos.flat()));
+
+        const faqMatches = faqs.filter(item =>
+            combina(normalize(item.querySelector('.faq-q').innerText + ' ' + item.querySelector('.faq-content').innerText))
+        );
+
+        const guiaMatches = guideEntries.filter(g => combina(g.texto));
+
+        closeAllFaq();
+
+        const total = faqMatches.length + guiaMatches.length;
+
+        if(!total){
+            resultBox.innerHTML =
+                '<div class="search-fail">⚠ Não encontramos conteúdo relacionado.</div>' +
+                '<div class="ticket-box">Tente termos como <strong>CIOT</strong>, <strong>CT-e</strong>, <strong>MDF-e</strong>, <strong>piso mínimo</strong> ou <strong>vale-pedágio</strong>.<br><br>' +
+                'Se a dúvida permanecer após consultar os materiais disponíveis, recomendamos a abertura de um ticket para análise da equipe de suporte.</div>';
+            resultBox.classList.add('show');
             return;
         }
 
-        tag.classList.add('active');
-        searchInput.value = tag.innerText;
-        pesquisarFAQ();
+        let html = '<div class="search-success">✓ ' + total + ' resultado(s) encontrado(s)</div>';
 
+        if(faqMatches.length){
+            html += faqMatches.map(item => {
+                const pergunta = highlight(item.querySelector('.faq-q').innerHTML, termosRealce);
+                const resposta = highlight(item.querySelector('.faq-content').innerHTML, termosRealce);
+                return '<div class="search-match"><strong>' + pergunta + '</strong><div class="search-answer">' + resposta + '</div></div>';
+            }).join('');
+        }
+
+        if(guiaMatches.length){
+            html += '<div class="result-group-title">No Guia TMS Agro</div>';
+            html += guiaMatches.map(g =>
+                '<a class="search-match guia-link" href="#' + g.id + '" data-guia="' + g.id + '"><strong>' + g.titulo + '</strong><p>Abrir no Guia Rápido de Classificação de CIOT →</p></a>'
+            ).join('');
+        }
+
+        resultBox.innerHTML = html;
+        resultBox.classList.add('show');
+
+        resultBox.querySelectorAll('.guia-link').forEach(link => {
+            link.addEventListener('click', e => {
+                e.preventDefault();
+                const target = document.getElementById(link.dataset.guia);
+                if(!target) return;
+                target.scrollIntoView({behavior:'smooth', block:'center'});
+                target.classList.add('guide-flash');
+                setTimeout(() => target.classList.remove('guide-flash'), 1600);
+            });
+        });
+    }
+
+    let searchTimer;
+    searchInput.addEventListener('input', () => {
+        clearTimeout(searchTimer);
+        searchTimer = setTimeout(pesquisar, 160);
     });
 
-});
+    /* ---------- Tags rápidas ---------- */
+    document.querySelectorAll('.help-tag').forEach(tag => {
+        tag.addEventListener('click', () => {
+            const isActive = tag.classList.contains('active');
+            document.querySelectorAll('.help-tag').forEach(t => t.classList.remove('active'));
+            if(isActive){
+                searchInput.value = '';
+                limparBusca();
+                searchInput.focus();
+                return;
+            }
+            tag.classList.add('active');
+            searchInput.value = tag.innerText;
+            pesquisar();
+        });
+    });
+
+    /* ---------- Formulário de sugestões ---------- */
+    const form = document.getElementById('suggestForm');
+    if(form){
+        const fb = document.getElementById('sg-feedback');
+        const submitBtn = document.getElementById('sg-submit');
+        const msg = document.getElementById('sg-mensagem');
+        const counter = document.getElementById('sg-count');
+        const demoNote = document.getElementById('sg-demo');
+
+        if(!SUGESTOES_ENDPOINT && demoNote) demoNote.hidden = false;
+
+        if(msg && counter){
+            const atualizaContador = () => { counter.textContent = msg.value.length; };
+            msg.addEventListener('input', atualizaContador);
+            atualizaContador();
+        }
+
+        const mostraFb = (tipo, texto) => {
+            fb.className = 'suggest-feedback show ' + tipo;
+            fb.innerHTML = texto;
+        };
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            fb.className = 'suggest-feedback';
+
+            let ok = true;
+            ['sg-tipo','sg-assunto','sg-mensagem'].forEach(id => {
+                const el = document.getElementById(id);
+                const field = el.closest('.field');
+                if(!el.value.trim()){ field.classList.add('invalid'); ok = false; }
+                else field.classList.remove('invalid');
+            });
+            if(!ok){
+                mostraFb('err', '⚠ Preencha os campos obrigatórios: Tipo, Assunto e Descrição.');
+                return;
+            }
+
+            const dados = {
+                nome: form.nome.value.trim(),
+                empresa: form.empresa.value.trim(),
+                email: form.email.value.trim(),
+                tipo: form.tipo.value,
+                assunto: form.assunto.value.trim(),
+                mensagem: form.mensagem.value.trim(),
+                enviadoEm: new Date().toISOString(),
+                origem: location.href
+            };
+
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Enviando...';
+
+            try{
+                if(SUGESTOES_ENDPOINT){
+                    await fetch(SUGESTOES_ENDPOINT, {
+                        method: 'POST',
+                        mode: 'no-cors',
+                        headers: {'Content-Type':'text/plain;charset=utf-8'},
+                        body: JSON.stringify(dados)
+                    });
+                } else {
+                    const arr = JSON.parse(localStorage.getItem(SUGESTOES_STORE) || '[]');
+                    arr.push(dados);
+                    localStorage.setItem(SUGESTOES_STORE, JSON.stringify(arr));
+                }
+                form.reset();
+                if(counter) counter.textContent = '0';
+                mostraFb('ok', '✓ Sugestão enviada com sucesso! Obrigado pela contribuição.' + (dados.email ? ' Se necessário, retornaremos no e-mail informado.' : ''));
+                fb.scrollIntoView({behavior:'smooth', block:'center'});
+            } catch(err){
+                mostraFb('err', '⚠ Não foi possível enviar agora. Verifique sua conexão e tente novamente, ou registre um ticket com o suporte.');
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '✉️ Enviar sugestão';
+            }
+        });
+    }
+
+    /* ---------- Animação de entrada das seções ---------- */
+    const reveals = document.querySelectorAll('.reveal');
+    if('IntersectionObserver' in window){
+        const io = new IntersectionObserver((entries, obs) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting){
+                    entry.target.classList.add('is-visible');
+                    obs.unobserve(entry.target);
+                }
+            });
+        }, {threshold:0.08, rootMargin:'0px 0px -40px 0px'});
+        reveals.forEach(el => io.observe(el));
+    } else {
+        reveals.forEach(el => el.classList.add('is-visible'));
+    }
+
+    /* ---------- Voltar ao topo ---------- */
+    const toTop = document.getElementById('toTop');
+    if(toTop){
+        window.addEventListener('scroll', () => {
+            toTop.classList.toggle('show', window.scrollY > 500);
+        }, {passive:true});
+        toTop.addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
+    }
+
+    /* ---------- Scroll-spy no menu fixo ---------- */
+    const navLinks = Array.from(document.querySelectorAll('.site-nav a'));
+    const sections = navLinks
+        .map(a => document.getElementById(a.getAttribute('href').slice(1)))
+        .filter(Boolean);
+
+    if('IntersectionObserver' in window && sections.length){
+        const spy = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting){
+                    const id = entry.target.id;
+                    navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + id));
+                }
+            });
+        }, {rootMargin:'-45% 0px -50% 0px', threshold:0});
+        sections.forEach(sec => spy.observe(sec));
+    }
+})();
 
 </script>
 
