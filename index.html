@@ -5,2151 +5,1187 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CIOT ANTT — Regras Operacionais | NSTECH</title>
 <meta name="description" content="Portal de apoio às adequações do CIOT ANTT para Frota Própria: regras operacionais, guia de classificação de CIOT, validação do piso mínimo de frete, perguntas frequentes e vídeos. NSTECH.">
-<meta name="theme-color" content="#ff6600">
+<meta name="theme-color" content="#FF3D03">
 <link rel="icon" href="favicon.png" type="image/png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <script>document.documentElement.className += ' js';</script>
-
-
-
 
 <style>
 :root{
-    --orange:#ff6600;
-    --orange-dim:#cc5200;
-    --orange-glow:rgba(255,102,0,.18);
-    --bg:#111111;
-    --surface:#1c1c1c;
-    --surface2:#242424;
-    --border:#333333;
-    --text:#e8e8e8;
-    --muted:#888888;
+    /* Marca */
+    --laranja:#FF3D03;
+    --laranja-claro:#FF9D5C;
+    --laranja-escuro:#B23A1B;
+    --orange:#FF3D03;            /* alias usado por estilos inline legados */
+    --orange-dim:#B23A1B;
+    --orange-glow:rgba(255,61,3,.18);
+
+    /* Superfícies (dark) */
+    --preto:#0d0e12;
+    --surface:#15161c;
+    --surface-2:#1c1d25;
+    --surface-3:#22232d;
+    --border-soft:#2b2d36;
+    --border:#2b2d36;
+    --ink:#EDEEF2;
+    --text:#EDEEF2;
+    --ink-dim:#A6A9B4;
+    --muted:#A6A9B4;
+
+    /* Semânticas */
     --green:#22c55e;
-    --blue:#3b82f6;
+    --blue:#60a5fa;
+    --red:#f87171;
+
+    /* Tipografia */
+    --display:'Archivo Black','Archivo',sans-serif;
+    --corpo:'Archivo',sans-serif;
+    --mono:'JetBrains Mono',monospace;
+
+    /* Métricas */
+    --maxw:1240px;
+    --radius-sm:12px;
+    --radius:18px;
+    --radius-lg:26px;
+    --shadow-sm:0 1px 2px rgba(0,0,0,.25), 0 3px 10px rgba(0,0,0,.28);
+    --shadow-md:0 6px 18px rgba(0,0,0,.30), 0 18px 40px rgba(0,0,0,.38);
+    --shadow-lg:0 12px 34px rgba(0,0,0,.38), 0 34px 70px rgba(0,0,0,.48);
+    --ease:cubic-bezier(.16,1,.3,1);
+    --ease-out:cubic-bezier(.22,.61,.36,1);
+    --header-h:72px;
 }
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth; scroll-padding-top:calc(var(--header-h) + 24px);}
+body{
+    font-family:var(--corpo);
+    background:var(--surface);
+    color:var(--ink);
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+    min-height:100vh;
+    overflow-x:hidden;
+    background-image:
+        radial-gradient(ellipse 60% 45% at 85% -5%, rgba(255,61,3,.10) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 40% at 0% 100%, rgba(255,61,3,.06) 0%, transparent 55%);
+    background-attachment:fixed;
 }
-
-html{
-    scroll-behavior:smooth;
-}
+img{max-width:100%;display:block;}
+a{color:inherit;text-decoration:none;}
+ul{list-style:none;}
+::selection{background:var(--laranja);color:#fff;}
 
 @media(prefers-reduced-motion:reduce){
     html{scroll-behavior:auto;}
-    *{transition:none !important;animation:none !important;}
+    *{animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important;}
+    .reveal{opacity:1 !important; transform:none !important;}
 }
 
-/* Acessibilidade: foco visível e skip-link */
 a:focus-visible,
 button:focus-visible,
 input:focus-visible,
-.help-tag:focus-visible{
-    outline:2px solid var(--orange);
+.help-tag:focus-visible,
+.video-card:focus-visible{
+    outline:3px solid var(--laranja);
     outline-offset:3px;
-    border-radius:6px;
+    border-radius:8px;
 }
 
 .skip-link{
-    position:absolute;
-    left:-9999px;
-    top:0;
-    background:var(--orange);
-    color:#111;
-    padding:10px 16px;
-    font-weight:700;
-    border-radius:0 0 8px 0;
-    z-index:1000;
+    position:absolute; left:-9999px; top:0; z-index:1200;
+    background:var(--laranja); color:#111; padding:10px 16px;
+    font-weight:700; border-radius:0 0 10px 0;
 }
-.skip-link:focus{
-    left:0;
+.skip-link:focus{left:0;}
+
+.wrap{max-width:var(--maxw); margin:0 auto; padding:0 clamp(18px,4vw,32px);}
+
+/* ============ SCROLL PROGRESS ============ */
+.scroll-progress{
+    position:fixed; top:0; left:0; height:3px; width:0%;
+    background:linear-gradient(90deg, var(--laranja-escuro), var(--laranja), var(--laranja-claro));
+    z-index:1100; transition:width .08s linear;
+    box-shadow:0 0 12px rgba(255,61,3,.6);
 }
 
-body{
-    font-family:'Roboto',sans-serif;
-    background:var(--bg);
-    color:var(--text);
-    padding:32px 24px;
-    min-height:100vh;
+/* ============ BRILHO QUE SEGUE O CURSOR ============ */
+.cursor-glow{
+    position:fixed; top:0; left:0; width:520px; height:520px;
+    transform:translate3d(-50%,-50%,0);
+    background:radial-gradient(circle, rgba(255,61,3,.10) 0%, transparent 65%);
+    pointer-events:none; z-index:0; opacity:0;
+    transition:opacity .4s var(--ease); mix-blend-mode:screen;
+}
 
+/* ============ HEADER / NAV ============ */
+.site-header{
+    position:sticky; top:0; z-index:1000;
+    background:color-mix(in srgb, var(--surface) 82%, transparent);
+    backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--border-soft);
+}
+.nav-row{
+    display:flex; align-items:center; justify-content:space-between;
+    gap:18px; min-height:var(--header-h);
+}
+.brandblock{display:flex; align-items:center; gap:12px; flex-shrink:0;}
+.brand-mark{
+    font-family:var(--display);
+    font-size:20px; letter-spacing:.5px; line-height:1; color:var(--ink);
+}
+.brand-mark b{color:var(--laranja); font-weight:inherit;}
+.brand-sep{width:1px; height:22px; background:var(--border-soft);}
+.brand-sub{
+    font-family:var(--mono); font-size:10.5px; letter-spacing:.14em;
+    text-transform:uppercase; color:var(--ink-dim);
+}
+.nav-right{display:flex; align-items:center; gap:16px;}
+.brand-logo{
+    font-family:var(--display); font-size:15px; letter-spacing:2px; color:var(--laranja);
+}
+.site-nav{display:flex; align-items:center; gap:4px;}
+.site-nav a{
+    font-family:var(--mono); font-size:12px; letter-spacing:.03em; text-transform:uppercase;
+    color:var(--ink-dim); padding:9px 13px; border-radius:9px; position:relative;
+    transition:color .2s var(--ease), background .2s var(--ease);
+}
+.site-nav a:hover{color:var(--ink); background:var(--surface-2);}
+.site-nav a.active{color:var(--laranja);}
+.site-nav a.active::after{
+    content:""; position:absolute; left:13px; right:13px; bottom:3px; height:2px;
+    background:var(--laranja); border-radius:2px;
+}
+.nav-toggle{
+    display:none; background:var(--surface-2); border:1px solid var(--border-soft);
+    color:var(--ink); width:42px; height:42px; border-radius:10px; cursor:pointer;
+    font-size:20px; line-height:1; align-items:center; justify-content:center;
+}
+
+/* ============ SECTIONS GENERICS ============ */
+main{display:block;}
+section{padding:clamp(56px,8vw,104px) 0; position:relative;}
+section.hero{padding:0;}
+.sec-head{margin-bottom:clamp(30px,5vw,54px); max-width:720px;}
+.sec-tag{
+    font-family:var(--mono); font-size:12px; letter-spacing:.1em; text-transform:uppercase;
+    color:var(--laranja-claro); display:inline-flex; align-items:center; gap:10px; margin-bottom:16px;
+}
+.sec-tag::before{content:""; width:24px; height:2px; background:var(--laranja); display:inline-block;}
+.sec-head h2{
+    font-family:var(--display); font-size:clamp(26px,4vw,42px); line-height:1.05;
+    letter-spacing:-.01em; color:var(--ink);
+}
+.sec-head p{color:var(--ink-dim); font-size:15.5px; margin-top:14px; max-width:620px;}
+
+/* ============ HERO ============ */
+.hero{
+    position:relative; overflow:hidden;
+    border-bottom:5px solid var(--laranja);
+    background:
+        radial-gradient(ellipse 70% 60% at 80% 0%, rgba(255,61,3,.16) 0%, transparent 60%),
+        var(--preto);
+}
+.hero::before{
+    content:""; position:absolute; inset:-40px; pointer-events:none;
     background-image:
-    radial-gradient(ellipse 60% 40% at 80% 10%, rgba(255,102,0,.06) 0%, transparent 60%),
-    radial-gradient(ellipse 40% 30% at 10% 90%, rgba(255,102,0,.04) 0%, transparent 50%);
+        linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px);
+    background-size:46px 46px;
+    transform:translate3d(var(--grid-x,0px), var(--grid-y,0px), 0);
+    will-change:transform;
+    mask-image:radial-gradient(ellipse 90% 80% at 60% 10%, #000 30%, transparent 85%);
+    -webkit-mask-image:radial-gradient(ellipse 90% 80% at 60% 10%, #000 30%, transparent 85%);
 }
+.hero-inner{
+    position:relative; z-index:2;
+    display:grid; grid-template-columns:1.35fr .95fr; gap:clamp(32px,5vw,64px); align-items:center;
+    padding:clamp(56px,8vw,96px) 0 clamp(48px,6vw,72px);
+}
+.hero-eyebrow{
+    font-family:var(--mono); font-size:12.5px; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--laranja-claro); display:flex; align-items:center; gap:12px; margin-bottom:24px;
+}
+.hero-eyebrow::before{content:""; width:30px; height:2px; background:var(--laranja);}
+.hero h1{
+    font-family:var(--display); color:#fff;
+    font-size:clamp(34px,5.4vw,62px); line-height:1.0; letter-spacing:-.01em;
+}
+.hero h1 .hl{color:var(--laranja);}
+.hero .lede{
+    margin-top:26px; color:#C9CDD6; font-size:clamp(15px,1.5vw,17.5px); line-height:1.7; max-width:640px;
+}
+.hero .lede + .lede{margin-top:14px;}
+.hero-actions{display:flex; gap:14px; margin-top:34px; flex-wrap:wrap;}
 
-.page{
-    max-width:1240px;
-    margin:auto;
-    display:flex;
-    flex-direction:column;
-    gap:52px;
+.btn{
+    font-family:var(--mono); font-size:12.5px; letter-spacing:.04em; text-transform:uppercase; font-weight:600;
+    padding:14px 24px; border-radius:11px; cursor:pointer; border:1px solid transparent;
+    display:inline-flex; align-items:center; gap:10px; position:relative; overflow:hidden;
+    transition:transform .2s var(--ease), background .2s var(--ease), color .2s var(--ease), box-shadow .2s var(--ease), border-color .2s var(--ease);
 }
+.btn::before{
+    content:""; position:absolute; top:0; left:-120%; width:60%; height:100%;
+    background:linear-gradient(100deg, transparent, rgba(255,255,255,.28), transparent);
+    transform:skewX(-18deg);
+}
+.btn:hover::before{animation:btn-sheen .7s var(--ease);}
+@keyframes btn-sheen{from{left:-120%;} to{left:160%;}}
+.btn-primary{background:var(--laranja); color:#fff;}
+.btn-primary:hover{transform:translateY(-2px); box-shadow:0 14px 30px rgba(255,61,3,.32);}
+.btn-ghost{border-color:rgba(255,255,255,.26); color:#fff;}
+.btn-ghost:hover{border-color:#fff; background:rgba(255,255,255,.08); transform:translateY(-2px);}
 
-/* O conteúdo foi envolvido em <main>; ele precisa herdar o mesmo respiro
-   entre as seções, senão o espaçamento some nas transições de área. */
-main#conteudo{
-    display:flex;
-    flex-direction:column;
-    gap:52px;
+/* Painel de legislação no hero */
+.hero-legis{
+    background:color-mix(in srgb, var(--surface-2) 70%, transparent);
+    border:1px solid var(--border-soft); border-radius:var(--radius);
+    padding:26px; box-shadow:var(--shadow-md); backdrop-filter:blur(6px);
 }
-
-/* HEADER */
-
-.header{
-    display:flex;
-    justify-content:space-between;
-    align-items:flex-end;
-    border-bottom:1px solid var(--border);
-    padding-bottom:20px;
-    position:relative;
+.hero-legis .hl-kicker{
+    font-family:var(--mono); font-size:11px; letter-spacing:.12em; text-transform:uppercase;
+    color:var(--laranja-claro); display:flex; align-items:center; gap:9px; margin-bottom:16px;
 }
-
-.header::after{
-    content:'';
-    position:absolute;
-    left:0;
-    bottom:-1px;
-    width:180px;
-    height:2px;
-    background:var(--orange);
-}
-
-.header h1{
-    font-size:38px;
-    font-weight:900;
-    letter-spacing:2px;
-    display:flex;
-    align-items:center;
-    gap:12px;
-}
-
-.page-icon{
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-    width:42px;
-    height:42px;
-    border-radius:12px;
-    background:rgba(255,102,0,.18);
-    color:var(--orange);
-    font-size:22px;
-}
-
-.header h1 span{
-    color:var(--orange);
-}
-
-.header h2{
-    color:var(--muted);
-    font-size:16px;
-    letter-spacing:4px;
-    margin-top:6px;
-}
-
-.logo{
-    color:var(--orange);
-    font-weight:900;
-    font-size:22px;
-    letter-spacing:3px;
-}
-
-.section-label{
-    color:var(--orange);
-    font-size:13px;
-    font-weight:700;
-    letter-spacing:3px;
-    text-transform:uppercase;
-    margin-bottom:28px;
-    display:flex;
-    align-items:center;
-    gap:8px;
-}
-
-.section-label::before{
-    content:'';
-    width:3px;
-    height:16px;
-    background:var(--orange);
-}
-
-.top-link-box{
-    background:rgba(255,102,0,.08);
-    border:1px solid rgba(255,102,0,.2);
-    border-radius:10px;
-    padding:14px 18px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-}
-.top-link-box a{
-    display:inline-flex;
-    align-items:center;
-    gap:10px;
-    background:var(--orange);
-    color:#111;
-    font-weight:700;
-    padding:12px 18px;
-    border-radius:8px;
-    text-decoration:none;
-    transition:.25s;
-}
-.top-link-box a:hover{
-    background:var(--orange-dim);
-}
-.top-link-box a::before{
-    content:'🔗';
-    display:inline-block;
-    font-size:16px;
-}
-
+.hero-legis .hl-kicker::before{content:""; width:20px; height:2px; background:var(--laranja);}
+.leg-list{display:flex; flex-direction:column; gap:2px;}
+.leg-list li{margin:0;}
 .leg-list a{
-    color:var(--text);
-    text-decoration:none;
+    display:flex; align-items:center; gap:10px; padding:11px 12px; border-radius:10px;
+    color:var(--ink); font-size:14px; font-weight:500;
+    border:1px solid transparent; transition:all .18s var(--ease);
 }
-.leg-list a:hover{
-    color:var(--orange);
-    text-decoration:underline;
+.leg-list a::before{content:"→"; color:var(--laranja); font-family:var(--mono); font-size:13px;}
+.leg-list a:hover{background:var(--surface-3); border-color:var(--border-soft); transform:translateX(3px);}
+
+/* ============ TOP LINK (gov.br) ============ */
+.top-link-box{margin-top:clamp(40px,6vw,64px);}
+.top-link-box a{
+    display:inline-flex; align-items:center; gap:10px;
+    font-family:var(--mono); font-size:12.5px; letter-spacing:.03em; text-transform:uppercase;
+    background:var(--surface-2); border:1px solid var(--border-soft); color:var(--ink);
+    padding:12px 20px; border-radius:11px; transition:all .2s var(--ease);
 }
+.top-link-box a::after{content:"↗"; color:var(--laranja);}
+.top-link-box a:hover{border-color:var(--laranja); transform:translateY(-2px); box-shadow:var(--shadow-sm);}
 
-/* Intro / HERO */
-
-.hero-grid{
-    display:grid;
-    grid-template-columns:2.5fr 1fr;
-    gap:60px;
-    align-items:start;
-}
-
-.hero-sub{
-    font-size:17px;
-    line-height:2;
-    color:var(--text);
-    max-width:900px;
-}
-
-.leg-list{
-    list-style:none;
-    padding:0;
-    margin:0;
-}
-
-.leg-list li{
-    margin-bottom:14px;
-    color:var(--text);
-    line-height:1.6;
-}
-
-/* ASSISTENTE DE BUSCA */
-
+/* ============ HELP CENTER / BUSCA ============ */
 .help-center{
-    max-width:950px;
-    margin:0 auto;
-    text-align:center;
+    background:linear-gradient(180deg, var(--surface-2), var(--surface));
+    border:1px solid var(--border-soft); border-radius:var(--radius-lg);
+    padding:clamp(28px,4vw,48px); box-shadow:var(--shadow-md);
 }
-
-.help-title{
-    font-size:42px;
-    font-weight:900;
-    margin-bottom:12px;
+.help-title{font-family:var(--display); font-size:clamp(24px,3.4vw,36px); line-height:1.05; color:var(--ink);}
+.help-subtitle{color:var(--ink-dim); margin-top:12px; font-size:15.5px;}
+.search-wrapper{position:relative; margin-top:26px;}
+#faqSearch{
+    width:100%; font-family:var(--corpo); font-size:16px; color:var(--ink);
+    background:var(--preto); border:1px solid var(--border-soft); border-radius:14px;
+    padding:18px 20px 18px 54px; outline:none; transition:border-color .2s var(--ease), box-shadow .2s var(--ease);
 }
-
-.help-subtitle{
-    color:var(--muted);
-    font-size:16px;
-    margin-bottom:30px;
-}
-
-.search-wrapper{
-    position:relative;
-    margin-bottom:25px;
-}
-
-.search-wrapper input{
-    width:100%;
-    background:#1d1d1d;
-    border:1px solid #3a3a3a;
-    border-radius:24px;
-    padding:22px 65px 22px 28px;
-    color:white;
-    font-size:16px;
-    outline:none;
-    transition:.25s;
-}
-
-.search-wrapper input:focus{
-    border-color:var(--orange);
-    box-shadow:0 0 25px rgba(255,102,0,.15);
-}
-
+#faqSearch::placeholder{color:#6b6e79;}
+#faqSearch:focus{border-color:var(--laranja); box-shadow:0 0 0 4px rgba(255,61,3,.14);}
 .search-icon{
-    position:absolute;
-    right:24px;
-    top:50%;
-    transform:translateY(-50%);
-    color:var(--orange);
-    font-size:22px;
+    position:absolute; left:20px; top:50%; transform:translateY(-50%);
+    font-size:22px; color:var(--laranja); pointer-events:none;
 }
-
-.help-tags{
-    display:flex;
-    justify-content:center;
-    flex-wrap:wrap;
-    gap:12px;
-    margin-bottom:30px;
-}
-
+.help-tags{display:flex; flex-wrap:wrap; gap:9px; margin-top:20px;}
 .help-tag{
-    background:rgba(255,102,0,.08);
-    border:1px solid rgba(255,102,0,.18);
-    color:var(--text);
-    padding:10px 18px;
-    border-radius:999px;
-    cursor:pointer;
-    transition:.25s;
-    font-size:14px;
-    font-family:inherit;
-    font-weight:500;
-    line-height:1;
-    user-select:none;
-    }
-
-    .help-tag:hover{
-        background:rgba(255,102,0,.15);
-        border-color:var(--orange);
-    }
-
-    .help-tag.active{
-        background:var(--orange);
-        border-color:var(--orange);
-        color:#111;
-        box-shadow:0 0 20px rgba(255,102,0,.18);
+    font-family:var(--mono); font-size:11.5px; letter-spacing:.02em;
+    background:var(--surface-3); border:1px solid var(--border-soft); color:var(--ink-dim);
+    padding:8px 14px; border-radius:999px; cursor:pointer; transition:all .18s var(--ease);
 }
+.help-tag:hover{color:var(--ink); border-color:var(--laranja-escuro); transform:translateY(-1px);}
+.help-tag.active{background:var(--laranja); border-color:var(--laranja); color:#fff;}
 
-.search-result.show{
-    display:block;
-}
-
+.search-result{display:none; margin-top:26px; flex-direction:column; gap:12px;}
+.search-result.show{display:flex;}
 .search-success{
-    color:#22c55e;
-    font-weight:700;
+    font-family:var(--mono); font-size:13px; color:var(--green);
+    background:rgba(34,197,94,.08); border:1px solid rgba(34,197,94,.3);
+    padding:10px 14px; border-radius:10px;
 }
-
 .search-fail{
-    color:#f59e0b;
-    font-weight:700;
+    font-family:var(--mono); font-size:13px; color:var(--red);
+    background:rgba(248,113,113,.08); border:1px solid rgba(248,113,113,.3);
+    padding:12px 14px; border-radius:10px;
 }
-
-.search-match{
-    border:1px solid rgba(255,102,0,.15);
-    border-radius:10px;
-    padding:16px;
-    margin-top:16px;
-    background:rgba(255,102,0,.04);
-}
-
-.search-match strong{
-    display:block;
-    margin-bottom:6px;
-    color:var(--orange);
-}
-
-.search-match p{
-    margin:0 0 10px;
-    color:var(--text);
-    line-height:1.7;
-}
-
-.search-answer a{
-    color:var(--orange);
-    text-decoration:none;
-}
-
-.search-answer a:hover{
-    text-decoration:underline;
-}
-
 .ticket-box{
-    margin-top:18px;
-    padding-top:18px;
-    border-top:1px solid var(--border);
+    background:var(--surface-3); border:1px solid var(--border-soft); border-radius:10px;
+    padding:16px; font-size:14px; color:var(--ink-dim); line-height:1.7;
 }
-
-.ticket-btn{
-    display:inline-block;
-    margin-top:10px;
-    background:var(--orange);
-    color:#111;
-    text-decoration:none;
-    padding:12px 18px;
-    border-radius:8px;
-    font-weight:700;
+.ticket-box strong{color:var(--ink);}
+.result-group-title{
+    font-family:var(--mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase;
+    color:var(--laranja-claro); margin-top:10px;
 }
-
-@media(max-width:900px){
-
-    .hero-grid{
-        grid-template-columns:1fr;
-        gap:30px;
-    }
-
+.search-match{
+    display:block; background:var(--surface-2); border:1px solid var(--border-soft);
+    border-left:3px solid var(--laranja); border-radius:12px; padding:16px 18px;
+    transition:transform .18s var(--ease), border-color .18s var(--ease);
 }
-.hero-title{
-    font-size:28px;
-    margin-bottom:12px;
-}
-.hero-sub{
-    line-height:1.8;
-    margin-bottom:20px;
-}
-.hero-steps ul{ 
-    margin-left:18px;
-    line-height:1.6;
-}
-.hero-cta{
-    display:inline-block;
-    background:var(--orange);
-    color:#111;
-    padding:8px 12px;
-    border-radius:6px;
-    text-decoration:none;
-    font-weight:700;
-    margin-top:8px;
-}
-.hero-right{
-    background:var(--surface2);
-    border-radius:8px;
-    padding:12px;
-}
-.leg-list{list-style:none;padding-left:0;margin:0}
-.leg-list li{margin-bottom:8px;color:var(--text);font-size:13px}
+a.search-match:hover{transform:translateX(3px); border-color:var(--laranja);}
+.search-match > strong{color:var(--ink); display:block; font-size:15px; line-height:1.4;}
+.search-answer{color:var(--ink-dim); font-size:14px; line-height:1.7; margin-top:8px;}
+.search-match p{color:var(--ink-dim); font-size:13px; margin-top:6px;}
+mark.hl{background:rgba(255,61,3,.26); color:#fff; border-radius:3px; padding:0 2px;}
 
-/* TOP */
-
-.top-row{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:24px;
-}
-
-.cards-grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:16px;
-}
-
-.info-card{
-    background:var(--surface);
-    border:1px solid var(--border);
-    border-radius:10px;
-    padding:28px;
-    transition:.25s;
-    position:relative;
-    overflow:hidden;
-    min-height:180px;
-}
-
-.info-card::before{
-    content:'';
-    position:absolute;
-    left:0;
-    top:0;
-    width:4px;
-    height:100%;
-    background:var(--orange);
-}
-
-.info-card:hover{
-    border-color:var(--orange);
-}
-
-.card-badge{
-    background:rgba(255,102,0,.15);
-    color:var(--orange);
-    font-size:10px;
-    font-weight:700;
-    letter-spacing:2px;
-    padding:3px 8px;
-    border-radius:4px;
-    display:inline-block;
-    margin-bottom:8px;
-}
-
-.card-title{
-    font-size:20px;
-    font-weight:700;
-    margin-bottom:12px;
-}
-
-.card-desc{
-    font-size:12px;
-    color:var(--muted);
-    line-height:1.7;
-}
-
-/* CHECKLIST */
-
-.checklist{
-    display:flex;
-    flex-direction:column;
-    gap:14px;
-}
-
-.check-item{
-    display:flex;
-    gap:14px;
-    background:var(--surface);
-    border:1px solid var(--border);
-    border-radius:10px;
-    padding:22px;
-}
-
-.check-item:hover{
-    border-color:var(--orange);
-}
-
-.check-num{
-    color:var(--orange);
-    font-size:24px;
-    font-weight:900;
-}
-
-.check-body strong{
-    display:block;
-    margin-bottom:4px;
-}
-
-.check-body span{
-    color:var(--muted);
-    font-size:12px;
-    line-height:1.7;
-}
-
-/* TIMELINE */
-
-.timeline{
-    display:grid;
-    grid-template-columns:repeat(5,1fr);
-    gap:16px;
-    position:relative;
-}
-
-.timeline-card{
-    background:var(--surface);
-    border:1px solid var(--border);
-    border-radius:10px;
-    padding:18px;
-    min-height:180px;
-    transition:.25s;
-}
-
-.timeline-card:hover{
-    border-color:var(--orange);
-}
-
-.time{
-    color:var(--orange);
-    font-size:11px;
-    letter-spacing:2px;
-    font-weight:700;
-    margin-bottom:10px;
-}
-
-.timeline-title{
-    font-size:18px;
-    font-weight:700;
-    margin-bottom:10px;
-}
-
-.timeline-text{
-    font-size:12px;
-    line-height:1.5;
-    color:var(--muted);
-}
-
-/* FAQ */
-
-.faq-container{
-    display:flex;
-    flex-direction:column;
-    gap:16px;
-}
-
-.video-list{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:12px;
-}
-
-.video-link{
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    gap:10px;
-    padding:14px 12px;
-    background:var(--surface);
-    border:1px solid var(--border);
-    border-radius:10px;
-    text-decoration:none;
-    color:var(--text);
-    transition:.25s;
-    text-align:center;
-}
-
-.video-link:hover{
-    border-color:var(--orange);
-    background:rgba(255,102,0,.06);
-}
-
-.video-link span{
-    font-size:28px;
-    line-height:1;
-    min-width:40px;
-    text-align:center;
-}
-
-.video-link div{
-    flex:1;
-}
-
-.video-link strong{
-    display:block;
-    font-size:14px;
-    font-weight:600;
-    margin-bottom:4px;
-}
-
-.video-link small{
-    display:block;
-    font-size:11px;
-    color:var(--muted);
-}
-
-.faq-item{
-    background:var(--surface);
-    border:1px solid var(--border);
-    border-radius:10px;
-    overflow:hidden;
-    transition:.25s;
-}
-
-.faq-item:hover{
-    border-color:var(--orange);
-}
-
-.faq-item.open{
-    border-color:var(--orange);
-    box-shadow:0 0 18px var(--orange-glow);
-}
-
-.faq-q{
-    width:100%;
-    background:none;
-    border:none;
-    color:var(--text);
-    text-align:left;
-    padding:20px 24px;
-    cursor:pointer;
-    font-size:15px;
-    font-weight:600;
-
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-}
-
-.faq-q::after{
-    content:'+';
-    color:var(--orange);
-    font-size:24px;
-}
-
-.faq-item.open .faq-q::after{
-    content:'−';
-}
-
-.faq-a{
-    max-height:0;
-    overflow:hidden;
-    transition:max-height .35s ease;
-}
-
-.faq-content{
-    background:transparent;
-    padding:20px 22px;
-    color:var(--text);
-    line-height:1.7;
-    font-size:13px;
-}
-
-/* ALERT */
-
-.alert-box{
-    background:var(--surface);
-    border:1px solid var(--border);
-    border-radius:10px;
-    overflow:hidden;
-}
-
-.alert-header{
-    background:var(--orange);
-    color:#111;
-    text-align:center;
-    padding:10px;
-    font-weight:900;
-    letter-spacing:2px;
-}
-
-.alert-body{
-    padding:20px;
-}
-
-.alert-body ul{
-    margin-left:20px;
-    line-height:2;
-}
-
-.alert-body li{
-    color:var(--text);
-}
-
-@media(max-width:900px){
-
-    .top-row{
-        grid-template-columns:1fr;
-    }
-
-    .timeline{
-        grid-template-columns:1fr;
-    }
-
-    .cards-grid{
-        grid-template-columns:1fr;
-    }
-
-}
-/* FLUXOGRAMA */
-
-.flow-container{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    gap:16px;
-    margin-bottom:32px;
-    flex-wrap:wrap;
-}
-
+/* ============ CONTRATAÇÃO — fluxo ============ */
+.flow-container{display:flex; align-items:stretch; gap:14px; flex-wrap:wrap;}
 .flow-card{
-    flex:1;
-    min-width:220px;
-    max-width:260px;
-    background:var(--surface);
-    border:1px solid var(--border);
-    border-radius:12px;
-    padding:24px;
-    text-align:center;
-    transition:.25s;
+    flex:1; min-width:200px; background:var(--surface-2); border:1px solid var(--border-soft);
+    border-radius:var(--radius); padding:22px; box-shadow:var(--shadow-sm);
+    transition:transform .22s var(--ease), box-shadow .22s var(--ease), border-color .22s var(--ease);
 }
-
-.flow-card:hover{
-    border-color:var(--orange);
-    transform:translateY(-4px);
-}
-
-.flow-icon{
-    font-size:36px;
-    margin-bottom:14px;
-}
-
-.flow-title{
-    font-size:16px;
-    font-weight:700;
-    margin-bottom:10px;
-}
-
-.flow-text{
-    font-size:13px;
-    line-height:1.8;
-    color:var(--muted);
-    color: white;
-}
-
-.flow-arrow{
-    color:var(--orange);
-    font-size:28px;
-    font-weight:900;
-}
+.flow-card:hover{transform:translateY(-4px); box-shadow:var(--shadow-md); border-color:var(--laranja-escuro);}
+.flow-icon{font-size:30px; margin-bottom:12px;}
+.flow-title{font-family:var(--display); font-size:16px; color:var(--ink); margin-bottom:8px;}
+.flow-text{color:var(--ink-dim); font-size:14px; line-height:1.6;}
+.flow-text strong{color:var(--ink);}
+.flow-arrow{display:flex; align-items:center; color:var(--laranja); font-size:22px;}
 
 .important-box{
-    background:rgba(255,102,0,.08);
-    border:1px solid rgba(255,102,0,.25);
-    border-left:5px solid var(--orange);
-    border-radius:12px;
-    padding:24px;
-    margin-bottom:20px;
+    margin-top:24px; background:rgba(255,61,3,.06); border:1px solid rgba(255,61,3,.28);
+    border-left:4px solid var(--laranja); border-radius:var(--radius); padding:22px 24px;
 }
-
-.important-title{
-    color:var(--orange);
-    font-size:18px;
-    font-weight:800;
-    margin-bottom:12px;
-}
-
-.important-text{
-    line-height:1.8;
-    color:var(--text);
-}
-
+.important-title{font-family:var(--display); font-size:16px; color:var(--laranja-claro); margin-bottom:10px;}
+.important-text{color:var(--ink-dim); font-size:14.5px; line-height:1.75;}
+.important-text strong{color:var(--ink);}
 .warning-box{
-    background:rgba(239,68,68,.08);
-    border:1px solid rgba(239,68,68,.25);
-    border-left:5px solid #ef4444;
-    border-radius:12px;
-    padding:24px;
+    margin-top:16px; background:var(--surface-2); border:1px solid var(--border-soft);
+    border-left:4px solid var(--blue); border-radius:var(--radius); padding:22px 24px;
 }
+.warning-title{font-family:var(--display); font-size:16px; color:var(--blue); margin-bottom:10px;}
+.warning-text{color:var(--ink-dim); font-size:14.5px; line-height:1.75;}
+.warning-text strong{color:var(--ink);}
 
-.warning-title{
-    color:#ef4444;
-    font-size:18px;
-    font-weight:800;
-    margin-bottom:12px;
-}
-
-.warning-text{
-    line-height:1.8;
-    color:var(--text);
-}
-
-/* GUIA CIOT */
-
+/* ============ GUIA TMS AGRO ============ */
 .guide-panel{
-    background:linear-gradient(180deg, rgba(255,102,0,.08), rgba(28,28,28,.45));
-    border:1px solid rgba(255,102,0,.22);
-    border-radius:12px;
-    padding:28px;
-    box-shadow:0 0 24px rgba(255,102,0,.08);
+    background:var(--surface-2); border:1px solid var(--border-soft); border-radius:var(--radius-lg);
+    padding:clamp(24px,3.5vw,40px); box-shadow:var(--shadow-md);
 }
-
-.guide-head{
-    display:flex;
-    justify-content:space-between;
-    gap:24px;
-    align-items:flex-start;
-    margin-bottom:24px;
-}
-
+.guide-head{display:flex; justify-content:space-between; align-items:flex-start; gap:18px; flex-wrap:wrap;}
 .guide-kicker{
-    color:var(--orange);
-    font-size:12px;
-    font-weight:800;
-    letter-spacing:3px;
-    text-transform:uppercase;
-    margin-bottom:8px;
+    font-family:var(--mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase;
+    color:var(--laranja-claro); margin-bottom:8px;
 }
-
-.guide-title{
-    font-size:26px;
-    font-weight:900;
-    line-height:1.25;
-}
-
+.guide-title{font-family:var(--display); font-size:clamp(18px,2.4vw,24px); line-height:1.25; color:var(--ink); max-width:720px;}
 .guide-badge{
-    flex:0 0 auto;
-    background:var(--orange);
-    color:#111;
-    border-radius:8px;
-    padding:10px 14px;
-    font-size:12px;
-    font-weight:900;
-    letter-spacing:2px;
-    text-transform:uppercase;
+    font-family:var(--mono); font-size:11px; letter-spacing:.04em; white-space:nowrap;
+    background:var(--laranja); color:#fff; padding:7px 13px; border-radius:999px;
 }
-
-.guide-grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:16px;
-    margin-bottom:18px;
-}
-
+.guide-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:16px; margin-top:26px;}
 .guide-card{
-    background:var(--surface);
-    border:1px solid var(--border);
-    border-radius:10px;
-    padding:22px;
+    background:var(--surface-3); border:1px solid var(--border-soft); border-radius:var(--radius);
+    padding:22px; transition:transform .22s var(--ease), box-shadow .22s var(--ease), border-color .22s var(--ease);
 }
-
-.guide-card:hover{
-    border-color:var(--orange);
-}
-
-.guide-card-title{
-    color:var(--orange);
-    font-size:18px;
-    font-weight:800;
-    margin-bottom:12px;
-}
-
-.guide-card p,
-.guide-note,
-.guide-flow-text{
-    color:var(--text);
-    font-size:13px;
-    line-height:1.7;
-}
-
-.guide-list{
-    list-style:none;
-    margin:12px 0 0;
-    padding:0;
-}
-
-.guide-list li{
-    color:var(--text);
-    font-size:13px;
-    line-height:1.7;
-    padding-left:18px;
-    position:relative;
-    margin-bottom:6px;
-}
-
-.guide-list li::before{
-    content:'';
-    width:6px;
-    height:6px;
-    border-radius:50%;
-    background:var(--orange);
-    position:absolute;
-    left:0;
-    top:10px;
-}
-
+.guide-card:hover{transform:translateY(-3px); box-shadow:var(--shadow-sm); border-color:var(--laranja-escuro);}
+.guide-card-title{font-family:var(--display); font-size:17px; color:var(--laranja-claro); margin-bottom:10px;}
+.guide-card p{color:var(--ink-dim); font-size:14px; line-height:1.6;}
+.guide-list{margin-top:12px; display:flex; flex-direction:column; gap:7px;}
+.guide-list li{position:relative; padding-left:20px; color:var(--ink-dim); font-size:13.5px; line-height:1.6;}
+.guide-list li::before{content:"▹"; position:absolute; left:0; color:var(--laranja);}
 .guide-note{
-    margin-top:14px;
-    padding:12px 14px;
-    background:rgba(255,102,0,.08);
-    border-left:4px solid var(--orange);
-    border-radius:8px;
+    margin-top:14px; background:rgba(255,61,3,.07); border:1px dashed rgba(255,61,3,.32);
+    border-radius:10px; padding:12px 14px; color:var(--ink-dim); font-size:13px; line-height:1.6;
 }
-
-.guide-section{
-    background:var(--surface);
-    border:1px solid var(--border);
-    border-radius:10px;
-    padding:22px;
-    margin-top:16px;
-}
-
+.guide-section{margin-top:30px; padding-top:26px; border-top:1px solid var(--border-soft);}
 .guide-section-title{
-    font-size:17px;
-    font-weight:800;
-    color:var(--orange);
-    margin-bottom:12px;
+    font-family:var(--mono); font-size:12px; letter-spacing:.08em; text-transform:uppercase;
+    color:var(--laranja-claro); display:flex; align-items:center; gap:10px; margin-bottom:14px;
 }
-
-.criteria-grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:10px;
-    margin-top:14px;
-}
-
+.guide-section-title::before{content:""; width:20px; height:2px; background:var(--laranja);}
+.guide-flow-text{color:var(--ink-dim); font-size:14.5px; line-height:1.75;}
+.guide-flow-text strong{color:var(--ink);}
+.criteria-grid{display:flex; flex-wrap:wrap; gap:9px; margin:16px 0;}
 .criteria-pill{
-    background:rgba(255,255,255,.04);
-    border:1px solid var(--border);
-    border-radius:8px;
-    padding:12px;
-    color:var(--text);
-    font-size:12px;
-    font-weight:700;
+    font-family:var(--mono); font-size:12px; background:var(--surface-3);
+    border:1px solid var(--border-soft); color:var(--ink); padding:8px 14px; border-radius:999px;
 }
-
-.guide-flow{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:14px;
-}
-
+.guide-flow{display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:16px;}
 .guide-flow-card{
-    background:rgba(255,102,0,.06);
-    border:1px solid rgba(255,102,0,.18);
-    border-radius:10px;
-    padding:18px;
+    background:var(--surface-3); border:1px solid var(--border-soft); border-radius:var(--radius); padding:20px;
 }
-
-.guide-flow-card strong{
-    display:block;
-    color:var(--orange);
-    margin-bottom:8px;
-}
-
-.guide-table-wrap{
-    overflow-x:auto;
-    border:1px solid var(--border);
-    border-radius:10px;
-}
-
-.guide-table{
-    width:100%;
-    border-collapse:collapse;
-    min-width:720px;
-    background:var(--surface);
-}
-
-.guide-table th,
-.guide-table td{
-    padding:13px 14px;
-    border-bottom:1px solid var(--border);
-    text-align:left;
-    font-size:13px;
-}
-
+.guide-flow-card strong{color:var(--ink); font-size:15px; display:block; margin-bottom:8px;}
+.guide-table-wrap{overflow-x:auto; border-radius:var(--radius); border:1px solid var(--border-soft);}
+.guide-table{width:100%; border-collapse:collapse; font-size:14px; min-width:460px;}
 .guide-table th{
-    color:var(--orange);
-    background:rgba(255,102,0,.08);
-    font-weight:800;
+    background:var(--surface-3); color:var(--laranja-claro); text-align:left; padding:13px 16px;
+    font-family:var(--mono); font-size:11.5px; letter-spacing:.05em; text-transform:uppercase;
+    border-bottom:1px solid var(--border-soft);
 }
-
-.guide-table tr:last-child td{
-    border-bottom:none;
-}
-
-.guide-laws{
-    display:flex;
-    flex-wrap:wrap;
-    gap:10px;
-}
-
+.guide-table td{padding:13px 16px; color:var(--ink-dim); border-bottom:1px solid var(--border-soft);}
+.guide-table tr:last-child td{border-bottom:none;}
+.guide-table tbody tr:hover td{background:var(--surface-3); color:var(--ink);}
+.guide-laws{display:flex; flex-wrap:wrap; gap:10px;}
 .guide-law{
-    background:rgba(255,102,0,.08);
-    border:1px solid rgba(255,102,0,.18);
-    border-radius:999px;
-    color:var(--text);
-    font-size:12px;
-    font-weight:700;
-    padding:9px 12px;
+    font-family:var(--mono); font-size:12.5px; background:var(--surface-3);
+    border:1px solid var(--border-soft); color:var(--ink); padding:10px 15px; border-radius:10px;
+}
+.guide-flash{animation:guide-flash 1.6s var(--ease);}
+@keyframes guide-flash{
+    0%{box-shadow:0 0 0 3px rgba(255,61,3,.5);}
+    100%{box-shadow:0 0 0 3px rgba(255,61,3,0);}
 }
 
-/* NAV FIXO */
+/* ============ FAQ ============ */
+.faq-container{display:flex; flex-direction:column; gap:12px;}
+.faq-item{
+    background:var(--surface-2); border:1px solid var(--border-soft); border-radius:var(--radius);
+    overflow:hidden; transition:border-color .2s var(--ease), box-shadow .2s var(--ease);
+}
+.faq-item.open{border-color:var(--laranja-escuro); box-shadow:var(--shadow-sm);}
+.faq-q{
+    width:100%; text-align:left; cursor:pointer; background:transparent; border:none;
+    font-family:var(--corpo); font-weight:600; font-size:15.5px; color:var(--ink);
+    padding:20px 54px 20px 22px; position:relative; line-height:1.5;
+    transition:color .2s var(--ease);
+}
+.faq-q:hover{color:var(--laranja-claro);}
+.faq-q::after{
+    content:"+"; position:absolute; right:22px; top:50%; transform:translateY(-50%);
+    font-size:24px; font-weight:400; color:var(--laranja); transition:transform .3s var(--ease);
+    line-height:1;
+}
+.faq-item.open .faq-q::after{transform:translateY(-50%) rotate(45deg);}
+.faq-a{max-height:0; overflow:hidden; transition:max-height .35s var(--ease);}
+.faq-content{padding:0 22px 22px; color:var(--ink-dim); font-size:14.5px; line-height:1.8;}
+.faq-content a{color:var(--laranja-claro); font-weight:600;}
+.faq-content a:hover{text-decoration:underline;}
+.faq-content strong{color:var(--ink);}
 
-.site-nav{
-    position:sticky;
-    top:0;
-    z-index:50;
-    margin:0 -24px;
-    padding:0 24px;
-    background:rgba(17,17,17,.82);
-    backdrop-filter:blur(12px);
-    -webkit-backdrop-filter:blur(12px);
-    border-bottom:1px solid var(--border);
-}
-
-.site-nav-inner{
-    max-width:1240px;
-    margin:auto;
-    display:flex;
-    align-items:center;
-    gap:6px;
-    overflow-x:auto;
-    scrollbar-width:none;
-    padding:10px 0;
-}
-.site-nav-inner::-webkit-scrollbar{display:none;}
-
-.site-nav a{
-    flex:0 0 auto;
-    color:var(--muted);
-    text-decoration:none;
-    font-size:13px;
-    font-weight:700;
-    letter-spacing:.5px;
-    padding:8px 14px;
-    border-radius:999px;
-    white-space:nowrap;
-    transition:.2s;
-}
-.site-nav a:hover{
-    color:var(--text);
-    background:rgba(255,102,0,.08);
-}
-.site-nav a.active{
-    color:var(--orange);
-    background:rgba(255,102,0,.12);
-}
-
-/* Âncoras: compensa o nav fixo ao rolar */
-[id]{
-    scroll-margin-top:80px;
-}
-
-/* Realce de termos na busca */
-mark.hl{
-    background:var(--orange);
-    color:#111;
-    border-radius:3px;
-    padding:0 3px;
-    font-weight:700;
-}
-
-/* Animação de entrada das seções (só quando há JS) */
-.js .reveal{
-    opacity:0;
-    transform:translateY(18px);
-    transition:opacity .6s ease, transform .6s ease;
-}
-.js .reveal.is-visible{
-    opacity:1;
-    transform:none;
-}
-
-/* Grupo de resultados e link para o Guia na busca */
-.result-group-title{
-    text-align:left;
-    color:var(--muted);
-    font-size:12px;
-    font-weight:700;
-    letter-spacing:2px;
-    text-transform:uppercase;
-    margin:22px 0 4px;
-}
-
-a.guia-link{
-    display:block;
-    text-align:left;
-    text-decoration:none;
-    cursor:pointer;
-}
-a.guia-link:hover{
-    border-color:var(--orange);
-    background:rgba(255,102,0,.08);
-}
-a.guia-link p{
-    color:var(--muted);
-    font-size:12px;
-    margin:0;
-}
-
-/* Destaque temporário ao pular para uma seção do Guia */
-.guide-flash{
-    box-shadow:0 0 0 2px var(--orange), 0 0 22px var(--orange-glow) !important;
-    border-radius:12px;
-    transition:box-shadow .35s ease;
-}
-
-/* CENTRO DE VÍDEOS */
-.videos-intro{
-    color:var(--muted);
-    font-size:14px;
-    margin:-16px 0 24px;
-}
-
-.video-group{
-    margin-bottom:30px;
-}
-.video-group:last-child{
-    margin-bottom:0;
-}
-
+/* ============ VÍDEOS ============ */
+.videos-intro{color:var(--ink-dim); font-size:15px; margin-bottom:28px;}
+.video-group{margin-bottom:34px;}
 .video-group-title{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    font-size:15px;
-    font-weight:800;
-    letter-spacing:.5px;
-    color:var(--text);
-    margin:0 0 16px;
-}
-.video-group-title::before{
-    content:'';
-    width:8px;
-    height:8px;
-    border-radius:50%;
-    background:var(--orange);
-    box-shadow:0 0 10px var(--orange);
+    font-family:var(--mono); font-size:12px; letter-spacing:.06em; text-transform:uppercase;
+    color:var(--ink); display:flex; align-items:center; gap:12px; margin-bottom:16px;
 }
 .vg-count{
-    font-size:11px;
-    font-weight:700;
-    color:var(--orange);
-    background:rgba(255,102,0,.12);
-    border:1px solid rgba(255,102,0,.22);
-    border-radius:999px;
-    padding:3px 10px;
+    font-size:10.5px; color:var(--laranja-claro); background:rgba(255,61,3,.1);
+    border:1px solid rgba(255,61,3,.28); padding:3px 9px; border-radius:999px; letter-spacing:.02em;
 }
-
-.video-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fill, minmax(250px,1fr));
-    gap:18px;
-}
-
+.video-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(250px,1fr)); gap:18px;}
 .video-card{
-    display:flex;
-    flex-direction:column;
-    background:var(--surface);
-    border:1px solid var(--border);
-    border-radius:14px;
-    overflow:hidden;
-    text-decoration:none;
-    color:var(--text);
-    transition:transform .25s, border-color .25s, box-shadow .25s;
+    background:var(--surface-2); border:1px solid var(--border-soft); border-radius:var(--radius);
+    overflow:hidden; transition:transform .22s var(--ease), box-shadow .22s var(--ease), border-color .22s var(--ease);
 }
-.video-card:hover{
-    transform:translateY(-5px);
-    border-color:var(--orange);
-    box-shadow:0 14px 32px rgba(0,0,0,.5);
-}
-
-.video-thumb{
-    position:relative;
-    aspect-ratio:16/9;
-    background:linear-gradient(135deg,#2b2b2b,#161616);
-    overflow:hidden;
-}
-.video-thumb img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    display:block;
-    filter:brightness(.82);
-    transition:transform .4s, filter .25s;
-}
-.video-card:hover .video-thumb img{
-    transform:scale(1.06);
-    filter:brightness(1);
-}
-
-.video-thumb.ig{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    background:linear-gradient(135deg,#833ab4,#fd1d1d 55%,#fcb045);
-}
-.video-thumb.ig .ig-glyph{
-    font-size:46px;
-    filter:drop-shadow(0 2px 6px rgba(0,0,0,.35));
-}
-
-.video-play{
-    position:absolute;
-    inset:0;
-    margin:auto;
-    width:54px;
-    height:54px;
-    border-radius:50%;
-    background:rgba(255,102,0,.92);
-    color:#111;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:20px;
-    padding-left:3px;
-    box-shadow:0 4px 16px rgba(0,0,0,.45);
-    transition:transform .25s, background .25s;
-}
-.video-card:hover .video-play{
-    transform:scale(1.14);
-    background:var(--orange);
-}
-
+.video-card:hover{transform:translateY(-4px); box-shadow:var(--shadow-md); border-color:var(--laranja-escuro);}
+.video-thumb{position:relative; aspect-ratio:16/9; background:var(--surface-3); overflow:hidden;}
+.video-thumb img{width:100%; height:100%; object-fit:cover; transition:transform .4s var(--ease);}
+.video-card:hover .video-thumb img{transform:scale(1.05);}
+.video-thumb.ig{display:flex; align-items:center; justify-content:center; background:linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045);}
+.ig-glyph{font-size:46px;}
 .video-platform{
-    position:absolute;
-    top:10px;
-    left:10px;
-    display:inline-flex;
-    align-items:center;
-    gap:5px;
-    background:rgba(0,0,0,.62);
-    -webkit-backdrop-filter:blur(4px);
-    backdrop-filter:blur(4px);
-    color:#fff;
-    font-size:10px;
-    font-weight:700;
-    letter-spacing:.5px;
-    padding:4px 9px;
-    border-radius:999px;
+    position:absolute; top:10px; left:10px; font-family:var(--mono); font-size:10.5px;
+    background:rgba(0,0,0,.65); color:#fff; padding:4px 9px; border-radius:7px; letter-spacing:.02em;
 }
+.video-play{
+    position:absolute; inset:0; margin:auto; width:54px; height:54px; border-radius:50%;
+    background:rgba(255,61,3,.92); color:#fff; display:flex; align-items:center; justify-content:center;
+    font-size:20px; padding-left:4px; opacity:0; transform:scale(.8); transition:all .25s var(--ease);
+}
+.video-card:hover .video-play{opacity:1; transform:scale(1);}
+.video-info{padding:16px 18px; display:flex; flex-direction:column; gap:7px;}
+.video-info strong{color:var(--ink); font-size:14.5px; line-height:1.4;}
+.video-meta{font-family:var(--mono); font-size:11px; color:var(--laranja-claro); letter-spacing:.02em;}
 
-.video-info{
-    display:flex;
-    flex-direction:column;
-    gap:10px;
-    padding:15px 16px 16px;
-    flex:1;
+/* ============ FOOTER ============ */
+.site-footer{
+    border-top:1px solid var(--border-soft); background:var(--preto); margin-top:40px;
 }
-.video-info strong{
-    font-size:14px;
-    font-weight:700;
-    line-height:1.4;
+.footer-grid{
+    display:grid; grid-template-columns:1.3fr 1fr 1fr; gap:36px;
+    padding:clamp(40px,6vw,64px) 0 clamp(28px,4vw,40px);
 }
-.video-meta{
-    margin-top:auto;
-    font-size:11px;
-    font-weight:700;
-    letter-spacing:.4px;
-    color:var(--muted);
-    display:inline-flex;
-    align-items:center;
-    gap:6px;
-    transition:color .25s;
+.footer-brand .brand-mark{font-size:24px;}
+.footer-about{color:var(--ink-dim); font-size:13.5px; line-height:1.7; margin-top:14px; max-width:340px;}
+.footer-col h4{
+    font-family:var(--mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase;
+    color:var(--laranja-claro); margin-bottom:14px;
 }
-.video-card:hover .video-meta{
-    color:var(--orange);
+.footer-col ul{display:flex; flex-direction:column; gap:9px;}
+.footer-col a{color:var(--ink-dim); font-size:13.5px; transition:color .18s var(--ease);}
+.footer-col a:hover{color:var(--laranja-claro);}
+.footer-bottom{
+    border-top:1px solid var(--border-soft); padding:20px 0;
+    display:flex; justify-content:space-between; gap:14px; flex-wrap:wrap;
+    font-family:var(--mono); font-size:11px; letter-spacing:.03em; color:var(--ink-dim);
 }
+.footer-bottom b{color:var(--laranja);}
 
-@media(max-width:600px){
-    .video-grid{
-        grid-template-columns:1fr;
-    }
-}
-
-/* Botão voltar ao topo */
+/* ============ TO TOP ============ */
 .to-top{
-    position:fixed;
-    right:22px;
-    bottom:22px;
-    width:48px;
-    height:48px;
-    border:none;
-    border-radius:50%;
-    background:var(--orange);
-    color:#111;
-    font-size:22px;
-    font-weight:900;
-    cursor:pointer;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    box-shadow:0 8px 24px rgba(0,0,0,.4), 0 0 0 1px rgba(255,102,0,.3);
-    opacity:0;
-    visibility:hidden;
-    transform:translateY(12px);
-    transition:.25s;
-    z-index:60;
+    position:fixed; right:22px; bottom:22px; width:48px; height:48px; border:none; border-radius:50%;
+    background:var(--laranja); color:#fff; font-size:22px; cursor:pointer; z-index:900;
+    display:flex; align-items:center; justify-content:center; box-shadow:var(--shadow-md);
+    opacity:0; visibility:hidden; transform:translateY(12px); transition:all .25s var(--ease);
 }
-.to-top.show{
-    opacity:1;
-    visibility:visible;
-    transform:none;
+.to-top.show{opacity:1; visibility:visible; transform:none;}
+.to-top:hover{background:var(--laranja-escuro); transform:translateY(-2px);}
+
+/* ============ REVEAL ============ */
+.reveal{opacity:0; transform:translateY(26px); transition:opacity .7s var(--ease), transform .7s var(--ease);}
+.reveal.is-visible{opacity:1; transform:none;}
+.reveal.is-visible .flow-card,
+.reveal.is-visible .guide-card,
+.reveal.is-visible .video-card{animation:card-in .6s var(--ease) both;}
+.reveal.is-visible .flow-card:nth-child(2){animation-delay:.06s;}
+.reveal.is-visible .flow-card:nth-child(3){animation-delay:.12s;}
+.reveal.is-visible .flow-card:nth-child(4){animation-delay:.18s;}
+.reveal.is-visible .video-card:nth-child(2){animation-delay:.08s;}
+.reveal.is-visible .video-card:nth-child(3){animation-delay:.16s;}
+@keyframes card-in{from{opacity:0; transform:translateY(14px);} to{opacity:1; transform:none;}}
+
+/* Hero entrance */
+.hero-boot{opacity:0; transform:translateY(16px); animation:boot-up .9s var(--ease) both; animation-delay:var(--d,0ms);}
+@keyframes boot-up{to{opacity:1; transform:none;}}
+
+/* ============ RESPONSIVO ============ */
+@media(max-width:920px){
+    .hero-inner{grid-template-columns:1fr; gap:36px;}
 }
-.to-top:hover{
-    background:var(--orange-dim);
+@media(max-width:780px){
+    .nav-toggle{display:inline-flex;}
+    .brand-sep,.brand-sub{display:none;}
+    .nav-right .brand-logo{display:none;}
+    .site-nav{
+        position:absolute; top:var(--header-h); left:0; right:0;
+        flex-direction:column; align-items:stretch; gap:2px;
+        background:var(--surface); border-bottom:1px solid var(--border-soft);
+        padding:12px clamp(18px,4vw,32px) 18px;
+        box-shadow:var(--shadow-lg);
+        display:none;
+    }
+    .site-nav.open{display:flex;}
+    .site-nav a{padding:13px 14px; border-radius:10px;}
+    .site-nav a.active::after{display:none;}
+    .flow-arrow{display:none;}
+    .footer-grid{grid-template-columns:1fr; gap:28px;}
 }
-
-@media(max-width:600px){
-    .to-top{
-        right:16px;
-        bottom:16px;
-        width:44px;
-        height:44px;
-    }
+@media(max-width:480px){
+    .hero-actions .btn{width:100%; justify-content:center;}
 }
-
-@media(max-width:900px){
-
-    .hero-grid{
-        grid-template-columns:1fr;
-        gap:24px;
-    }
-
-    .flow-container{
-        flex-direction:column;
-        gap:14px;
-    }
-
-    .flow-arrow{
-        transform:rotate(90deg);
-        margin:0;
-    }
-
-    .flow-card{
-        max-width:100%;
-        width:100%;
-    }
-
-    .video-list{
-        grid-template-columns:1fr;
-    }
-
-    .guide-head,
-    .guide-grid,
-    .guide-flow{
-        grid-template-columns:1fr;
-    }
-
-    .guide-head{
-        flex-direction:column;
-    }
-
-    .criteria-grid{
-        grid-template-columns:1fr 1fr;
-    }
-
-    .faq-q{
-        padding:16px 18px;
-    }
-
-    .faq-content{
-        padding:16px 18px;
-    }
-
-    .alert-body,
-    .important-box,
-    .warning-box,
-    .guide-panel,
-    .guide-card,
-    .guide-section,
-    .info-card,
-    .timeline-card,
-    .check-item,
-    .flow-card{
-        padding:18px;
-    }
-
-    .check-item{
-        flex-direction:column;
-        align-items:flex-start;
-    }
-
-    .page,
-    main#conteudo{
-        gap:24px;
-    }
-
-    body{
-        padding:20px 16px;
-    }
-
-}
-
-@media(max-width:600px){
-    body{
-        padding:16px 12px;
-    }
-    .page,
-    main#conteudo{
-        gap:20px;
-    }
-    .header{
-        flex-direction:column;
-        align-items:flex-start;
-        gap:16px;
-    }
-    .header h1{
-        font-size:32px;
-    }
-    .logo{
-        font-size:18px;
-    }
-    .section-label{
-        margin-bottom:18px;
-    }
-    .hero-title{
-        font-size:24px;
-    }
-    .hero-sub{
-        font-size:15px;
-    }
-    .flow-card{
-        padding:18px;
-    }
-    .flow-arrow{
-        font-size:24px;
-    }
-    .video-link{
-        padding:14px;
-    }
-    .timeline-card{
-        padding:16px;
-    }
-    .faq-q{
-        font-size:14px;
-    }
-    .faq-content{
-        font-size:13px;
-    }
-    .criteria-grid{
-        grid-template-columns:1fr;
-    }
-    .guide-title{
-        font-size:22px;
-    }
-}
-
 </style>
 </head>
 <body>
 
-<a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+<div class="scroll-progress" id="scrollProgress"></div>
+<div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
+<a class="skip-link" href="#conteudo">Ir para o conteúdo</a>
 
-<div class="page">
-
-<div class="header" id="topo">
-    <div>
-        <h1>CIOT <span>ANTT</span></h1>
-        <h2>REGRAS OPERACIONAIS</h2>
+<header class="site-header" id="topo">
+    <div class="wrap nav-row">
+        <a class="brandblock" href="#topo" aria-label="CIOT ANTT — início">
+            <span class="brand-mark">CIOT <b>ANTT</b></span>
+            <span class="brand-sep" aria-hidden="true"></span>
+            <span class="brand-sub">Regras Operacionais</span>
+        </a>
+        <nav class="site-nav" id="siteNav" aria-label="Navegação da página">
+            <a href="#ajuda">Buscar dúvida</a>
+            <a href="#contratacao">Contratação</a>
+            <a href="#guia">Guia TMS Agro</a>
+            <a href="#faq">Perguntas Frequentes</a>
+            <a href="#videos">Vídeos</a>
+        </nav>
+        <div class="nav-right">
+            <span class="brand-logo">NSTECH</span>
+            <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="siteNav" aria-label="Abrir menu">≡</button>
+        </div>
     </div>
-    <div class="logo">NSTECH</div>
-</div>
-
-<nav class="site-nav" aria-label="Navegação da página">
-    <div class="site-nav-inner">
-        <a href="#ajuda">Buscar dúvida</a>
-        <a href="#contratacao">Contratação</a>
-        <a href="#guia">Guia TMS Agro</a>
-        <a href="#faq">Perguntas Frequentes</a>
-        <a href="#videos">Vídeos</a>
-    </div>
-</nav>
+</header>
 
 <main id="conteudo">
-<div class="top-link-box">
-    <a href="https://www.gov.br/antt/pt-br/assuntos/cargas/ciot-para-todos-1/perguntas-frequentes" target="_blank" rel="noopener noreferrer">Perguntas Frequentes ANTT</a>
-</div>
-<div class="hero-grid">
 
-    <div>
-        <div class="section-label">CIOT ANTT - FROTA PRÓPRIA</div>
-
-        <div class="hero-sub">
-            A solução tem como objetivo realizar a geração automática do CIOT para operações de Frota Própria, em conformidade com a MP nº 1.343 e com a regulamentação estabelecida pela Portaria SUROC nº 6, de 23 de abril de 2026.
-
-            O processo de geração será executado automaticamente com base nas informações do CT-e, desconsiderando quaisquer valores existentes em Contratos de Frete.
-
-            Após a geração, o número do CIOT será vinculado automaticamente ao MDF-e.
-        </div>
-    </div>
-
-    <div>
-        <div class="section-label">Legislação Relacionada</div>
-
-        <ul class="leg-list">
-            <li>🔸 <a href="https://anttlegis.antt.gov.br/action/ActionDatalegis.php?acao=detalharAto&tipo=RES&numeroAto=00005867&seqAto=000&valorAno=2020&orgao=DG/ANTT/MI&codTipo=&desItem=&desItemFim=&cod_menu=5408&cod_modulo=161&pesquisa=true" target="_blank" rel="noopener noreferrer">Resolução ANTT nº 5.867/2020</a></li>
-            <li>🔸 <a href="https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2026/mpv/mpv1343.htm" target="_blank" rel="noopener noreferrer">MP nº 1.343/2026</a></li>
-            <li>🔸 <a href="https://anttlegis.antt.gov.br/action/ActionDatalegis.php?acao=abrirTextoAto&cod_menu=9230&cod_modulo=623&numeroAto=00006077&orgao=DG%2FANTT%2FMT&seqAto=000&tipo=RES&valorAno=2026&utm_source=chatgpt.com" target="_blank" rel="noopener noreferrer">Resolução ANTT nº 6.077/2026</a></li>
-            <li>🔸 <a href="https://anttlegis.antt.gov.br/action/ActionDatalegis.php?acao=abrirTextoAto&tipo=RES&numeroAto=00006078&seqAto=000&valorAno=2026&orgao=DG/ANTT/MT&cod_modulo=623&cod_menu=9230" target="_blank" rel="noopener noreferrer">Resolução ANTT nº 6.078/2026</a></li>
-            <li>🔸 <a href="https://anttlegis.antt.gov.br/action/ActionDatalegis.php?acao=abrirTextoAto&tipo=POR&numeroAto=00000006&seqAto=000&valorAno=2026&orgao=SUROC/ANTT/MT&cod_modulo=623&cod_menu=9230" target="_blank" rel="noopener noreferrer">Portaria SUROC nº 6/2026</a></li>
-            <li>🔸 <a href="https://anttlegis.antt.gov.br/action/ActionDatalegis.php?acao=abrirTextoAto&tipo=POR&numeroAto=00000006&seqAto=000&valorAno=2026&orgao=SUROC/ANTT/MT&cod_modulo=623&cod_menu=9230" target="_blank" rel="noopener noreferrer">Portal ANTT Legislação – Portaria SUROC nº 6/2026</a></li>
-        </ul>
-    </div>
-
-</div>
-
-<div class="help-center reveal" id="ajuda">
-
-    <div class="help-title">
-        Como podemos ajudar?
-    </div>
-
-    <p class="help-subtitle">Busque por palavra-chave nas perguntas frequentes e no guia de classificação.</p>
-
-    <div class="search-wrapper">
-        <label for="faqSearch" class="skip-link">Buscar dúvida</label>
-        <input
-            type="search"
-            id="faqSearch"
-            autocomplete="off"
-            aria-describedby="searchResult"
-            placeholder="Digite sua dúvida..."
-        >
-        <div class="search-icon" aria-hidden="true">⌕</div>
-    </div>
-
-    <div class="help-tags" role="group" aria-label="Palavras-chave sugeridas">
-
-        <button type="button" class="help-tag">CIOT</button>
-        <button type="button" class="help-tag">CT-e</button>
-        <button type="button" class="help-tag">MDF-e</button>
-        <button type="button" class="help-tag">Piso Mínimo</button>
-        <button type="button" class="help-tag">Vale-Pedágio</button>
-        <button type="button" class="help-tag">Frota Própria</button>
-        <button type="button" class="help-tag">Embarque</button>
-        <button type="button" class="help-tag">Subcontratação</button>
-        <button type="button" class="help-tag">Alto Desempenho</button>
-        <button type="button" class="help-tag">Fracionado</button>
-
-    </div>
-
-    <div class="search-result" id="searchResult" aria-live="polite">
-    </div>
-
-</div>
-
-<div class="reveal" id="contratacao">
-    <div class="section-label">Contratação do Add-on</div>
-
-    <div class="flow-container">
-
-        <div class="flow-card">
-            <div class="flow-icon">🛒</div>
-            <div class="flow-title">1. Acessar Atua Store</div>
-            <div class="flow-text">
-                Portal do Cliente<br>
-                ➜ Atua Store<br>
-                ➜ CIOT ANTT
-            </div>
-        </div>
-
-        <div class="flow-arrow">➜</div>
-
-        <div class="flow-card">
-            <div class="flow-icon">✅</div>
-            <div class="flow-title">2. Contratar</div>
-            <div class="flow-text">
-                Clique em <strong>Contratar</strong> e confirme a ativação do Add-on.
-            </div>
-        </div>
-
-        <div class="flow-arrow">➜</div>
-
-        <div class="flow-card">
-            <div class="flow-icon">⚙️</div>
-            <div class="flow-title">3. Configurações</div>
-            <div class="flow-text">
-                Após ativar, acesse o menu
-                <strong>Configurações</strong>.
-            </div>
-        </div>
-
-        <div class="flow-arrow">➜</div>
-
-        <div class="flow-card">
-            <div class="flow-icon">📋</div>
-            <div class="flow-title">4. Escolher Plano</div>
-            <div class="flow-text">
-                Selecione o plano de contratação e clique em
-                <strong>Salvar</strong>.
-            </div>
-        </div>
-
-    </div>
-
-    <div class="important-box">
-
-        <div class="important-title">
-            ⚠️ Importante
-        </div>
-
-        <div class="important-text">
-            Ao ativar o Add-on CIOT ANTT, o sistema criará automaticamente uma administradora de pagamento
-            <strong>CIOT ANTT - Sem Movimentação Financeira</strong>,
-            utilizada exclusivamente para operações de Frota Própria.
-            <br><br>
-            Essa configuração é obrigatória para permitir a geração automática do CIOT durante a emissão do CT-e.
-        </div>
-
-    </div>
-
-    <div class="warning-box">
-
-        <div class="warning-title">
-            🔒 Não aparece a opção "Contratar"?
-        </div>
-
-        <div class="warning-text">
-            Apenas o <strong>Responsável pelo Sistema</strong> possui permissão para contratar Add-ons na Atua Store.
-            <br><br>
-            Caso a opção não esteja disponível para você, será necessário solicitar a contratação ao usuário responsável pela gestão do sistema.
-        </div>
-
-    </div>
-
-</div>
-
-
-<div class="reveal" id="guia">
-    <div class="section-label">Guia Rápido TMS Agro</div>
-
-    <div class="guide-panel">
-        <div class="guide-head">
+<!-- ============ HERO ============ -->
+<section class="hero" id="home">
+    <div class="wrap">
+        <div class="hero-inner">
             <div>
-                <div class="guide-kicker">Classificação de CIOT e Piso Mínimo</div>
-                <div class="guide-title">TMS AGRO - Guia Rápido de Classificação de CIOT e Validação do Piso Mínimo de Frete</div>
-            </div>
-            <div class="guide-badge">Consulta rápida</div>
-        </div>
-
-        <div class="guide-grid">
-            <div class="guide-card">
-                <div class="guide-card-title">CIOT Lotação</div>
-                <p>Quando existir apenas um contratante da operação de transporte.</p>
-                <ul class="guide-list">
-                    <li>Um embarcador e uma entrega.</li>
-                    <li>Um embarcador e múltiplas entregas.</li>
-                    <li>Um embarcador e múltiplas coletas.</li>
-                    <li>ETC contratando TAC.</li>
-                    <li>ETC contratando outra ETC.</li>
-                </ul>
-                <div class="guide-note">
-                    Múltiplas entregas ou coletas não alteram a classificação para Fracionado quando houver apenas um contratante.
+                <div class="hero-eyebrow hero-boot" style="--d:60ms">CIOT ANTT · Frota Própria</div>
+                <h1 class="hero-boot" style="--d:140ms">Geração <span class="hl">automática</span> do CIOT para Frota Própria</h1>
+                <p class="lede hero-boot" style="--d:240ms">
+                    A solução tem como objetivo realizar a geração automática do CIOT para operações de Frota Própria, em conformidade com a MP nº 1.343 e com a regulamentação estabelecida pela Portaria SUROC nº 6, de 23 de abril de 2026. O processo de geração será executado automaticamente com base nas informações do CT-e, desconsiderando quaisquer valores existentes em Contratos de Frete. Após a geração, o número do CIOT será vinculado automaticamente ao MDF-e.
+                </p>
+                <div class="hero-actions hero-boot" style="--d:340ms">
+                    <a class="btn btn-primary" href="https://www.gov.br/antt/pt-br/assuntos/cargas/ciot-para-todos-1/perguntas-frequentes" target="_blank" rel="noopener noreferrer">Perguntas Frequentes ANTT</a>
+                    <a class="btn btn-ghost" href="#ajuda">Buscar dúvida</a>
                 </div>
             </div>
-
-            <div class="guide-card">
-                <div class="guide-card-title">CIOT Fracionado</div>
-                <p>Quando houver mais de um contratante vinculado à mesma operação.</p>
-                <ul class="guide-list">
-                    <li>Mercadorias de vários embarcadores na mesma viagem.</li>
-                    <li>Operação de distribuição consolidada de diversos clientes.</li>
-                    <li>Coletas de diferentes contratantes.</li>
+            <aside class="hero-legis hero-boot" style="--d:420ms">
+                <div class="hl-kicker">Legislação Relacionada</div>
+                <ul class="leg-list">
+                    <li><a href="https://anttlegis.antt.gov.br/action/ActionDatalegis.php?acao=detalharAto&tipo=RES&numeroAto=00005867&seqAto=000&valorAno=2020&orgao=DG/ANTT/MI&codTipo=&desItem=&desItemFim=&cod_menu=5408&cod_modulo=161&pesquisa=true" target="_blank" rel="noopener noreferrer">Resolução ANTT nº 5.867/2020</a></li>
+                    <li><a href="https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2026/mpv/mpv1343.htm" target="_blank" rel="noopener noreferrer">MP nº 1.343/2026</a></li>
+                    <li><a href="https://anttlegis.antt.gov.br/action/ActionDatalegis.php?acao=abrirTextoAto&cod_menu=9230&cod_modulo=623&numeroAto=00006077&orgao=DG%2FANTT%2FMT&seqAto=000&tipo=RES&valorAno=2026&utm_source=chatgpt.com" target="_blank" rel="noopener noreferrer">Resolução ANTT nº 6.077/2026</a></li>
+                    <li><a href="https://anttlegis.antt.gov.br/action/ActionDatalegis.php?acao=abrirTextoAto&tipo=RES&numeroAto=00006078&seqAto=000&valorAno=2026&orgao=DG/ANTT/MT&cod_modulo=623&cod_menu=9230" target="_blank" rel="noopener noreferrer">Resolução ANTT nº 6.078/2026</a></li>
+                    <li><a href="https://anttlegis.antt.gov.br/action/ActionDatalegis.php?acao=abrirTextoAto&tipo=POR&numeroAto=00000006&seqAto=000&valorAno=2026&orgao=SUROC/ANTT/MT&cod_modulo=623&cod_menu=9230" target="_blank" rel="noopener noreferrer">Portaria SUROC nº 6/2026</a></li>
+                    <li><a href="https://anttlegis.antt.gov.br/action/ActionDatalegis.php?acao=abrirTextoAto&tipo=POR&numeroAto=00000006&seqAto=000&valorAno=2026&orgao=SUROC/ANTT/MT&cod_modulo=623&cod_menu=9230" target="_blank" rel="noopener noreferrer">Portal ANTT Legislação – Portaria SUROC nº 6/2026</a></li>
                 </ul>
+            </aside>
+        </div>
+    </div>
+</section>
+
+<!-- ============ BUSCA ============ -->
+<section class="reveal" id="ajuda">
+    <div class="wrap">
+        <div class="help-center">
+            <div class="help-title">Como podemos ajudar?</div>
+            <p class="help-subtitle">Busque por palavra-chave nas perguntas frequentes e no guia de classificação.</p>
+
+            <div class="search-wrapper">
+                <label for="faqSearch" class="skip-link">Buscar dúvida</label>
+                <input type="search" id="faqSearch" autocomplete="off" aria-describedby="searchResult" placeholder="Digite sua dúvida...">
+                <div class="search-icon" aria-hidden="true">⌕</div>
+            </div>
+
+            <div class="help-tags" role="group" aria-label="Palavras-chave sugeridas">
+                <button type="button" class="help-tag">CIOT</button>
+                <button type="button" class="help-tag">CT-e</button>
+                <button type="button" class="help-tag">MDF-e</button>
+                <button type="button" class="help-tag">Piso Mínimo</button>
+                <button type="button" class="help-tag">Vale-Pedágio</button>
+                <button type="button" class="help-tag">Frota Própria</button>
+                <button type="button" class="help-tag">Embarque</button>
+                <button type="button" class="help-tag">Subcontratação</button>
+                <button type="button" class="help-tag">Alto Desempenho</button>
+                <button type="button" class="help-tag">Fracionado</button>
+            </div>
+
+            <div class="search-result" id="searchResult" aria-live="polite"></div>
+        </div>
+    </div>
+</section>
+
+<!-- ============ CONTRATAÇÃO ============ -->
+<section class="reveal" id="contratacao">
+    <div class="wrap">
+        <div class="sec-head">
+            <div class="sec-tag">Contratação do Add-on</div>
+            <h2>Ative o CIOT ANTT na Atua Store em 4 passos</h2>
+            <p>Siga o fluxo abaixo para habilitar a geração automática do CIOT na sua operação.</p>
+        </div>
+
+        <div class="flow-container">
+            <div class="flow-card">
+                <div class="flow-icon">🛒</div>
+                <div class="flow-title">1. Acessar Atua Store</div>
+                <div class="flow-text">Portal do Cliente<br>➜ Atua Store<br>➜ CIOT ANTT</div>
+            </div>
+            <div class="flow-arrow">➜</div>
+            <div class="flow-card">
+                <div class="flow-icon">✅</div>
+                <div class="flow-title">2. Contratar</div>
+                <div class="flow-text">Clique em <strong>Contratar</strong> e confirme a ativação do Add-on.</div>
+            </div>
+            <div class="flow-arrow">➜</div>
+            <div class="flow-card">
+                <div class="flow-icon">⚙️</div>
+                <div class="flow-title">3. Configurações</div>
+                <div class="flow-text">Após ativar, acesse o menu <strong>Configurações</strong>.</div>
+            </div>
+            <div class="flow-arrow">➜</div>
+            <div class="flow-card">
+                <div class="flow-icon">📋</div>
+                <div class="flow-title">4. Escolher Plano</div>
+                <div class="flow-text">Selecione o plano de contratação e clique em <strong>Salvar</strong>.</div>
             </div>
         </div>
 
-        <div class="guide-section">
-            <div class="guide-section-title">Múltiplas Entregas</div>
-            <p class="guide-flow-text">
-                Mesmo com um único contratante e múltiplos destinos, o tipo de CIOT permanece como <strong>Lotação</strong>. Nesses casos, o Piso Mínimo <strong>não é validado automaticamente</strong>, pois múltiplos destinos afastam a validação.
-            </p>
+        <div class="important-box">
+            <div class="important-title">⚠️ Importante</div>
+            <div class="important-text">
+                Ao ativar o Add-on CIOT ANTT, o sistema criará automaticamente uma administradora de pagamento
+                <strong>CIOT ANTT - Sem Movimentação Financeira</strong>,
+                utilizada exclusivamente para operações de Frota Própria.
+                <br><br>
+                Essa configuração é obrigatória para permitir a geração automática do CIOT durante a emissão do CT-e.
+            </div>
         </div>
 
-        <div class="guide-section">
-            <div class="guide-section-title">Validação do Piso Mínimo</div>
-            <p class="guide-flow-text">
-                A classificação do CIOT e a validação do Piso Mínimo são análises distintas. Uma operação pode ser Lotação e, ainda assim, não ter validação automática do Piso Mínimo.
-            </p>
-
-            <div class="criteria-grid">
-                <div class="criteria-pill">Contratante único</div>
-                <div class="criteria-pill">Contrato único</div>
-                <div class="criteria-pill">Veículo exclusivo</div>
-                <div class="criteria-pill">Origem única</div>
-                <div class="criteria-pill">Destino único</div>
-                <div class="criteria-pill">Documento fiscal único</div>
+        <div class="warning-box">
+            <div class="warning-title">🔒 Não aparece a opção "Contratar"?</div>
+            <div class="warning-text">
+                Apenas o <strong>Responsável pelo Sistema</strong> possui permissão para contratar Add-ons na Atua Store.
+                <br><br>
+                Caso a opção não esteja disponível para você, será necessário solicitar a contratação ao usuário responsável pela gestão do sistema.
             </div>
+        </div>
+    </div>
+</section>
 
-            <div class="guide-note">
-                Haverá validação do Piso somente quando todos os requisitos forem atendidos simultaneamente.
-            </div>
-
-            <ul class="guide-list">
-                <li>Não haverá validação automática em operações com múltiplas entregas ou múltiplas coletas.</li>
-                <li>Também não haverá validação automática com múltiplos CT-es, múltiplas NF-es, mais de um contratante ou operações classificadas como Fracionadas.</li>
-            </ul>
+<!-- ============ GUIA TMS AGRO ============ -->
+<section class="reveal" id="guia">
+    <div class="wrap">
+        <div class="sec-head">
+            <div class="sec-tag">Guia Rápido TMS Agro</div>
+            <h2>Classificação de CIOT e validação do Piso Mínimo</h2>
+            <p>Consulta rápida para enquadrar a operação e entender quando o piso é validado.</p>
         </div>
 
-        <div class="guide-section">
-            <div class="guide-section-title">Subcontratação</div>
+        <div class="guide-panel">
+            <div class="guide-head">
+                <div>
+                    <div class="guide-kicker">Classificação de CIOT e Piso Mínimo</div>
+                    <div class="guide-title">TMS AGRO - Guia Rápido de Classificação de CIOT e Validação do Piso Mínimo de Frete</div>
+                </div>
+                <div class="guide-badge">Consulta rápida</div>
+            </div>
+
             <div class="guide-grid">
                 <div class="guide-card">
-                    <div class="guide-card-title">ETC -> TAC</div>
-                    <p>Gera CIOT | Lotação | ETC contratante é responsável pelo registro.</p>
-                </div>
-                <div class="guide-card">
-                    <div class="guide-card-title">ETC -> ETC</div>
-                    <p>Gera CIOT | Lotação | ETC que executará o transporte é responsável.</p>
-                </div>
-                <div class="guide-card">
-                    <div class="guide-card-title">ETC -> ETC -> TAC</div>
-                    <p>Gera CIOT | Lotação | Responsabilidade acompanha a execução efetiva.</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="guide-section">
-            <div class="guide-section-title">Fluxo Simplificado</div>
-            <div class="guide-flow">
-                <div class="guide-flow-card">
-                    <strong>Existe mais de um contratante?</strong>
-                    <div class="guide-flow-text">
-                        SIM -> CIOT Fracionado<br>
-                        NÃO -> CIOT Lotação
+                    <div class="guide-card-title">CIOT Lotação</div>
+                    <p>Quando existir apenas um contratante da operação de transporte.</p>
+                    <ul class="guide-list">
+                        <li>Um embarcador e uma entrega.</li>
+                        <li>Um embarcador e múltiplas entregas.</li>
+                        <li>Um embarcador e múltiplas coletas.</li>
+                        <li>ETC contratando TAC.</li>
+                        <li>ETC contratando outra ETC.</li>
+                    </ul>
+                    <div class="guide-note">
+                        Múltiplas entregas ou coletas não alteram a classificação para Fracionado quando houver apenas um contratante.
                     </div>
                 </div>
-                <div class="guide-flow-card">
-                    <strong>Validação do Piso Mínimo</strong>
-                    <div class="guide-flow-text">
-                        Todos os critérios atendidos -> Valida Piso<br>
-                        Qualquer critério não atendido -> Não valida Piso automaticamente
+
+                <div class="guide-card">
+                    <div class="guide-card-title">CIOT Fracionado</div>
+                    <p>Quando houver mais de um contratante vinculado à mesma operação.</p>
+                    <ul class="guide-list">
+                        <li>Mercadorias de vários embarcadores na mesma viagem.</li>
+                        <li>Operação de distribuição consolidada de diversos clientes.</li>
+                        <li>Coletas de diferentes contratantes.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="guide-section">
+                <div class="guide-section-title">Múltiplas Entregas</div>
+                <p class="guide-flow-text">
+                    Mesmo com um único contratante e múltiplos destinos, o tipo de CIOT permanece como <strong>Lotação</strong>. Nesses casos, o Piso Mínimo <strong>não é validado automaticamente</strong>, pois múltiplos destinos afastam a validação.
+                </p>
+            </div>
+
+            <div class="guide-section">
+                <div class="guide-section-title">Validação do Piso Mínimo</div>
+                <p class="guide-flow-text">
+                    A classificação do CIOT e a validação do Piso Mínimo são análises distintas. Uma operação pode ser Lotação e, ainda assim, não ter validação automática do Piso Mínimo.
+                </p>
+
+                <div class="criteria-grid">
+                    <div class="criteria-pill">Contratante único</div>
+                    <div class="criteria-pill">Contrato único</div>
+                    <div class="criteria-pill">Veículo exclusivo</div>
+                    <div class="criteria-pill">Origem única</div>
+                    <div class="criteria-pill">Destino único</div>
+                    <div class="criteria-pill">Documento fiscal único</div>
+                </div>
+
+                <div class="guide-note">
+                    Haverá validação do Piso somente quando todos os requisitos forem atendidos simultaneamente.
+                </div>
+
+                <ul class="guide-list">
+                    <li>Não haverá validação automática em operações com múltiplas entregas ou múltiplas coletas.</li>
+                    <li>Também não haverá validação automática com múltiplos CT-es, múltiplas NF-es, mais de um contratante ou operações classificadas como Fracionadas.</li>
+                </ul>
+            </div>
+
+            <div class="guide-section">
+                <div class="guide-section-title">Subcontratação</div>
+                <div class="guide-grid">
+                    <div class="guide-card">
+                        <div class="guide-card-title">ETC -> TAC</div>
+                        <p>Gera CIOT | Lotação | ETC contratante é responsável pelo registro.</p>
+                    </div>
+                    <div class="guide-card">
+                        <div class="guide-card-title">ETC -> ETC</div>
+                        <p>Gera CIOT | Lotação | ETC que executará o transporte é responsável.</p>
+                    </div>
+                    <div class="guide-card">
+                        <div class="guide-card-title">ETC -> ETC -> TAC</div>
+                        <p>Gera CIOT | Lotação | Responsabilidade acompanha a execução efetiva.</p>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <div class="guide-section">
-            <div class="guide-section-title">Resumo</div>
-            <div class="guide-table-wrap">
-                <table class="guide-table">
-                    <thead>
-                        <tr>
-                            <th>Situação</th>
-                            <th>Tipo CIOT</th>
-                            <th>Validação Piso</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>1 contratante, 1 entrega</td>
-                            <td>Lotação</td>
-                            <td>Sim</td>
-                        </tr>
-                        <tr>
-                            <td>1 contratante, múltiplas entregas</td>
-                            <td>Lotação</td>
-                            <td>Não</td>
-                        </tr>
-                        <tr>
-                            <td>1 contratante, múltiplas coletas</td>
-                            <td>Lotação</td>
-                            <td>Não</td>
-                        </tr>
-                        <tr>
-                            <td>Vários contratantes</td>
-                            <td>Fracionado</td>
-                            <td>Não</td>
-                        </tr>
-                        <tr>
-                            <td>ETC -> TAC</td>
-                            <td>Lotação</td>
-                            <td>Depende dos critérios</td>
-                        </tr>
-                        <tr>
-                            <td>ETC -> ETC</td>
-                            <td>Lotação</td>
-                            <td>Depende dos critérios</td>
-                        </tr>
-                        <tr>
-                            <td>ETC -> ETC -> TAC</td>
-                            <td>Lotação</td>
-                            <td>Depende dos critérios</td>
-                        </tr>
-                    </tbody>
-                </table>
+            <div class="guide-section">
+                <div class="guide-section-title">Fluxo Simplificado</div>
+                <div class="guide-flow">
+                    <div class="guide-flow-card">
+                        <strong>Existe mais de um contratante?</strong>
+                        <div class="guide-flow-text">
+                            SIM -> CIOT Fracionado<br>
+                            NÃO -> CIOT Lotação
+                        </div>
+                    </div>
+                    <div class="guide-flow-card">
+                        <strong>Validação do Piso Mínimo</strong>
+                        <div class="guide-flow-text">
+                            Todos os critérios atendidos -> Valida Piso<br>
+                            Qualquer critério não atendido -> Não valida Piso automaticamente
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
 
-        <div class="guide-section">
-            <div class="guide-section-title">Base Legal</div>
-            <div class="guide-laws">
-                <div class="guide-law">Portaria SUROC nº 16/2026</div>
-                <div class="guide-law">Resolução ANTT nº 5.867/2020</div>
-                <div class="guide-law">Resolução ANTT nº 6.078/2026</div>
+            <div class="guide-section">
+                <div class="guide-section-title">Resumo</div>
+                <div class="guide-table-wrap">
+                    <table class="guide-table">
+                        <thead>
+                            <tr>
+                                <th>Situação</th>
+                                <th>Tipo CIOT</th>
+                                <th>Validação Piso</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>1 contratante, 1 entrega</td><td>Lotação</td><td>Sim</td></tr>
+                            <tr><td>1 contratante, múltiplas entregas</td><td>Lotação</td><td>Não</td></tr>
+                            <tr><td>1 contratante, múltiplas coletas</td><td>Lotação</td><td>Não</td></tr>
+                            <tr><td>Vários contratantes</td><td>Fracionado</td><td>Não</td></tr>
+                            <tr><td>ETC -> TAC</td><td>Lotação</td><td>Depende dos critérios</td></tr>
+                            <tr><td>ETC -> ETC</td><td>Lotação</td><td>Depende dos critérios</td></tr>
+                            <tr><td>ETC -> ETC -> TAC</td><td>Lotação</td><td>Depende dos critérios</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="guide-section">
+                <div class="guide-section-title">Base Legal</div>
+                <div class="guide-laws">
+                    <div class="guide-law">Portaria SUROC nº 16/2026</div>
+                    <div class="guide-law">Resolução ANTT nº 5.867/2020</div>
+                    <div class="guide-law">Resolução ANTT nº 6.078/2026</div>
+                </div>
             </div>
         </div>
     </div>
-</div>
+</section>
 
-
-<div class="reveal" id="faq">
-    <div class="section-label">Perguntas Frequentes</div>
-
-    <div class="faq-container">
-
-        <div class="faq-item">
-            <button class="faq-q">
-                Para emitir CIOT é necessário adequar a operação ao piso mínimo de frete?
-            </button>
-            <div class="faq-a">
-                <div class="faq-content">
-                    Sim. O piso mínimo de frete deve ser respeitado quando houver transporte rodoviário remunerado de cargas, contratado por viagem, utilizando veículo movido a diesel e caracterizado como operação de carga lotação. As administradoras validam o piso junto à ANTT antes da geração do CIOT.
-                </div>
-            </div>
+<!-- ============ FAQ ============ -->
+<section class="reveal" id="faq">
+    <div class="wrap">
+        <div class="sec-head">
+            <div class="sec-tag">Perguntas Frequentes</div>
+            <h2>Dúvidas comuns sobre CIOT, piso e emissão</h2>
+            <p>Clique em uma pergunta para ver a resposta. Use a busca acima para filtrar por tema.</p>
         </div>
 
-        <div class="faq-item">
-            <button class="faq-q">
-                É necessário emitir CIOT para um CT-e de complemento de frete?
-            </button>
-            <div class="faq-a">
-                <div class="faq-content">
-                    Não. Quando o CT-e complementar tem apenas a finalidade de ajustar valores de uma operação já vinculada a um CIOT válido, não é necessária a geração de um novo CIOT.
+        <div class="faq-container">
+            <div class="faq-item">
+                <button class="faq-q">Para emitir CIOT é necessário adequar a operação ao piso mínimo de frete?</button>
+                <div class="faq-a">
+                    <div class="faq-content">
+                        Sim. O piso mínimo de frete deve ser respeitado quando houver transporte rodoviário remunerado de cargas, contratado por viagem, utilizando veículo movido a diesel e caracterizado como operação de carga lotação. As administradoras validam o piso junto à ANTT antes da geração do CIOT.
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="faq-item">
-            <button class="faq-q">
-                Quando indicar operação de alto desempenho?
-            </button>
-            <div class="faq-a">
-                <div class="faq-content">
-                    Quando houver frota dedicada ou fidelizada, tempo total de carga e descarga de até três horas e responsabilidade do contratante pelas atividades de carregamento e descarregamento.<br><strong>Documentação:</strong> <a href="https://wiki.atua.com.br:8028/pt-br/Transportadora/CT-e/operacao-alto-desempenho" target="_blank" style="color:var(--orange); text-decoration:none;">Configurar Operação Alto Desempenho
+            <div class="faq-item">
+                <button class="faq-q">É necessário emitir CIOT para um CT-e de complemento de frete?</button>
+                <div class="faq-a">
+                    <div class="faq-content">
+                        Não. Quando o CT-e complementar tem apenas a finalidade de ajustar valores de uma operação já vinculada a um CIOT válido, não é necessária a geração de um novo CIOT.
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-q">Quando indicar operação de alto desempenho?</button>
+                <div class="faq-a">
+                    <div class="faq-content">
+                        Quando houver frota dedicada ou fidelizada, tempo total de carga e descarga de até três horas e responsabilidade do contratante pelas atividades de carregamento e descarregamento.<br><strong>Documentação:</strong> <a href="https://wiki.atua.com.br:8028/pt-br/Transportadora/CT-e/operacao-alto-desempenho" target="_blank" style="color:var(--orange); text-decoration:none;">Configurar Operação Alto Desempenho
 </a><br>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="faq-item">
-            <button class="faq-q">
-                Nos casos de CIOT para frota própria, o ICMS pode compor o valor do piso mínimo de frete?
-            </button>
-            <div class="faq-a">
-                <div class="faq-content">
-                    NÃO. Nos cenários de geração de CIOT para frota própria, o cálculo do piso mínimo de frete considera os valores vinculados à prestação de transporte informados no CT-e, desconsiderando os valores referentes ao ICMS. Dessa forma, o imposto não compõe a base utilizada para validação do frete mínimo perante as regras aplicáveis ao CIOT e à ANTT.
+            <div class="faq-item">
+                <button class="faq-q">Nos casos de CIOT para frota própria, o ICMS pode compor o valor do piso mínimo de frete?</button>
+                <div class="faq-a">
+                    <div class="faq-content">
+                        NÃO. Nos cenários de geração de CIOT para frota própria, o cálculo do piso mínimo de frete considera os valores vinculados à prestação de transporte informados no CT-e, desconsiderando os valores referentes ao ICMS. Dessa forma, o imposto não compõe a base utilizada para validação do frete mínimo perante as regras aplicáveis ao CIOT e à ANTT.
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="faq-item">
-            <button class="faq-q">
-                O pedágio pode compor o piso mínimo de frete?
-            </button>
-            <div class="faq-a">
-                <div class="faq-content">
-                    NÃO. O valor do Vale-Pedágio Obrigatório (VPO) não pode compor nem ser descontado do valor do frete devido ao transportador. Quando houver pedágio na operação, ele deve ser tratado conforme a Lei nº 10.209/2001 e regulamentações aplicáveis, sem reduzir ou complementar o valor do piso mínimo do frete. Ou seja, o vale-pedágio é um valor separado do frete, devendo ser gerado por meio de fornecedor homologado e disponibilizado de forma antecipada ao transportador.
+            <div class="faq-item">
+                <button class="faq-q">O pedágio pode compor o piso mínimo de frete?</button>
+                <div class="faq-a">
+                    <div class="faq-content">
+                        NÃO. O valor do Vale-Pedágio Obrigatório (VPO) não pode compor nem ser descontado do valor do frete devido ao transportador. Quando houver pedágio na operação, ele deve ser tratado conforme a Lei nº 10.209/2001 e regulamentações aplicáveis, sem reduzir ou complementar o valor do piso mínimo do frete. Ou seja, o vale-pedágio é um valor separado do frete, devendo ser gerado por meio de fornecedor homologado e disponibilizado de forma antecipada ao transportador.
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="faq-item">
-            <button class="faq-q">
-                Como é gerado o KM rodado considerado pela ANTT?
-            </button>
-            <div class="faq-a">
-                <div class="faq-content">
-                    A ANTT calcula e roteiriza a quilometragem da operação com base nos dados de origem e destino informados no registro da operação de transporte. Esse cálculo pode considerar informações como CEP, código IBGE do município ou coordenadas de latitude e longitude. Para definição do trajeto e da distância percorrida, é utilizada a tecnologia de roteirização baseada no Google Maps, que determina o KM considerado para validação da operação e aplicação das regras relacionadas ao frete e CIOT.
+            <div class="faq-item">
+                <button class="faq-q">Como é gerado o KM rodado considerado pela ANTT?</button>
+                <div class="faq-a">
+                    <div class="faq-content">
+                        A ANTT calcula e roteiriza a quilometragem da operação com base nos dados de origem e destino informados no registro da operação de transporte. Esse cálculo pode considerar informações como CEP, código IBGE do município ou coordenadas de latitude e longitude. Para definição do trajeto e da distância percorrida, é utilizada a tecnologia de roteirização baseada no Google Maps, que determina o KM considerado para validação da operação e aplicação das regras relacionadas ao frete e CIOT.
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="faq-item">
-            <button class="faq-q">
-                Com as novas regras do CIOT mudou alguma regra sobre o Vale-Pedágio?
-            </button>
-            <div class="faq-a">
-                <div class="faq-content">
-                    NÃO. O Vale-Pedágio Obrigatório (VPO) foi instituído pela Lei nº 10.209, de 23 de março de 2001, tornando obrigatória a antecipação do valor do pedágio pelo contratante do transporte rodoviário de cargas. Dessa forma, a obrigatoriedade do vale-pedágio não foi alterada pelas regras do CIOT. O embarcador ou equiparado e, na ausência destes, a própria transportadora, conforme o cenário operacional, continua responsável pela aquisição e geração antecipada do vale-pedágio, com o devido destaque da informação no MDF-e.
+            <div class="faq-item">
+                <button class="faq-q">Com as novas regras do CIOT mudou alguma regra sobre o Vale-Pedágio?</button>
+                <div class="faq-a">
+                    <div class="faq-content">
+                        NÃO. O Vale-Pedágio Obrigatório (VPO) foi instituído pela Lei nº 10.209, de 23 de março de 2001, tornando obrigatória a antecipação do valor do pedágio pelo contratante do transporte rodoviário de cargas. Dessa forma, a obrigatoriedade do vale-pedágio não foi alterada pelas regras do CIOT. O embarcador ou equiparado e, na ausência destes, a própria transportadora, conforme o cenário operacional, continua responsável pela aquisição e geração antecipada do vale-pedágio, com o devido destaque da informação no MDF-e.
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="faq-item">
-            <button class="faq-q">
-                Nos casos em que subcontrato outro transportador e possuo vários CT-es para transportar na mesma operação, como devo proceder?
-            </button>
-            <div class="faq-a">
-                <div class="faq-content">
-                    Nestes cenários, orientamos a utilização do processo de embarque disponível no sistema. O procedimento consiste em iniciar a operação vinculando os CT-es ao embarque e, no último CT-e da operação, gerar o contrato de frete e realizar a emissão do CIOT correspondente. Dessa forma, toda a operação permanece consolidada em um único registro, garantindo a correta validação do frete, da quilometragem e das regras aplicáveis pela ANTT e pela administradora de pagamento.<br><br><strong>Documentação:</strong> <a href="https://wiki.atua.com.br:8028/pt-br/Transportadora/CT-e/Emissao_de_CT-e_por_embarque" target="_blank" style="color:var(--orange); text-decoration:none;">Emissão CT-e por Embarque</a><br><strong>Vídeo:</strong> <a href="https://www.youtube.com/watch?v=kUcjJI2vKNo&feature=youtu.be" target="_blank" style="color:var(--orange); text-decoration:none;">YouTube - Incluir / Excluir CTRC do Embarque</a>
+            <div class="faq-item">
+                <button class="faq-q">Nos casos em que subcontrato outro transportador e possuo vários CT-es para transportar na mesma operação, como devo proceder?</button>
+                <div class="faq-a">
+                    <div class="faq-content">
+                        Nestes cenários, orientamos a utilização do processo de embarque disponível no sistema. O procedimento consiste em iniciar a operação vinculando os CT-es ao embarque e, no último CT-e da operação, gerar o contrato de frete e realizar a emissão do CIOT correspondente. Dessa forma, toda a operação permanece consolidada em um único registro, garantindo a correta validação do frete, da quilometragem e das regras aplicáveis pela ANTT e pela administradora de pagamento.<br><br><strong>Documentação:</strong> <a href="https://wiki.atua.com.br:8028/pt-br/Transportadora/CT-e/Emissao_de_CT-e_por_embarque" target="_blank" style="color:var(--orange); text-decoration:none;">Emissão CT-e por Embarque</a><br><strong>Vídeo:</strong> <a href="https://www.youtube.com/watch?v=kUcjJI2vKNo&feature=youtu.be" target="_blank" style="color:var(--orange); text-decoration:none;">YouTube - Incluir / Excluir CTRC do Embarque</a>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="faq-item">
-            <button class="faq-q">
-                Em situações com frota própria e vários CT-es na mesma operação, como devo proceder?
-            </button>
-            <div class="faq-a">
-                <div class="faq-content">
-                    Nestes cenários, orientamos a utilização do processo de embarque disponível no sistema. O procedimento consiste em iniciar a operação vinculando os CT-es ao embarque e, no último CT-e da operação, indicar a ADM de pagamento CIOT/ANTT para então realizar a emissão do CIOT correspondente. Dessa forma, a operação permanece consolidada em um único registro, permitindo a correta validação da quilometragem, do frete e das regras aplicáveis ao CIOT e à ANTT.<br><br><strong>Documentação:</strong> <a href="https://wiki.atua.com.br:8028/pt-br/Atua-Store/Add-ons/ciot-antt-frota" target="_blank" style="color:var(--orange); text-decoration:none;">CIOT ANTT Frota (item Emissão CT-e Embarque Frota)</a><br><strong>Vídeo:</strong> <a href="https://www.youtube.com/watch?v=SMHR3aI4TaU&feature=youtu.be" target="_blank" style="color:var(--orange); text-decoration:none;">YouTube - Emissão CT-e Embarque + CF + CIOT Frota</a>
+            <div class="faq-item">
+                <button class="faq-q">Em situações com frota própria e vários CT-es na mesma operação, como devo proceder?</button>
+                <div class="faq-a">
+                    <div class="faq-content">
+                        Nestes cenários, orientamos a utilização do processo de embarque disponível no sistema. O procedimento consiste em iniciar a operação vinculando os CT-es ao embarque e, no último CT-e da operação, indicar a ADM de pagamento CIOT/ANTT para então realizar a emissão do CIOT correspondente. Dessa forma, a operação permanece consolidada em um único registro, permitindo a correta validação da quilometragem, do frete e das regras aplicáveis ao CIOT e à ANTT.<br><br><strong>Documentação:</strong> <a href="https://wiki.atua.com.br:8028/pt-br/Atua-Store/Add-ons/ciot-antt-frota" target="_blank" style="color:var(--orange); text-decoration:none;">CIOT ANTT Frota (item Emissão CT-e Embarque Frota)</a><br><strong>Vídeo:</strong> <a href="https://www.youtube.com/watch?v=SMHR3aI4TaU&feature=youtu.be" target="_blank" style="color:var(--orange); text-decoration:none;">YouTube - Emissão CT-e Embarque + CF + CIOT Frota</a>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="faq-item">
-            <button class="faq-q">
-                Como funciona a emissão de CIOT para cargas fracionadas/CT-e Fracionado?
-            </button>
-            <div class="faq-a">
-                <div class="faq-content">
-                    O sistema permite a emissão de operações com múltiplos CT-es através de embarques. Entretanto, a classificação da operação como lotação ou fracionada depende das informações da viagem e das regras aplicadas pela administradora do CIOT.<br><br>
-                    Por isso, é fundamental preencher corretamente quilometragem, valores e documentos da operação para garantir a validação adequada do CIOT.<br><br>
-                    <strong>Documentação:</strong> <a href="https://wiki.atua.com.br:8028/pt-br/Transportadora/CT-e/Emissao_de_CT-e_por_embarque" target="_blank" style="color:var(--orange); text-decoration:none;">Emissão CT-e por Embarque</a> / <a href="https://wiki.atua.com.br:8028/pt-br/Atua-Store/Add-ons/ciot-antt-frota" target="_blank" style="color:var(--orange); text-decoration:none;">CIOT ANTT Frota (item Emissão CT-e Embarque Frota)</a><br>
-                    <strong>Vídeo:</strong> <a href="https://www.youtube.com/watch?v=kUcjJI2vKNo" target="_blank" style="color:var(--orange); text-decoration:none;">YouTube - Emissão do CT-e com Embarque</a> / <a href="https://www.youtube.com/watch?v=SMHR3aI4TaU" target="_blank" style="color:var(--orange); text-decoration:none;">YouTube - Emissão CT-e Embarque + CF + CIOT Frota</a>
+            <div class="faq-item">
+                <button class="faq-q">Como funciona a emissão de CIOT para cargas fracionadas/CT-e Fracionado?</button>
+                <div class="faq-a">
+                    <div class="faq-content">
+                        O sistema permite a emissão de operações com múltiplos CT-es através de embarques. Entretanto, a classificação da operação como lotação ou fracionada depende das informações da viagem e das regras aplicadas pela administradora do CIOT.<br><br>
+                        Por isso, é fundamental preencher corretamente quilometragem, valores e documentos da operação para garantir a validação adequada do CIOT.<br><br>
+                        <strong>Documentação:</strong> <a href="https://wiki.atua.com.br:8028/pt-br/Transportadora/CT-e/Emissao_de_CT-e_por_embarque" target="_blank" style="color:var(--orange); text-decoration:none;">Emissão CT-e por Embarque</a> / <a href="https://wiki.atua.com.br:8028/pt-br/Atua-Store/Add-ons/ciot-antt-frota" target="_blank" style="color:var(--orange); text-decoration:none;">CIOT ANTT Frota (item Emissão CT-e Embarque Frota)</a><br>
+                        <strong>Vídeo:</strong> <a href="https://www.youtube.com/watch?v=kUcjJI2vKNo" target="_blank" style="color:var(--orange); text-decoration:none;">YouTube - Emissão do CT-e com Embarque</a> / <a href="https://www.youtube.com/watch?v=SMHR3aI4TaU" target="_blank" style="color:var(--orange); text-decoration:none;">YouTube - Emissão CT-e Embarque + CF + CIOT Frota</a>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="faq-item">
-            <button class="faq-q">
-                O que é considerado como informações básicas para a geração de CIOT?
-            </button>
-            <div class="faq-a">
-                <div class="faq-content">
-                    As informações mínimas necessárias para a geração do CIOT incluem:<br>
-                    - Dados do contratante e do contratado ou do subcontratante e subcontratado, quando aplicável;<br>
-                    - Dados do destinatário;<br>
-                    - Origem e destino da operação;<br>
-                    - Distância da rota;<br>
-                    - Tipo e quantidade da carga transportada;<br>
-                    - Valor do frete;<br>
-                    - Forma de pagamento;<br>
-                    - Placas e dados dos veículos envolvidos na operação;<br>
-                    - Datas de início e término do transporte;<br>
-                    - Dados bancários do contratado ou definição da forma de pagamento utilizada.<br><br>
-                    Essas informações são utilizadas para o registro da operação de transporte, validação junto à ANTT e geração do CIOT pela administradora de pagamento.
+            <div class="faq-item">
+                <button class="faq-q">O que é considerado como informações básicas para a geração de CIOT?</button>
+                <div class="faq-a">
+                    <div class="faq-content">
+                        As informações mínimas necessárias para a geração do CIOT incluem:<br>
+                        - Dados do contratante e do contratado ou do subcontratante e subcontratado, quando aplicável;<br>
+                        - Dados do destinatário;<br>
+                        - Origem e destino da operação;<br>
+                        - Distância da rota;<br>
+                        - Tipo e quantidade da carga transportada;<br>
+                        - Valor do frete;<br>
+                        - Forma de pagamento;<br>
+                        - Placas e dados dos veículos envolvidos na operação;<br>
+                        - Datas de início e término do transporte;<br>
+                        - Dados bancários do contratado ou definição da forma de pagamento utilizada.<br><br>
+                        Essas informações são utilizadas para o registro da operação de transporte, validação junto à ANTT e geração do CIOT pela administradora de pagamento.
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="faq-item">
-            <button class="faq-q">
-                Em que situações de transporte é indispensável o piso mínimo de frete?
-            </button>
-            <div class="faq-a">
-                <div class="faq-content">
-                    O piso mínimo de frete deve ser aplicado quando houver transporte rodoviário remunerado de cargas, contratado por viagem, em âmbito nacional, realizado com veículo movido a diesel e caracterizado como operação de carga lotação. Nessas situações, o valor do frete deve respeitar os parâmetros definidos pela regulamentação vigente, observadas as hipóteses de exceção previstas pela ANTT.
+            <div class="faq-item">
+                <button class="faq-q">Em que situações de transporte é indispensável o piso mínimo de frete?</button>
+                <div class="faq-a">
+                    <div class="faq-content">
+                        O piso mínimo de frete deve ser aplicado quando houver transporte rodoviário remunerado de cargas, contratado por viagem, em âmbito nacional, realizado com veículo movido a diesel e caracterizado como operação de carga lotação. Nessas situações, o valor do frete deve respeitar os parâmetros definidos pela regulamentação vigente, observadas as hipóteses de exceção previstas pela ANTT.
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="faq-item">
-            <button class="faq-q">
-                Veículos de pequeno porte, como furgões, estão sujeitos à regra do piso mínimo?
-            </button>
-            <div class="faq-a">
-                <div class="faq-content">
-                    Depende da operação realizada. A aplicação do piso mínimo de frete não considera apenas o porte do veículo, mas principalmente as características da operação de transporte. Para enquadramento na regra, é necessário que haja transporte rodoviário remunerado de carga lotação e que o veículo utilizado seja movido a diesel. Dessa forma, veículos de pequeno porte, como furgões, podem estar sujeitos ao piso mínimo caso atendam a essas condições. Por outro lado, veículos movidos por outros combustíveis, como gasolina ou eletricidade, não se enquadram nas regras do piso mínimo previstas pela regulamentação da ANTT.
+            <div class="faq-item">
+                <button class="faq-q">Veículos de pequeno porte, como furgões, estão sujeitos à regra do piso mínimo?</button>
+                <div class="faq-a">
+                    <div class="faq-content">
+                        Depende da operação realizada. A aplicação do piso mínimo de frete não considera apenas o porte do veículo, mas principalmente as características da operação de transporte. Para enquadramento na regra, é necessário que haja transporte rodoviário remunerado de carga lotação e que o veículo utilizado seja movido a diesel. Dessa forma, veículos de pequeno porte, como furgões, podem estar sujeitos ao piso mínimo caso atendam a essas condições. Por outro lado, veículos movidos por outros combustíveis, como gasolina ou eletricidade, não se enquadram nas regras do piso mínimo previstas pela regulamentação da ANTT.
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="faq-item">
-            <button class="faq-q">
-                Há a possibilidade de dividir uma carga entre duas transportadoras e atender ao frete mínimo?
-            </button>
-            <div class="faq-a">
-                <div class="faq-content">
-                    Depende da forma como a operação será estruturada.
-                    Se cada transportadora assumir uma parte da operação e emitir seus próprios documentos, cada uma deverá realizar o cálculo do frete de forma individualizada e atender às exigências do piso mínimo de frete aplicáveis à sua participação na viagem. Na prática, isso significa que cada transportadora terá sua própria obrigação de pagamento, podendo resultar em um custo equivalente ao pagamento em duplicidade da operação.
-                    Caso a intenção seja apenas dividir o valor do frete entre duas transportadoras para uma mesma prestação de serviço, sem que cada uma assuma formalmente sua parte da operação e suas respectivas obrigações, isso não é permitido.
-                    Portanto, a resposta é: sim, desde que cada transportadora participe formalmente da prestação do serviço e cumpra individualmente as regras do frete mínimo. Caso contrário, a divisão não pode ser realizada.
+
+            <div class="faq-item">
+                <button class="faq-q">Há a possibilidade de dividir uma carga entre duas transportadoras e atender ao frete mínimo?</button>
+                <div class="faq-a">
+                    <div class="faq-content">
+                        Depende da forma como a operação será estruturada.
+                        Se cada transportadora assumir uma parte da operação e emitir seus próprios documentos, cada uma deverá realizar o cálculo do frete de forma individualizada e atender às exigências do piso mínimo de frete aplicáveis à sua participação na viagem. Na prática, isso significa que cada transportadora terá sua própria obrigação de pagamento, podendo resultar em um custo equivalente ao pagamento em duplicidade da operação.
+                        Caso a intenção seja apenas dividir o valor do frete entre duas transportadoras para uma mesma prestação de serviço, sem que cada uma assuma formalmente sua parte da operação e suas respectivas obrigações, isso não é permitido.
+                        Portanto, a resposta é: sim, desde que cada transportadora participe formalmente da prestação do serviço e cumpra individualmente as regras do frete mínimo. Caso contrário, a divisão não pode ser realizada.
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="faq-item">
-            <button class="faq-q">
-                Existe alguma contingência no sistema para geração de CIOT em caso de instabilidade da ANTT?
-            </button>
-            <div class="faq-a">
-                <div class="faq-content">
-                    Não existe uma contingência que permita ao sistema gerar um CIOT válido sem a validação dos serviços externos envolvidos no processo. Em casos de indisponibilidade da ANTT ou das ADMs, é necessário aguardar a normalização dos serviços ou seguir as orientações oficiais divulgadas pelos órgãos responsáveis.
+            <div class="faq-item">
+                <button class="faq-q">Existe alguma contingência no sistema para geração de CIOT em caso de instabilidade da ANTT?</button>
+                <div class="faq-a">
+                    <div class="faq-content">
+                        Não existe uma contingência que permita ao sistema gerar um CIOT válido sem a validação dos serviços externos envolvidos no processo. Em casos de indisponibilidade da ANTT ou das ADMs, é necessário aguardar a normalização dos serviços ou seguir as orientações oficiais divulgadas pelos órgãos responsáveis.
+                    </div>
                 </div>
             </div>
-        </div>
-
-    </div>
-</div>
-
-<div class="reveal" id="videos">
-    <div class="section-label">Centro de Vídeos</div>
-    <p class="videos-intro">Tutoriais em vídeo organizados por tema. Clique em qualquer card para assistir.</p>
-
-    <div class="video-group">
-        <div class="video-group-title">Primeiros passos <span class="vg-count">1 vídeo</span></div>
-        <div class="video-grid">
-            <a class="video-card" href="https://www.youtube.com/watch?v=awI0V_lGkqE" target="_blank" rel="noopener noreferrer">
-                <div class="video-thumb">
-                    <img src="https://img.youtube.com/vi/awI0V_lGkqE/hqdefault.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
-                    <span class="video-platform">▶ YouTube</span>
-                    <span class="video-play" aria-hidden="true">▶</span>
-                </div>
-                <div class="video-info">
-                    <strong>Contratação do Add-on</strong>
-                    <span class="video-meta">Assistir no YouTube ↗</span>
-                </div>
-            </a>
         </div>
     </div>
+</section>
 
-    <div class="video-group">
-        <div class="video-group-title">CIOT Frota Própria <span class="vg-count">3 vídeos</span></div>
-        <div class="video-grid">
-            <a class="video-card" href="https://youtu.be/eNC7BwPVGn8" target="_blank" rel="noopener noreferrer">
-                <div class="video-thumb">
-                    <img src="https://img.youtube.com/vi/eNC7BwPVGn8/hqdefault.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
-                    <span class="video-platform">▶ YouTube</span>
-                    <span class="video-play" aria-hidden="true">▶</span>
-                </div>
-                <div class="video-info">
-                    <strong>Emissão de CIOT Frota com Contrato de Frete</strong>
-                    <span class="video-meta">Assistir no YouTube ↗</span>
-                </div>
-            </a>
-            <a class="video-card" href="https://youtu.be/siTmSH5v3pM" target="_blank" rel="noopener noreferrer">
-                <div class="video-thumb">
-                    <img src="https://img.youtube.com/vi/siTmSH5v3pM/hqdefault.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
-                    <span class="video-platform">▶ YouTube</span>
-                    <span class="video-play" aria-hidden="true">▶</span>
-                </div>
-                <div class="video-info">
-                    <strong>Emissão de CIOT Frota sem Contrato de Frete</strong>
-                    <span class="video-meta">Assistir no YouTube ↗</span>
-                </div>
-            </a>
-            <a class="video-card" href="https://www.instagram.com/p/DYnOR2MiPQI/" target="_blank" rel="noopener noreferrer">
-                <div class="video-thumb ig">
-                    <span class="ig-glyph" aria-hidden="true">📸</span>
-                    <span class="video-platform">Instagram</span>
-                    <span class="video-play" aria-hidden="true">▶</span>
-                </div>
-                <div class="video-info">
-                    <strong>Explicativo sobre CIOT Frota Própria</strong>
-                    <span class="video-meta">Assistir no Instagram ↗</span>
-                </div>
-            </a>
-        </div>
-    </div>
-
-    <div class="video-group">
-        <div class="video-group-title">Emissão por Embarque <span class="vg-count">3 vídeos</span></div>
-        <div class="video-grid">
-            <a class="video-card" href="https://youtu.be/SMHR3aI4TaU" target="_blank" rel="noopener noreferrer">
-                <div class="video-thumb">
-                    <img src="https://img.youtube.com/vi/SMHR3aI4TaU/hqdefault.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
-                    <span class="video-platform">▶ YouTube</span>
-                    <span class="video-play" aria-hidden="true">▶</span>
-                </div>
-                <div class="video-info">
-                    <strong>Emissão CT-e Embarque + CF + CIOT Frota</strong>
-                    <span class="video-meta">Assistir no YouTube ↗</span>
-                </div>
-            </a>
-            <a class="video-card" href="https://youtu.be/kUcjJI2vKNo" target="_blank" rel="noopener noreferrer">
-                <div class="video-thumb">
-                    <img src="https://img.youtube.com/vi/kUcjJI2vKNo/hqdefault.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
-                    <span class="video-platform">▶ YouTube</span>
-                    <span class="video-play" aria-hidden="true">▶</span>
-                </div>
-                <div class="video-info">
-                    <strong>Emissão de CT-e com Embarque</strong>
-                    <span class="video-meta">Assistir no YouTube ↗</span>
-                </div>
-            </a>
-            <a class="video-card" href="https://youtu.be/yMbpdEDPnsw" target="_blank" rel="noopener noreferrer">
-                <div class="video-thumb">
-                    <img src="https://img.youtube.com/vi/yMbpdEDPnsw/hqdefault.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
-                    <span class="video-platform">▶ YouTube</span>
-                    <span class="video-play" aria-hidden="true">▶</span>
-                </div>
-                <div class="video-info">
-                    <strong>Incluir / Excluir CTRC do Embarque</strong>
-                    <span class="video-meta">Assistir no YouTube ↗</span>
-                </div>
-            </a>
-        </div>
-    </div>
-</div>
-
-<div class="important-box reveal">
-
-        <div class="important-title">
-            ⚠️ Importante
+<!-- ============ VÍDEOS ============ -->
+<section class="reveal" id="videos">
+    <div class="wrap">
+        <div class="sec-head">
+            <div class="sec-tag">Centro de Vídeos</div>
+            <h2>Tutoriais em vídeo</h2>
+            <p class="videos-intro">Tutoriais em vídeo organizados por tema. Clique em qualquer card para assistir.</p>
         </div>
 
-        <div class="important-text">
-            Prezado cliente, para melhor atendê-lo, solicitamos que sempre que houver necessidade de acionar o suporte, a demanda seja registrada via ticket e descrita com o
-            <strong>maior nível de detalhamento possível.</strong>
-            <br><br>
-É de fundamental importância informar dados como: documento ou processo envolvido, prints da tela com a situação apresentada, contexto da operação e quaisquer outros detalhes que possam influenciar na análise.
-Quanto mais completas forem as informações registradas, maior será a agilidade no entendimento do cenário e no atendimento da solicitação.        </div>
+        <div class="video-group">
+            <div class="video-group-title">Primeiros passos <span class="vg-count">1 vídeo</span></div>
+            <div class="video-grid">
+                <a class="video-card" href="https://www.youtube.com/watch?v=awI0V_lGkqE" target="_blank" rel="noopener noreferrer">
+                    <div class="video-thumb">
+                        <img src="https://img.youtube.com/vi/awI0V_lGkqE/hqdefault.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+                        <span class="video-platform">▶ YouTube</span>
+                        <span class="video-play" aria-hidden="true">▶</span>
+                    </div>
+                    <div class="video-info">
+                        <strong>Contratação do Add-on</strong>
+                        <span class="video-meta">Assistir no YouTube ↗</span>
+                    </div>
+                </a>
+            </div>
+        </div>
 
+        <div class="video-group">
+            <div class="video-group-title">CIOT Frota Própria <span class="vg-count">3 vídeos</span></div>
+            <div class="video-grid">
+                <a class="video-card" href="https://youtu.be/eNC7BwPVGn8" target="_blank" rel="noopener noreferrer">
+                    <div class="video-thumb">
+                        <img src="https://img.youtube.com/vi/eNC7BwPVGn8/hqdefault.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+                        <span class="video-platform">▶ YouTube</span>
+                        <span class="video-play" aria-hidden="true">▶</span>
+                    </div>
+                    <div class="video-info">
+                        <strong>Emissão de CIOT Frota com Contrato de Frete</strong>
+                        <span class="video-meta">Assistir no YouTube ↗</span>
+                    </div>
+                </a>
+                <a class="video-card" href="https://youtu.be/siTmSH5v3pM" target="_blank" rel="noopener noreferrer">
+                    <div class="video-thumb">
+                        <img src="https://img.youtube.com/vi/siTmSH5v3pM/hqdefault.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+                        <span class="video-platform">▶ YouTube</span>
+                        <span class="video-play" aria-hidden="true">▶</span>
+                    </div>
+                    <div class="video-info">
+                        <strong>Emissão de CIOT Frota sem Contrato de Frete</strong>
+                        <span class="video-meta">Assistir no YouTube ↗</span>
+                    </div>
+                </a>
+                <a class="video-card" href="https://www.instagram.com/p/DYnOR2MiPQI/" target="_blank" rel="noopener noreferrer">
+                    <div class="video-thumb ig">
+                        <span class="ig-glyph" aria-hidden="true">📸</span>
+                        <span class="video-platform">Instagram</span>
+                        <span class="video-play" aria-hidden="true">▶</span>
+                    </div>
+                    <div class="video-info">
+                        <strong>Explicativo sobre CIOT Frota Própria</strong>
+                        <span class="video-meta">Assistir no Instagram ↗</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div class="video-group">
+            <div class="video-group-title">Emissão por Embarque <span class="vg-count">3 vídeos</span></div>
+            <div class="video-grid">
+                <a class="video-card" href="https://youtu.be/SMHR3aI4TaU" target="_blank" rel="noopener noreferrer">
+                    <div class="video-thumb">
+                        <img src="https://img.youtube.com/vi/SMHR3aI4TaU/hqdefault.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+                        <span class="video-platform">▶ YouTube</span>
+                        <span class="video-play" aria-hidden="true">▶</span>
+                    </div>
+                    <div class="video-info">
+                        <strong>Emissão CT-e Embarque + CF + CIOT Frota</strong>
+                        <span class="video-meta">Assistir no YouTube ↗</span>
+                    </div>
+                </a>
+                <a class="video-card" href="https://youtu.be/kUcjJI2vKNo" target="_blank" rel="noopener noreferrer">
+                    <div class="video-thumb">
+                        <img src="https://img.youtube.com/vi/kUcjJI2vKNo/hqdefault.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+                        <span class="video-platform">▶ YouTube</span>
+                        <span class="video-play" aria-hidden="true">▶</span>
+                    </div>
+                    <div class="video-info">
+                        <strong>Emissão de CT-e com Embarque</strong>
+                        <span class="video-meta">Assistir no YouTube ↗</span>
+                    </div>
+                </a>
+                <a class="video-card" href="https://youtu.be/yMbpdEDPnsw" target="_blank" rel="noopener noreferrer">
+                    <div class="video-thumb">
+                        <img src="https://img.youtube.com/vi/yMbpdEDPnsw/hqdefault.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+                        <span class="video-platform">▶ YouTube</span>
+                        <span class="video-play" aria-hidden="true">▶</span>
+                    </div>
+                    <div class="video-info">
+                        <strong>Incluir / Excluir CTRC do Embarque</strong>
+                        <span class="video-meta">Assistir no YouTube ↗</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div class="important-box" style="margin-top:8px;">
+            <div class="important-title">⚠️ Importante</div>
+            <div class="important-text">
+                Prezado cliente, para melhor atendê-lo, solicitamos que sempre que houver necessidade de acionar o suporte, a demanda seja registrada via ticket e descrita com o
+                <strong>maior nível de detalhamento possível.</strong>
+                <br><br>
+                É de fundamental importância informar dados como: documento ou processo envolvido, prints da tela com a situação apresentada, contexto da operação e quaisquer outros detalhes que possam influenciar na análise. Quanto mais completas forem as informações registradas, maior será a agilidade no entendimento do cenário e no atendimento da solicitação.
+            </div>
+        </div>
     </div>
+</section>
 
 </main>
 
-</div>
+<footer class="site-footer">
+    <div class="wrap">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <span class="brand-mark">CIOT <b>ANTT</b></span>
+                <p class="footer-about">Portal de apoio às adequações do CIOT ANTT para Frota Própria: regras operacionais, guia de classificação, validação do piso mínimo de frete, perguntas frequentes e vídeos.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Navegação</h4>
+                <ul>
+                    <li><a href="#ajuda">Buscar dúvida</a></li>
+                    <li><a href="#contratacao">Contratação</a></li>
+                    <li><a href="#guia">Guia TMS Agro</a></li>
+                    <li><a href="#faq">Perguntas Frequentes</a></li>
+                    <li><a href="#videos">Vídeos</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Legislação</h4>
+                <ul>
+                    <li><a href="https://www.gov.br/antt/pt-br/assuntos/cargas/ciot-para-todos-1/perguntas-frequentes" target="_blank" rel="noopener noreferrer">Perguntas Frequentes ANTT ↗</a></li>
+                    <li><a href="https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2026/mpv/mpv1343.htm" target="_blank" rel="noopener noreferrer">MP nº 1.343/2026 ↗</a></li>
+                    <li><a href="https://anttlegis.antt.gov.br/action/ActionDatalegis.php?acao=abrirTextoAto&tipo=POR&numeroAto=00000006&seqAto=000&valorAno=2026&orgao=SUROC/ANTT/MT&cod_modulo=623&cod_menu=9230" target="_blank" rel="noopener noreferrer">Portaria SUROC nº 6/2026 ↗</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>CIOT ANTT — Regras Operacionais</span>
+            <span>Desenvolvido por <b>NSTECH</b></span>
+        </div>
+    </div>
+</footer>
 
 <button type="button" class="to-top" id="toTop" aria-label="Voltar ao topo" title="Voltar ao topo">↑</button>
 
 <script>
-
 (function(){
     'use strict';
 
@@ -2425,8 +1461,65 @@ Quanto mais completas forem as informações registradas, maior será a agilidad
         }, {rootMargin:'-45% 0px -50% 0px', threshold:0});
         sections.forEach(sec => spy.observe(sec));
     }
-})();
 
+    /* ---------- Menu mobile ---------- */
+    const navToggle = document.getElementById('navToggle');
+    const siteNav = document.getElementById('siteNav');
+    if(navToggle && siteNav){
+        navToggle.addEventListener('click', () => {
+            const open = siteNav.classList.toggle('open');
+            navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+            navToggle.textContent = open ? '✕' : '≡';
+        });
+        siteNav.querySelectorAll('a').forEach(a => {
+            a.addEventListener('click', () => {
+                siteNav.classList.remove('open');
+                navToggle.setAttribute('aria-expanded', 'false');
+                navToggle.textContent = '≡';
+            });
+        });
+    }
+
+    /* ---------- Barra de progresso de scroll ---------- */
+    const progress = document.getElementById('scrollProgress');
+    if(progress){
+        const atualizaProgresso = () => {
+            const h = document.documentElement;
+            const max = h.scrollHeight - h.clientHeight;
+            const pct = max > 0 ? (h.scrollTop / max) * 100 : 0;
+            progress.style.width = pct + '%';
+        };
+        window.addEventListener('scroll', atualizaProgresso, {passive:true});
+        atualizaProgresso();
+    }
+
+    /* ---------- Micro-interações (parallax do hero + brilho do cursor) ---------- */
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const hero = document.querySelector('.hero');
+    const glow = document.getElementById('cursorGlow');
+    const fine = window.matchMedia('(pointer: fine)').matches;
+
+    if(!prefersReduced && fine){
+        let raf = null, mx = 0, my = 0;
+        window.addEventListener('pointermove', e => {
+            mx = e.clientX; my = e.clientY;
+            if(raf) return;
+            raf = requestAnimationFrame(() => {
+                raf = null;
+                if(glow){
+                    glow.style.opacity = '1';
+                    glow.style.transform = 'translate3d(' + (mx - 260) + 'px,' + (my - 260) + 'px,0)';
+                }
+                if(hero){
+                    const cx = (mx / window.innerWidth - .5);
+                    const cy = (my / window.innerHeight - .5);
+                    hero.style.setProperty('--grid-x', (cx * 16) + 'px');
+                    hero.style.setProperty('--grid-y', (cy * 16) + 'px');
+                }
+            });
+        }, {passive:true});
+    }
+})();
 </script>
 
 </body>
