@@ -10,7 +10,20 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<script>document.documentElement.className += ' js';</script>
+<link rel="preload" as="image" href="atua-logo.png">
+<script>
+(function(){
+    var h = document.documentElement;
+    h.className += ' js';
+    /* Abertura com a logo: aparece uma vez por sessão do navegador.
+       Para rever, abra o site em uma nova aba ou use o endereço com ?intro no final. */
+    try{
+        var rever = /[?&]intro(=|&|$)/.test(location.search);
+        if(sessionStorage.getItem('ciot-intro') && !rever) h.className += ' sem-intro';
+        else sessionStorage.setItem('ciot-intro', '1');
+    }catch(e){}
+})();
+</script>
 
 <style>
 :root{
@@ -101,6 +114,57 @@ input:focus-visible,
 .skip-link:focus{left:0;}
 
 .wrap{max-width:var(--maxw); margin:0 auto; padding:0 clamp(18px,4vw,32px);}
+
+/* ============ ABERTURA COM A LOGO ============ */
+/* Só aparece com JS ativo, sem preferência por menos movimento e uma vez por sessão.
+   A saída é feita só em CSS: se algum script falhar, a abertura não trava a página. */
+.intro{display:none;}
+@media(prefers-reduced-motion:no-preference){
+    .js:not(.sem-intro) .intro{
+        position:fixed; inset:0; z-index:2000;
+        display:flex; flex-direction:column; align-items:center; justify-content:center; gap:24px;
+        background:radial-gradient(ellipse 60% 50% at 50% 42%, rgba(255,61,3,.16) 0%, transparent 65%), #000;
+        border-bottom:5px solid var(--laranja);
+        animation:intro-sai .6s cubic-bezier(.7,0,.2,1) 1.8s forwards;
+    }
+    /* O conteúdo do topo espera a abertura terminar para entrar */
+    .js:not(.sem-intro) .hero-boot{animation-delay:calc(var(--d,0ms) + 1950ms);}
+}
+.intro-logo{position:relative; width:min(420px,64vw); aspect-ratio:903 / 240;}
+.intro-logo img{display:block; max-width:none;}
+/* Símbolo: a faixa esquerda da logo (36,102% da largura), montada em 12 peças */
+.intro-mark{position:absolute; left:0; top:0; width:36.102%; height:100%;}
+.intro-cell{
+    position:absolute; overflow:hidden;
+    left:calc(var(--c) * 25%); top:calc(var(--r) * 33.3333%); width:25%; height:33.3334%;
+    opacity:0; transform:translate(-18px,18px) scale(.84);
+    animation:intro-entra .5s var(--ease) forwards, intro-some 1ms linear forwards;
+    animation-delay:calc(120ms + (var(--c) + 2 - var(--r)) * 60ms), .98s;
+}
+.intro-cell img{
+    position:absolute; left:calc(var(--c) * -100%); top:calc(var(--r) * -100%);
+    width:calc(100% / .090255); height:300%;
+}
+/* Logo inteira por cima: o símbolo troca as peças pela imagem única; a palavra "atua" é revelada da esquerda para a direita */
+.intro-inteira{position:absolute; inset:0; width:100%; height:100%;}
+.intro-simbolo{clip-path:inset(0 63.898% 0 0); opacity:0; animation:intro-aparece 1ms linear .98s forwards;}
+.intro-palavra{clip-path:inset(0 63.898% 0 36.102%); animation:intro-palavra .7s cubic-bezier(.2,.7,.2,1) .6s forwards;}
+.intro-by{
+    font-family:var(--corpo); font-size:clamp(13px,1.6vw,16px); letter-spacing:.34em; color:var(--ink-dim);
+    opacity:0; transform:translateY(8px); animation:intro-entra .5s var(--ease) 1.05s forwards;
+}
+.intro-by b{color:#fff; font-weight:700;}
+.intro-linha{width:min(180px,40vw); height:2px; border-radius:2px; background:var(--border-soft); overflow:hidden;}
+.intro-linha i{
+    display:block; height:100%; background:var(--laranja); transform:scaleX(0); transform-origin:left;
+    animation:intro-barra 1.5s cubic-bezier(.4,0,.2,1) .2s forwards;
+}
+@keyframes intro-entra{to{opacity:1; transform:none;}}
+@keyframes intro-some{to{opacity:0;}}
+@keyframes intro-aparece{to{opacity:1;}}
+@keyframes intro-palavra{to{clip-path:inset(0 0 0 36.102%);}}
+@keyframes intro-barra{to{transform:scaleX(1);}}
+@keyframes intro-sai{to{transform:translateY(-100%); visibility:hidden;}}
 
 /* ============ SCROLL PROGRESS ============ */
 .scroll-progress{
@@ -569,6 +633,30 @@ mark.hl{background:rgba(255,61,3,.26); color:#fff; border-radius:3px; padding:0 
 </style>
 </head>
 <body>
+
+<!-- Abertura: logo da Atua montada em peças, depois "by nstech", e a cortina sobe -->
+<div class="intro" id="intro" aria-hidden="true">
+    <div class="intro-logo">
+        <div class="intro-mark">
+            <span class="intro-cell" style="--c:0;--r:0"><img src="atua-logo.png" alt=""></span>
+            <span class="intro-cell" style="--c:1;--r:0"><img src="atua-logo.png" alt=""></span>
+            <span class="intro-cell" style="--c:2;--r:0"><img src="atua-logo.png" alt=""></span>
+            <span class="intro-cell" style="--c:3;--r:0"><img src="atua-logo.png" alt=""></span>
+            <span class="intro-cell" style="--c:0;--r:1"><img src="atua-logo.png" alt=""></span>
+            <span class="intro-cell" style="--c:1;--r:1"><img src="atua-logo.png" alt=""></span>
+            <span class="intro-cell" style="--c:2;--r:1"><img src="atua-logo.png" alt=""></span>
+            <span class="intro-cell" style="--c:3;--r:1"><img src="atua-logo.png" alt=""></span>
+            <span class="intro-cell" style="--c:0;--r:2"><img src="atua-logo.png" alt=""></span>
+            <span class="intro-cell" style="--c:1;--r:2"><img src="atua-logo.png" alt=""></span>
+            <span class="intro-cell" style="--c:2;--r:2"><img src="atua-logo.png" alt=""></span>
+            <span class="intro-cell" style="--c:3;--r:2"><img src="atua-logo.png" alt=""></span>
+        </div>
+        <img class="intro-inteira intro-simbolo" src="atua-logo.png" alt="">
+        <img class="intro-inteira intro-palavra" src="atua-logo.png" alt="">
+    </div>
+    <div class="intro-by">by <b>nstech</b></div>
+    <div class="intro-linha"><i></i></div>
+</div>
 
 <div class="scroll-progress" id="scrollProgress"></div>
 <div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
@@ -1189,7 +1277,16 @@ mark.hl{background:rgba(255,61,3,.26); color:#fff; border-radius:3px; padding:0 
 (function(){
     'use strict';
 
-    const normalize = s => s.toLowerCase().normalize('NFD').replace(/\p{Diacritic}/gu,'');
+    /* ---------- Abertura com a logo: clique ou tecla pula; ao terminar, sai do documento ---------- */
+    const intro = document.getElementById('intro');
+    if(intro){
+        const pularIntro = () => document.documentElement.classList.add('sem-intro');
+        intro.addEventListener('click', pularIntro);
+        document.addEventListener('keydown', pularIntro, {once:true});
+        intro.addEventListener('animationend', e => { if(e.animationName === 'intro-sai') intro.remove(); });
+    }
+
+    const normalize =s => s.toLowerCase().normalize('NFD').replace(/\p{Diacritic}/gu,'');
 
     /* Sinônimos/apelidos para busca (chaves já normalizadas: minúsculas, sem acento) */
     const SINONIMOS = {
