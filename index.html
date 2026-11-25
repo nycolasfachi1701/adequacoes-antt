@@ -212,7 +212,7 @@ input:focus-visible,
 .site-nav{display:flex; align-items:center; gap:4px;}
 .site-nav a{
     font-family:var(--mono); font-size:12px; letter-spacing:.03em; text-transform:uppercase;
-    color:var(--ink-dim); padding:9px 13px; border-radius:9px; position:relative;
+    color:var(--ink-dim); padding:9px 13px; border-radius:9px; position:relative; white-space:nowrap;
     transition:color .2s var(--ease), background .2s var(--ease);
 }
 .site-nav a:hover{color:var(--ink); background:var(--surface-2);}
@@ -470,7 +470,8 @@ mark.hl{background:rgba(255,61,3,.26); color:#fff; border-radius:3px; padding:0 
 .guide-flow-card{
     background:var(--surface-3); border:1px solid var(--border-soft); border-radius:var(--radius); padding:20px;
 }
-.guide-flow-card strong{color:var(--ink); font-size:15px; display:block; margin-bottom:8px;}
+.guide-flow-card > strong{color:var(--ink); font-size:15px; display:block; margin-bottom:8px;}
+.guide-flow-card .guide-flow-text strong{color:var(--ink);}
 .guide-table-wrap{overflow-x:auto; border-radius:var(--radius); border:1px solid var(--border-soft);}
 .guide-table{width:100%; border-collapse:collapse; font-size:14px; min-width:460px;}
 .guide-table th{
@@ -491,6 +492,52 @@ mark.hl{background:rgba(255,61,3,.26); color:#fff; border-radius:3px; padding:0 
     0%{box-shadow:0 0 0 3px rgba(255,61,3,.5);}
     100%{box-shadow:0 0 0 3px rgba(255,61,3,0);}
 }
+
+/* ============ VALE-PEDÁGIO SEM CONTRATO DE FRETE ============ */
+.vp-top{display:grid; grid-template-columns:1.25fr 1fr; gap:22px; margin-top:26px; align-items:stretch;}
+.vp-player{
+    background:var(--preto); border:1px solid var(--border-soft); border-radius:var(--radius);
+    overflow:hidden; box-shadow:var(--shadow-sm); display:flex; flex-direction:column;
+}
+.vp-player video{width:100%; aspect-ratio:16/9; background:#000; display:block;}
+.vp-player-cap{
+    padding:12px 16px; font-family:var(--mono); font-size:11.5px; letter-spacing:.03em;
+    color:var(--ink-dim); display:flex; align-items:center; gap:9px; border-top:1px solid var(--border-soft);
+}
+.vp-player-cap::before{content:"▶"; color:var(--laranja);}
+.vp-answer{
+    background:rgba(255,61,3,.06); border:1px solid rgba(255,61,3,.28); border-left:4px solid var(--laranja);
+    border-radius:var(--radius); padding:24px; display:flex; flex-direction:column; gap:12px;
+}
+.vp-answer .vp-q{color:var(--ink-dim); font-size:14.5px; line-height:1.7;}
+.vp-answer .vp-a{font-family:var(--display); font-size:clamp(20px,2.4vw,26px); line-height:1.15; color:var(--ink);}
+.vp-answer .vp-a b{color:var(--laranja);}
+.vp-answer p{color:var(--ink-dim); font-size:14.5px; line-height:1.7;}
+.vp-answer strong{color:var(--ink);}
+.vp-answer .guide-note{margin-top:auto;}
+.guide-card.vp-answer:hover{transform:none; box-shadow:none; border-color:rgba(255,61,3,.28); border-left-color:var(--laranja);}
+.guide-card.vp-ok{border-top:3px solid var(--green);}
+.guide-card.vp-ok .guide-card-title{color:var(--green);}
+.guide-card.vp-ok .guide-list li::before{content:"✓"; color:var(--green);}
+.guide-card.vp-block{border-top:3px solid var(--red);}
+.guide-card.vp-block .guide-card-title{color:var(--red);}
+.guide-card.vp-block .guide-list li::before{content:"✕"; color:var(--red);}
+.guide-card .guide-flow-text{font-size:14px;}
+.vp-steps{counter-reset:vp; list-style:none; padding:0; display:flex; flex-direction:column; gap:10px; margin-top:4px;}
+.vp-steps li{
+    counter-increment:vp; position:relative; padding:2px 0 2px 40px;
+    color:var(--ink-dim); font-size:14.5px; line-height:1.65;
+}
+.vp-steps li::before{
+    content:counter(vp); position:absolute; left:0; top:0; width:27px; height:27px; border-radius:8px;
+    background:var(--surface-3); border:1px solid var(--laranja-escuro); color:var(--laranja-claro);
+    font-family:var(--mono); font-size:12px; font-weight:600; display:flex; align-items:center; justify-content:center;
+}
+.vp-steps li strong, .guide-list li strong, .guide-card p strong, .guide-note strong{color:var(--ink);}
+.vp-sub{
+    font-family:var(--display); font-size:16px; color:var(--ink); margin:22px 0 12px;
+}
+.vp-sub:first-child{margin-top:0;}
 
 /* ============ FAQ ============ */
 .faq-container{display:flex; flex-direction:column; gap:12px;}
@@ -539,6 +586,8 @@ mark.hl{background:rgba(255,61,3,.26); color:#fff; border-radius:3px; padding:0 
 .video-thumb img{width:100%; height:100%; object-fit:cover; transition:transform .4s var(--ease);}
 .video-card:hover .video-thumb img{transform:scale(1.05);}
 .video-thumb.ig{display:flex; align-items:center; justify-content:center; background:linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045);}
+.video-thumb.local{display:flex; align-items:center; justify-content:center; background:linear-gradient(135deg,var(--laranja-escuro),var(--laranja) 60%,var(--laranja-claro));}
+.video-thumb.local video{width:100%; height:100%; object-fit:cover; position:absolute; inset:0;}
 .ig-glyph{font-size:46px;}
 .video-platform{
     position:absolute; top:10px; left:10px; font-family:var(--mono); font-size:10.5px;
@@ -608,11 +657,19 @@ mark.hl{background:rgba(255,61,3,.26); color:#fff; border-radius:3px; padding:0 
 /* ============ RESPONSIVO ============ */
 @media(max-width:920px){
     .hero-inner{grid-template-columns:1fr; gap:36px;}
+    .vp-top{grid-template-columns:1fr;}
 }
-@media(max-width:780px){
-    .nav-toggle{display:inline-flex;}
+@media(max-width:1260px){
     .brand-sep,.brand-sub{display:none;}
+}
+@media(max-width:1100px){
     .nav-right .brand-logo{display:none;}
+    .site-nav a{padding:9px 10px;}
+    .site-nav a.active::after{left:10px; right:10px;}
+}
+@media(max-width:960px){
+    .nav-toggle{display:inline-flex;}
+    .nav-right .brand-logo{display:inline;}
     .site-nav{
         position:absolute; top:var(--header-h); left:0; right:0;
         flex-direction:column; align-items:stretch; gap:2px;
@@ -624,6 +681,8 @@ mark.hl{background:rgba(255,61,3,.26); color:#fff; border-radius:3px; padding:0 
     .site-nav.open{display:flex;}
     .site-nav a{padding:13px 14px; border-radius:10px;}
     .site-nav a.active::after{display:none;}
+}
+@media(max-width:780px){
     .flow-arrow{display:none;}
     .footer-grid{grid-template-columns:1fr; gap:28px;}
 }
@@ -673,6 +732,7 @@ mark.hl{background:rgba(255,61,3,.26); color:#fff; border-radius:3px; padding:0 
             <a href="#ajuda">Buscar dúvida</a>
             <a href="#contratacao">Contratação</a>
             <a href="#guia">Guia TMS Agro</a>
+            <a href="#vale-pedagio">Vale-Pedágio</a>
             <a href="#faq">Perguntas Frequentes</a>
             <a href="#videos">Vídeos</a>
         </nav>
@@ -720,7 +780,7 @@ mark.hl{background:rgba(255,61,3,.26); color:#fff; border-radius:3px; padding:0 
     <div class="wrap">
         <div class="help-center">
             <div class="help-title">Como podemos ajudar?</div>
-            <p class="help-subtitle">Busque por palavra-chave nas perguntas frequentes e no guia de classificação.</p>
+            <p class="help-subtitle">Busque por palavra-chave nas perguntas frequentes, no guia de classificação e no passo a passo do Vale-Pedágio.</p>
 
             <div class="search-wrapper">
                 <label for="faqSearch" class="skip-link">Buscar dúvida</label>
@@ -954,6 +1014,184 @@ mark.hl{background:rgba(255,61,3,.26); color:#fff; border-radius:3px; padding:0 
     </div>
 </section>
 
+<!-- ============ VALE-PEDÁGIO SEM CONTRATO DE FRETE ============ -->
+<section class="reveal" id="vale-pedagio">
+    <div class="wrap">
+        <div class="sec-head">
+            <div class="sec-tag">Novo Processo · Vale-Pedágio</div>
+            <h2>Vale-Pedágio no CT-e sem Contrato de Frete</h2>
+            <p>Para veículos da frota própria, o vale-pedágio pode ser informado ou comprado direto na emissão do CT-e e segue automaticamente para o MDF-e.</p>
+        </div>
+
+        <div class="guide-panel">
+            <div class="guide-head">
+                <div>
+                    <div class="guide-kicker">Frota Própria · CT-e · MDF-e</div>
+                    <div class="guide-title">Informar o vale-pedágio sem emitir Contrato de Frete</div>
+                </div>
+                <div class="guide-badge">Novo</div>
+            </div>
+
+            <div class="vp-top">
+                <div class="vp-player">
+                    <video controls preload="metadata" playsinline src="videos/vale-pedagio-sem-cf.mp4#t=0.5" aria-label="Vídeo: Vale-Pedágio no CT-e sem Contrato de Frete">
+                        Seu navegador não reproduz vídeos. <a href="videos/vale-pedagio-sem-cf.mp4">Baixe o vídeo</a>.
+                    </video>
+                    <div class="vp-player-cap">Vídeo do processo · Vale-Pedágio sem Contrato de Frete</div>
+                </div>
+
+                <div class="vp-answer guide-card" id="vp-duvida">
+                    <div class="guide-card-title">Preciso emitir Contrato de Frete só para o vale-pedágio?</div>
+                    <p class="vp-q">Transporto com veículo da <strong>frota própria</strong> e preciso informar o vale-pedágio no MDF-e. O vale pode ter sido antecipado pelo embarcador ou comprado por nós.</p>
+                    <div class="vp-a"><b>Não.</b> Informe ou compre o vale direto na emissão do CT-e.</div>
+                    <p>Ele segue automaticamente para o <strong>MDF-e</strong>, sem Contrato de Frete.</p>
+                    <div class="guide-note">Com Contrato de Frete, nada muda: o vale-pedágio continua sendo informado como antes.</div>
+                </div>
+            </div>
+
+            <div class="guide-section">
+                <div class="guide-section-title">Quando a opção fica disponível</div>
+                <p class="guide-flow-text">Na emissão do CT-e <strong>sem</strong> Contrato de Frete aparece a caixa <strong>Informar Vale Pedágio</strong>. Ela só fica liberada quando as duas condições valem juntas.</p>
+                <div class="guide-grid">
+                    <div class="guide-card vp-ok">
+                        <div class="guide-card-title">Caixa liberada</div>
+                        <ul class="guide-list">
+                            <li>O veículo é da <strong>frota própria</strong>;</li>
+                            <li>o <strong>Pedágio Empresa</strong> está como <strong>Incluso</strong>, <strong>Cobrar + Pedágio</strong> ou <strong>Pago na Tag</strong>.</li>
+                        </ul>
+                    </div>
+                    <div class="guide-card vp-block">
+                        <div class="guide-card-title">Caixa bloqueada</div>
+                        <ul class="guide-list">
+                            <li>Pedágio Empresa em branco ou em <strong>Trajeto s/ Pedágio</strong>;</li>
+                            <li>veículo de terceiro ou agregado.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="guide-section">
+                <div class="guide-section-title">1. Vale-pedágio já comprado ou antecipado pelo embarcador</div>
+                <ol class="vp-steps">
+                    <li>Na emissão do CT-e, preencha o <strong>Pedágio Empresa</strong> (Incluso, Cobrar + Pedágio ou Pago na Tag).</li>
+                    <li>Marque <strong>Informar Vale Pedágio</strong>. A área <strong>Vale Pedágio</strong> se abre.</li>
+                    <li>Selecione a <strong>administradora</strong> do vale-pedágio.</li>
+                    <li>Informe o <strong>Nr. Pedido / Nr. Recibo</strong>.</li>
+                    <li>Se quiser, preencha <strong>Quem Pagará o Vale Pedágio</strong> e <strong>Observação</strong>. O campo <strong>Vl. Antecipado (R$)</strong> aparece quando o valor antecipado está habilitado na sua configuração.</li>
+                    <li>Emita o CT-e normalmente.</li>
+                </ol>
+                <ul class="guide-list">
+                    <li>O <strong>Nr. Tag Pedágio</strong> vem do cadastro do cavalo e não pode ser alterado nessa tela.</li>
+                </ul>
+                <div class="guide-note">
+                    <strong>Pedágio antecipado na nota fiscal do embarcador:</strong> o sistema preenche tudo sozinho. Ele coloca o Pedágio Empresa em <strong>Cobrar + Pedágio</strong>, marca a caixa e preenche a administradora, o cartão e o número do recibo. Aparece um aviso de que esse pedágio <strong>não soma</strong> ao frete e não gera CT-e complementar.
+                </div>
+            </div>
+
+            <div class="guide-section">
+                <div class="guide-section-title">2. Comprar o vale-pedágio pela administradora</div>
+                <ol class="vp-steps">
+                    <li>Marque <strong>Informar Vale Pedágio</strong> e escolha a administradora.</li>
+                    <li>O sistema abre a janela <strong>Emissão de Vale-Pedágio</strong> daquela administradora. Antes de abrir, ele confere se estes campos estão preenchidos no CT-e: <strong>Data de Emissão</strong>, <strong>Quem Pagará o Frete</strong>, <strong>Veículo</strong>, <strong>Motorista</strong> e <strong>Proprietário Documento (ANTT)</strong>.</li>
+                    <li>Faça a compra na janela. Os dados do vale voltam para o CT-e.</li>
+                </ol>
+                <div class="guide-note">Depois da compra, a área fica travada, com o aviso de que o vale já foi emitido e os dados do pedágio não podem mais ser alterados.</div>
+                <div class="vp-sub">Administradoras com compra sem Contrato de Frete</div>
+                <div class="criteria-grid">
+                    <div class="criteria-pill">E-Frete</div>
+                    <div class="criteria-pill">Repom</div>
+                    <div class="criteria-pill">DBTrans</div>
+                    <div class="criteria-pill">Rodocred</div>
+                    <div class="criteria-pill">Pamcary</div>
+                    <div class="criteria-pill">PagBem</div>
+                    <div class="criteria-pill">Extratta</div>
+                    <div class="criteria-pill">TipBank</div>
+                    <div class="criteria-pill">FF</div>
+                    <div class="criteria-pill">TMov</div>
+                    <div class="criteria-pill">VectorPay</div>
+                    <div class="criteria-pill">Rodobank</div>
+                    <div class="criteria-pill">NDD Cargo</div>
+                    <div class="criteria-pill">NeexCargo</div>
+                </div>
+            </div>
+
+            <div class="guide-section">
+                <div class="guide-section-title">3. Emissão automática e semiautomática</div>
+                <p class="guide-flow-text">Na emissão automática, os dados do vale-pedágio vêm da <strong>Ordem de Carregamento</strong>:</p>
+                <ol class="vp-steps" style="margin-top:12px;">
+                    <li>Na <strong>Manutenção de Ordem de Carregamento</strong>, deixe <strong>Emitir Contrato de Frete = Não</strong>.</li>
+                    <li>No bloco <strong>Vale Pedágio</strong>, marque <strong>Informar Vale Pedágio</strong> e preencha os dados.</li>
+                </ol>
+                <p class="guide-flow-text" style="margin-top:14px;">O vale é gravado no CT-e quando o veículo é da frota própria e o pedágio da Ordem é diferente de <strong>Trajeto s/ Pedágio</strong>.</p>
+                <div class="guide-flow" style="margin-top:16px;">
+                    <div class="guide-flow-card">
+                        <strong>Com Nr. Pedido na Ordem</strong>
+                        <div class="guide-flow-text">O vale é tratado como <strong>antecipado pelo cliente</strong> e usa o valor informado na Ordem.</div>
+                    </div>
+                    <div class="guide-flow-card">
+                        <strong>Sem Nr. Pedido</strong>
+                        <div class="guide-flow-text">O valor é consultado na administradora quando ela é <strong>FF</strong> ou <strong>Rodobank</strong>. Nas demais, vale o valor de pedágio da Ordem.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="guide-section">
+                <div class="guide-section-title">4. MDF-e</div>
+                <p class="guide-flow-text">O vale-pedágio informado no CT-e sem Contrato de Frete <strong>vai automaticamente para o MDF-e</strong>, inclusive nos CT-es do mesmo embarque.</p>
+            </div>
+
+            <div class="guide-section">
+                <div class="guide-section-title">5. Alterar ou retirar o vale-pedágio</div>
+                <p class="guide-flow-text">Ao ajustar um CT-e que já tem vale, a caixa já vem marcada. Se você desmarcar a caixa e emitir de novo, o vale é retirado do CT-e. O lançamento financeiro dele também é estornado. Um vale já comprado pela integração fica travado na tela e não pode ser retirado dessa forma.</p>
+            </div>
+
+            <div class="guide-section">
+                <div class="guide-section-title">6. Taxa administrativa e lançamento no caixa</div>
+                <div class="guide-grid" style="margin-top:0;">
+                    <div class="guide-card">
+                        <div class="guide-card-title">Taxa administrativa</div>
+                        <p>Calculada sobre o valor do pedágio, com o percentual <strong>Taxa Adm. (%)</strong> do cadastro da administradora, na tela <strong>Manutenção de Emissor de Vale Pedágio</strong>.</p>
+                    </div>
+                    <div class="guide-card">
+                        <div class="guide-card-title">Lançamento no caixa</div>
+                        <p>Acontece na emissão do CT-e quando a autenticação da administradora para a filial está com <strong>Lançar Débito = Na emissão</strong> e tem um <strong>Caixa Financeiro</strong> escolhido, na tela <strong>Manutenção de Autenticação do Vale Pedágio</strong>. Com <strong>Na busca da fatura</strong>, nada é lançado na emissão.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="guide-section">
+                <div class="guide-section-title">O que fazer quando aparecer uma mensagem</div>
+                <div class="guide-table-wrap">
+                    <table class="guide-table">
+                        <thead>
+                            <tr>
+                                <th>Mensagem</th>
+                                <th>O que fazer</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Selecione o Vale Pedágio ou desmarque o campo Informar Vale Pedágio!</td><td>Escolha a administradora ou desmarque a caixa.</td></tr>
+                            <tr><td>Preencha o campo Data de Emissão / Quem Pagará o Frete / Veículo / Motorista / Proprietário Documento (ANTT)!</td><td>Preencha o campo indicado antes de escolher a administradora.</td></tr>
+                            <tr><td>Emissor de Vale Pedágio não está configurado corretamente!</td><td>Revise o cadastro da administradora em Manutenção de Emissor de Vale Pedágio.</td></tr>
+                            <tr><td>Erro(s) encontrado(s) na Solicitação do Vale Pedágio! / Nr. Vale Pedágio não gerado.</td><td>A administradora não emitiu o vale. Confira os dados e tente de novo.</td></tr>
+                            <tr><td>Preencha o campo Vale Pedágio! (Ordem de Carregamento)</td><td>Escolha a administradora no bloco Vale Pedágio da Ordem.</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="important-box">
+            <div class="important-title">⚠️ Atenção</div>
+            <div class="important-text">
+                Só vai para o MDF-e o vale que tiver <strong>Nr. Pedido / Nr. Recibo</strong>.<br>
+                O recurso vale apenas para <strong>veículo da frota própria</strong>. Para veículo de terceiro ou agregado, o vale-pedágio continua sendo informado pelo Contrato de Frete.<br>
+                Com <strong>Trajeto s/ Pedágio</strong> a opção fica bloqueada.
+            </div>
+        </div>
+    </div>
+</section>
+
 <!-- ============ FAQ ============ -->
 <section class="reveal" id="faq">
     <div class="wrap">
@@ -1024,6 +1262,15 @@ mark.hl{background:rgba(255,61,3,.26); color:#fff; border-radius:3px; padding:0 
                 <div class="faq-a">
                     <div class="faq-content">
                         NÃO. O Vale-Pedágio Obrigatório (VPO) foi instituído pela Lei nº 10.209, de 23 de março de 2001, tornando obrigatória a antecipação do valor do pedágio pelo contratante do transporte rodoviário de cargas. Dessa forma, a obrigatoriedade do vale-pedágio não foi alterada pelas regras do CIOT. O embarcador ou equiparado e, na ausência destes, a própria transportadora, conforme o cenário operacional, continua responsável pela aquisição e geração antecipada do vale-pedágio, com o devido destaque da informação no MDF-e.
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-q">Na frota própria, preciso emitir Contrato de Frete só para informar o Vale-Pedágio no MDF-e?</button>
+                <div class="faq-a">
+                    <div class="faq-content">
+                        NÃO. Com veículo da frota própria, o vale-pedágio pode ser informado ou comprado direto na emissão do CT-e, sem Contrato de Frete, e segue automaticamente para o MDF-e. A caixa <strong>Informar Vale Pedágio</strong> fica liberada quando o veículo é da frota própria e o <strong>Pedágio Empresa</strong> está como Incluso, Cobrar + Pedágio ou Pago na Tag. Só vai para o MDF-e o vale que tiver <strong>Nr. Pedido / Nr. Recibo</strong>. Com Contrato de Frete, nada muda.<br><br><strong>Passo a passo:</strong> <a href="#vale-pedagio" style="color:var(--orange); text-decoration:none;">Vale-Pedágio no CT-e sem Contrato de Frete</a><br><strong>Vídeo:</strong> <a href="videos/vale-pedagio-sem-cf.mp4" target="_blank" style="color:var(--orange); text-decoration:none;">Vale-Pedágio sem Contrato de Frete</a>
                     </div>
                 </div>
             </div>
@@ -1224,6 +1471,23 @@ mark.hl{background:rgba(255,61,3,.26); color:#fff; border-radius:3px; padding:0 
             </div>
         </div>
 
+        <div class="video-group">
+            <div class="video-group-title">Vale-Pedágio <span class="vg-count">1 vídeo</span></div>
+            <div class="video-grid">
+                <a class="video-card" href="#vale-pedagio">
+                    <div class="video-thumb local">
+                        <span class="ig-glyph" aria-hidden="true">🛣️</span>
+                        <span class="video-platform">▶ Vídeo na página</span>
+                        <span class="video-play" aria-hidden="true">▶</span>
+                    </div>
+                    <div class="video-info">
+                        <strong>Vale-Pedágio no CT-e sem Contrato de Frete</strong>
+                        <span class="video-meta">Assistir na seção Vale-Pedágio ↑</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+
         <div class="important-box" style="margin-top:8px;">
             <div class="important-title">⚠️ Importante</div>
             <div class="important-text">
@@ -1243,7 +1507,7 @@ mark.hl{background:rgba(255,61,3,.26); color:#fff; border-radius:3px; padding:0 
         <div class="footer-grid">
             <div class="footer-brand">
                 <span class="brand-mark">CIOT <b>ANTT</b></span>
-                <p class="footer-about">Portal de apoio às adequações do CIOT ANTT para Frota Própria: regras operacionais, guia de classificação, validação do piso mínimo de frete, perguntas frequentes e vídeos.</p>
+                <p class="footer-about">Portal de apoio às adequações do CIOT ANTT para Frota Própria: regras operacionais, guia de classificação, validação do piso mínimo de frete, vale-pedágio sem contrato de frete, perguntas frequentes e vídeos.</p>
             </div>
             <div class="footer-col">
                 <h4>Navegação</h4>
@@ -1251,6 +1515,7 @@ mark.hl{background:rgba(255,61,3,.26); color:#fff; border-radius:3px; padding:0 
                     <li><a href="#ajuda">Buscar dúvida</a></li>
                     <li><a href="#contratacao">Contratação</a></li>
                     <li><a href="#guia">Guia TMS Agro</a></li>
+                    <li><a href="#vale-pedagio">Vale-Pedágio sem Contrato de Frete</a></li>
                     <li><a href="#faq">Perguntas Frequentes</a></li>
                     <li><a href="#videos">Vídeos</a></li>
                 </ul>
@@ -1312,6 +1577,9 @@ mark.hl{background:rgba(255,61,3,.26); color:#fff; border-radius:3px; padding:0 
         'mdfe': ['mdf-e'],
         'complemento': ['complementar'],
         'documentacao': ['documento','wiki'],
+        'cf': ['contrato de frete'],
+        'tag': ['pago na tag','nr. tag'],
+        'administradora': ['administradoras','adm'],
         'video': ['videos','tutorial']
     };
 
@@ -1356,17 +1624,22 @@ mark.hl{background:rgba(255,61,3,.26); color:#fff; border-radius:3px; padding:0 
     });
 
     /* ---------- Índice do Guia TMS Agro para a busca ---------- */
-    const guideEntries = Array.from(
-        document.querySelectorAll('#guia .guide-card, #guia .guide-section')
-    ).map((el, i) => {
-        el.id = el.id || ('guia-item-' + i);
-        const titleEl = el.querySelector('.guide-card-title, .guide-section-title');
-        return {
-            id: el.id,
-            titulo: titleEl ? titleEl.innerText.trim() : 'Guia TMS Agro',
-            texto: normalize(el.innerText)
-        };
-    });
+    const GUIAS = [
+        {sel:'#guia', nome:'No Guia TMS Agro', cta:'Abrir no Guia Rápido de Classificação de CIOT →', prefixo:'guia-item-'},
+        {sel:'#vale-pedagio', nome:'Vale-Pedágio sem Contrato de Frete', cta:'Abrir no passo a passo do Vale-Pedágio →', prefixo:'vp-item-'}
+    ];
+    const guideEntries = GUIAS.flatMap(g =>
+        Array.from(document.querySelectorAll(g.sel + ' .guide-card, ' + g.sel + ' .guide-section')).map((el, i) => {
+            el.id = el.id || (g.prefixo + i);
+            const titleEl = el.querySelector('.guide-card-title, .guide-section-title');
+            return {
+                id: el.id,
+                grupo: g,
+                titulo: titleEl ? titleEl.innerText.trim() : g.nome,
+                texto: normalize(el.innerText)
+            };
+        })
+    );
 
     /* ---------- Realce de termos (seguro para HTML) ---------- */
     function highlight(html, palavras){
@@ -1471,12 +1744,14 @@ mark.hl{background:rgba(255,61,3,.26); color:#fff; border-radius:3px; padding:0 
             }).join('');
         }
 
-        if(guiaMatches.length){
-            html += '<div class="result-group-title">No Guia TMS Agro</div>';
-            html += guiaMatches.map(g =>
-                '<a class="search-match guia-link" href="#' + g.id + '" data-guia="' + g.id + '"><strong>' + g.titulo + '</strong><p>Abrir no Guia Rápido de Classificação de CIOT →</p></a>'
+        GUIAS.forEach(grupo => {
+            const doGrupo = guiaMatches.filter(g => g.grupo === grupo);
+            if(!doGrupo.length) return;
+            html += '<div class="result-group-title">' + grupo.nome + '</div>';
+            html += doGrupo.map(g =>
+                '<a class="search-match guia-link" href="#' + g.id + '" data-guia="' + g.id + '"><strong>' + g.titulo + '</strong><p>' + grupo.cta + '</p></a>'
             ).join('');
-        }
+        });
 
         resultBox.innerHTML = html;
         resultBox.classList.add('show');
